@@ -159,7 +159,7 @@ struct ColorRampCard: View {
         VStack(alignment: .leading, spacing: 12) {
             // Ramp header
             HStack {
-                // Color circle + name
+                // Color picker
                 ColorPicker("", selection: Binding(
                     get: { Color(hex: ramp.seedHex) ?? .blue },
                     set: { color in
@@ -173,8 +173,32 @@ struct ColorRampCard: View {
                 .labelsHidden()
                 .frame(width: 24, height: 24)
 
-                Text(ramp.name)
-                    .font(.headline)
+                // Editable name
+                TextField("Ramp name", text: Binding(
+                    get: { projectStore.currentProject?.colors.ramps.first(where: { $0.id == ramp.id })?.name ?? ramp.name },
+                    set: { val in
+                        projectStore.update { ds in
+                            if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
+                                ds.colors.ramps[i].name = val
+                            }
+                        }
+                    }
+                ))
+                .textFieldStyle(.plain)
+                .font(.headline)
+                .frame(minWidth: 80, maxWidth: 160)
+
+                Spacer()
+
+                // Delete
+                Button {
+                    projectStore.update { ds in
+                        ds.colors.ramps.removeAll { $0.id == ramp.id }
+                    }
+                } label: {
+                    Image(systemName: "trash").font(.caption).foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
 
                 Spacer()
 
