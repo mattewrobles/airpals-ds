@@ -116,7 +116,7 @@ struct MotionDuration: Identifiable, Codable {
     var ms: Double
 
     static var defaults: [MotionDuration] {
-        [("instant", 0), ("fast", 100), ("normal", 200), ("slow", 300), ("slower", 500)]
+        [("instant", 0.0), ("fast", 100.0), ("normal", 200.0), ("slow", 300.0), ("slower", 500.0)]
         .map { MotionDuration(name: $0.0, ms: $0.1) }
     }
 }

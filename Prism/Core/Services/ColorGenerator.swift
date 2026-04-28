@@ -137,7 +137,7 @@ struct OKLCHColor {
         let m = 0.2119034982 * rl + 0.6806995451 * gl + 0.1073969566 * bl
         let s = 0.0883024619 * rl + 0.2817188376 * gl + 0.6299787005 * bl
 
-        let lp = cbrt(l); let mp = cbrt(m); let sp = cbrt(s)
+        let lp = Foundation.cbrt(l); let mp = Foundation.cbrt(m); let sp = Foundation.cbrt(s)
 
         let okL = 0.2104542553 * lp + 0.7936177850 * mp - 0.0040720468 * sp
         let okA = 1.9779984951 * lp - 2.4285922050 * mp + 0.4505937099 * sp
@@ -173,9 +173,5 @@ struct OKLCHColor {
 
     private func clamp(_ v: Double, _ lo: Double, _ hi: Double) -> Double {
         min(max(v, lo), hi)
-    }
-
-    private func cbrt(_ x: Double) -> Double {
-        x >= 0 ? pow(x, 1.0/3.0) : -pow(-x, 1.0/3.0)
     }
 }

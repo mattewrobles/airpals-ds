@@ -358,14 +358,242 @@ struct SliderRow: View {
     }
 }
 
-// MARK: - Placeholder tabs
+// MARK: - Tokens Tab
 
 struct ColorTokensTab: View {
-    var body: some View { Text("Tokens").padding() }
+    @EnvironmentObject var projectStore: ProjectStore
+
+    private var ramps: [ColorRamp] {
+        projectStore.currentProject?.colors.ramps ?? []
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            ForEach(ramps) { ramp in
+                let swatches = ColorGenerator.generate(ramp: ramp)
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(ramp.name)
+                        .font(.headline)
+                    VStack(spacing: 2) {
+                        ForEach(swatches) { swatch in
+                            TokenRow(
+                                name: "color/\(ramp.name.lowercased())/\(swatch.step)",
+                                value: swatch.hex,
+                                color: Color(hex: swatch.hex)
+                            )
+                        }
+                    }
+                    .background(Color(nsColor: .controlBackgroundColor))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+            }
+
+            if ramps.isEmpty {
+                Text("No ramps yet. Add one in the Edit tab.")
+                    .foregroundStyle(.secondary)
+                    .padding()
+            }
+        }
+        .padding(24)
+    }
 }
+
+struct TokenRow: View {
+    let name: String
+    let value: String
+    let color: Color?
+    @State private var copied = false
+
+    var body: some View {
+        HStack(spacing: 12) {
+            if let color {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(color)
+                    .frame(width: 20, height: 20)
+                    .overlay(RoundedRectangle(cornerRadius: 4).strokeBorder(.black.opacity(0.08), lineWidth: 0.5))
+            }
+            Text(name)
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(.primary)
+            Spacer()
+            Text(value.lowercased())
+                .font(.system(.caption, design: .monospaced))
+                .foregroundStyle(.secondary)
+            Button {
+                NSPasteboard.general.clearContents()
+                NSPasteboard.general.setString(name, forType: .string)
+                withAnimation { copied = true }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { copied = false }
+            } label: {
+                Image(systemName: copied ? "checkmark" : "doc.on.doc")
+                    .font(.caption)
+                    .foregroundStyle(copied ? .green : .secondary)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 7)
+    }
+}
+
+// MARK: - Code Tab
+
 struct ColorCodeTab: View {
-    var body: some View { Text("Code").padding() }
+    @EnvironmentObject var projectStore: ProjectStore
+    @State private var selectedFormat: CodeFormat = .cssVariables
+    @State private var copied = false
+
+    enum CodeFormat: String, CaseIterable {
+        case cssVariables = "CSS Variables"
+        case swiftEnum = "Swift"
+        case json = "JSON"
+    }
+
+    private var ramps: [ColorRamp] {
+        projectStore.currentProject?.colors.ramps ?? []
+    }
+
+    private var generatedCode: String {
+        switch selectedFormat {
+        case .cssVariables: return generateCSS()
+        case .swiftEnum: return generateSwift()
+        case .json: return generateJSON()
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Format picker + copy
+            HStack {
+                Picker("Format", selection: $selectedFormat) {
+                    ForEach(CodeFormat.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 320)
+                Spacer()
+                Button {
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(generatedCode, forType: .string)
+                    withAnimation { copied = true }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { copied = false }
+                } label: {
+                    Label(copied ? "Copied!" : "Copy", systemImage: copied ? "checkmark" : "doc.on.doc")
+                }
+                .buttonStyle(.bordered)
+            }
+            .padding(24)
+
+            Divider()
+
+            ScrollView {
+                Text(generatedCode)
+                    .font(.system(.caption, design: .monospaced))
+                    .foregroundStyle(.primary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(24)
+                    .textSelection(.enabled)
+            }
+        }
+    }
+
+    private func generateCSS() -> String {
+        var lines = [":root {"]
+        for ramp in ramps {
+            let swatches = ColorGenerator.generate(ramp: ramp)
+            lines.append("  /* \(ramp.name) */")
+            for swatch in swatches {
+                lines.append("  --color-\(ramp.name.lowercased())-\(swatch.step): \(swatch.hex.lowercased());")
+            }
+        }
+        lines.append("}")
+        return lines.joined(separator: "\n")
+    }
+
+    private func generateSwift() -> String {
+        var lines = ["import SwiftUI", "", "extension Color {"]
+        for ramp in ramps {
+            let swatches = ColorGenerator.generate(ramp: ramp)
+            lines.append("    // MARK: - \(ramp.name)")
+            for swatch in swatches {
+                let name = "\(ramp.name.lowercased())\(swatch.step)"
+                lines.append("    static let \(name) = Color(hex: \"\(swatch.hex)\")!")
+            }
+        }
+        lines.append("}")
+        return lines.joined(separator: "\n")
+    }
+
+    private func generateJSON() -> String {
+        var dict: [String: [String: String]] = [:]
+        for ramp in ramps {
+            let swatches = ColorGenerator.generate(ramp: ramp)
+            var rampDict: [String: String] = [:]
+            for swatch in swatches {
+                rampDict["\(swatch.step)"] = swatch.hex.lowercased()
+            }
+            dict[ramp.name.lowercased()] = rampDict
+        }
+        let wrapper = ["color": dict]
+        if let data = try? JSONSerialization.data(withJSONObject: wrapper, options: .prettyPrinted),
+           let str = String(data: data, encoding: .utf8) {
+            return str
+        }
+        return "{}"
+    }
 }
+
+// MARK: - Overview Tab
+
 struct ColorOverviewTab: View {
-    var body: some View { Text("Overview").padding() }
+    @EnvironmentObject var projectStore: ProjectStore
+
+    private var ramps: [ColorRamp] {
+        projectStore.currentProject?.colors.ramps ?? []
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 32) {
+            ForEach(ramps) { ramp in
+                let swatches = ColorGenerator.generate(ramp: ramp)
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(ramp.name).font(.headline)
+                        Text("\(swatches.count) steps").font(.caption).foregroundStyle(.secondary)
+                    }
+                    HStack(spacing: 0) {
+                        ForEach(swatches) { swatch in
+                            OverviewSwatchBlock(swatch: swatch)
+                        }
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+            }
+        }
+        .padding(24)
+    }
+}
+
+struct OverviewSwatchBlock: View {
+    let swatch: ColorSwatch
+    @State private var isHovered = false
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            Rectangle()
+                .fill(Color(hex: swatch.hex) ?? .gray)
+                .frame(height: isHovered ? 72 : 56)
+            if isHovered {
+                VStack(spacing: 1) {
+                    Text("\(swatch.step)").font(.system(size: 9, weight: .bold))
+                    Text(swatch.hex.lowercased()).font(.system(size: 8, design: .monospaced))
+                }
+                .foregroundStyle(.white.opacity(0.9))
+                .shadow(color: .black.opacity(0.6), radius: 2)
+                .padding(.bottom, 4)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .animation(.easeInOut(duration: 0.15), value: isHovered)
+        .onHover { isHovered = $0 }
+    }
 }

@@ -140,16 +140,15 @@ struct DetailView: View {
 
     var body: some View {
         switch section {
-        case .colors:
-            ColorsView()
-        case .preview:
-            PreviewView()
-        case .audit:
-            AuditView()
-        case .figmaSync:
-            FigmaSyncView()
-        default:
-            PlaceholderView(section: section)
+        case .colors:       ColorsView()
+        case .typography:   TypographyView()
+        case .spacing:      SpacingView()
+        case .radius:       RadiusView()
+        case .shadow:       ShadowView()
+        case .preview:      PreviewView()
+        case .audit:        AuditView()
+        case .figmaSync:    FigmaSyncView()
+        default:            PlaceholderView(section: section)
         }
     }
 }
