@@ -1,6 +1,6 @@
 import React from 'react';
 import figma from '@figma/code-connect';
-import { Input } from './Input';
+import { Input } from '@prism/components';
 
 /**
  * Figma Code Connect — Input

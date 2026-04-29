@@ -1,6 +1,6 @@
 import React from 'react';
 import figma from '@figma/code-connect';
-import { Badge } from './Badge';
+import { Badge } from '@prism/components';
 
 /**
  * Figma Code Connect — Badge

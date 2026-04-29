@@ -2,7 +2,10 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import { resolve } from 'path';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(ts|tsx)'],
+  stories: [
+    '../../components/src/**/*.stories.@(ts|tsx)',
+    '../src/foundations/**/*.stories.@(ts|tsx)',
+  ],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
@@ -20,7 +23,7 @@ const config: StorybookConfig = {
     config.resolve = config.resolve ?? {};
     config.resolve.alias = {
       ...(config.resolve.alias ?? {}),
-      '@': resolve(__dirname, '../src'),
+      '@prism/components': resolve(__dirname, '../../components/src'),
     };
     return config;
   },

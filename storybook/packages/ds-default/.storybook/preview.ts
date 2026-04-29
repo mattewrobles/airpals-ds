@@ -1,11 +1,10 @@
-import React from 'react';
 import type { Preview, Decorator } from '@storybook/react';
 import '../src/tokens/tokens.css';
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals['theme'] as string | undefined;
   document.documentElement.setAttribute('data-theme', theme ?? 'light');
-  return <Story />;
+  return Story();
 };
 
 const preview: Preview = {

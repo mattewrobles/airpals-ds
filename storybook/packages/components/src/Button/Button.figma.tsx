@@ -1,6 +1,6 @@
 import React from 'react';
 import figma, { html } from '@figma/code-connect';
-import { Button } from './Button';
+import { Button } from '@prism/components';
 
 /**
  * Figma Code Connect — Button

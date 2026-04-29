@@ -1,8 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card } from './Card';
-import { Badge } from '../Badge/Badge';
-import { Button } from '../Button/Button';
+import { Card, Badge, Button } from '@prism/components';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',

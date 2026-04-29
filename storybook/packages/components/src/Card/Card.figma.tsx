@@ -1,6 +1,6 @@
 import React from 'react';
 import figma from '@figma/code-connect';
-import { Card } from './Card';
+import { Card } from '@prism/components';
 
 /**
  * Figma Code Connect — Card

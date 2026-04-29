@@ -1,6 +1,6 @@
 import React from 'react';
 import figma from '@figma/code-connect';
-import { Avatar } from './Avatar';
+import { Avatar } from '@prism/components';
 
 /**
  * Figma Code Connect — Avatar
