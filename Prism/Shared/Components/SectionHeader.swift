@@ -5,6 +5,7 @@ struct SectionHeader: View {
     let title: String
     let subtitle: String
     let tokenCount: Int
+    var tokenLabel: String = "tokens"
 
     var body: some View {
         HStack(alignment: .top) {
@@ -23,7 +24,7 @@ struct SectionHeader: View {
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
-                Text("TOKENS")
+                Text(tokenLabel.uppercased())
                     .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(.secondary)
                 Text("\(tokenCount)")

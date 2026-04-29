@@ -89,58 +89,57 @@ struct TabButtonStyle: ButtonStyle {
 
 struct ColorEditTab: View {
     @EnvironmentObject var projectStore: ProjectStore
-    @State private var showNamingConfig = false
 
     private var foundation: ColorFoundation {
         projectStore.currentProject?.colors ?? ColorFoundation()
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            // Metadata row
+        VStack(alignment: .leading, spacing: 0) {
+            // Header row with title + Add Ramp button
             HStack {
-                Text("\(foundation.ramps.count) ramps · \(foundation.standalones.count) standalones · drag grid to reorder · light mode")
-                    .font(.caption)
+                Text("RAMPS")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                Text("· \(foundation.ramps.count) · color/name/step")
+                    .font(.system(size: 11, design: .monospaced))
                     .foregroundStyle(.secondary)
                 Spacer()
-                Button("Naming") { showNamingConfig.toggle() }
-                    .font(.caption)
-            }
-
-            // Naming preview
-            HStack(spacing: 4) {
-                Text("TOKEN NAMING")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(.secondary)
-                Text("color/primary/500")
-                    .font(.system(size: 11, design: .monospaced))
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Color.secondary.opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
-            }
-
-            // Ramps
-            Text("RAMPS")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(.secondary)
-
-            ForEach(foundation.ramps) { ramp in
-                ColorRampCard(ramp: ramp)
-            }
-
-            // Add ramp button
-            Button {
-                projectStore.update { ds in
-                    ds.colors.ramps.append(ColorRamp(name: "New", seedHex: "#6366F1", steps: 11))
+                Button {
+                    projectStore.update { ds in
+                        ds.colors.ramps.append(ColorRamp(name: "New", seedHex: "#6366F1", steps: 11))
+                    }
+                } label: {
+                    Label("Add Ramp", systemImage: "plus").font(.subheadline)
                 }
-            } label: {
-                Label("Add Ramp", systemImage: "plus")
-                    .font(.subheadline)
+                .buttonStyle(.bordered)
             }
-            .buttonStyle(.bordered)
+            .padding(.horizontal, 24)
+            .padding(.top, 24)
+            .padding(.bottom, 12)
+
+            if foundation.ramps.isEmpty {
+                Button {
+                    projectStore.update { ds in
+                        ds.colors.ramps.append(ColorRamp(name: "Primary", seedHex: "#6366F1", steps: 11))
+                    }
+                } label: {
+                    Label("Add first ramp", systemImage: "plus.circle")
+                        .font(.subheadline).foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 24)
+                .frame(maxWidth: .infinity)
+            } else {
+                LazyVStack(spacing: 0) {
+                    ForEach(Array(foundation.ramps.enumerated()), id: \.element.id) { index, ramp in
+                        ColorRampCard(ramp: ramp, index: index, totalCount: foundation.ramps.count)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 6)
+                    }
+                }
+            }
         }
-        .padding(24)
     }
 }
 
@@ -149,7 +148,11 @@ struct ColorEditTab: View {
 struct ColorRampCard: View {
     @EnvironmentObject var projectStore: ProjectStore
     let ramp: ColorRamp
+    let index: Int
+    let totalCount: Int
     @State private var isExpanded = false
+    @State private var showColorPopover = false
+    @State private var showDeleteAlert = false
 
     private var swatches: [ColorSwatch] {
         ColorGenerator.generate(ramp: ramp)
@@ -157,79 +160,134 @@ struct ColorRampCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // Ramp header
-            HStack {
-                // Color picker
-                ColorPicker("", selection: Binding(
-                    get: { Color(hex: ramp.seedHex) ?? .blue },
-                    set: { color in
-                        projectStore.update { ds in
-                            if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
-                                ds.colors.ramps[i].seedHex = color.toHex()
-                            }
-                        }
-                    }
-                ))
-                .labelsHidden()
-                .frame(width: 24, height: 24)
-
-                // Editable name
-                TextField("Ramp name", text: Binding(
-                    get: { projectStore.currentProject?.colors.ramps.first(where: { $0.id == ramp.id })?.name ?? ramp.name },
-                    set: { val in
-                        projectStore.update { ds in
-                            if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
-                                ds.colors.ramps[i].name = val
-                            }
-                        }
-                    }
-                ))
-                .textFieldStyle(.plain)
-                .font(.headline)
-                .frame(minWidth: 80, maxWidth: 160)
-
-                Spacer()
-
-                // Delete
+            // Header row
+            HStack(spacing: 8) {
+                // Color circle → opens popover with ColorPicker
                 Button {
-                    projectStore.update { ds in
-                        ds.colors.ramps.removeAll { $0.id == ramp.id }
-                    }
+                    showColorPopover = true
                 } label: {
-                    Image(systemName: "trash").font(.caption).foregroundStyle(.secondary)
+                    Circle()
+                        .fill(Color(hex: ramp.seedHex) ?? .blue)
+                        .frame(width: 28, height: 28)
+                        .overlay(Circle().strokeBorder(.white.opacity(0.25), lineWidth: 1.5))
+                        .shadow(color: .black.opacity(0.15), radius: 3, y: 1)
                 }
                 .buttonStyle(.plain)
+                .popover(isPresented: $showColorPopover, arrowEdge: .bottom) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Seed Color").font(.caption.bold()).foregroundStyle(.secondary)
+                        ColorPicker("", selection: colorBinding).labelsHidden()
+                    }
+                    .padding(16)
+                    .frame(width: 180)
+                }
+
+                // Hex text field
+                TextField("#RRGGBB", text: hexBinding)
+                    .textFieldStyle(.plain)
+                    .font(.system(size: 11, design: .monospaced))
+                    .frame(width: 74)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 3)
+                    .background(Color.secondary.opacity(0.08))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+
+                // Ramp name (editable)
+                TextField("Name", text: nameBinding)
+                    .textFieldStyle(.plain)
+                    .font(.system(size: 14, weight: .semibold))
+                    .frame(minWidth: 50, maxWidth: 110)
+                    .lineLimit(1)
 
                 Spacer()
 
-                // Steps config
-                HStack(spacing: 4) {
+                // Steps: − count +
+                HStack(spacing: 3) {
                     Text("STEPS")
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundStyle(.secondary)
+                    Button {
+                        projectStore.update { ds in
+                            if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
+                                ds.colors.ramps[i].steps = max(3, ds.colors.ramps[i].steps - 2)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "minus").font(.system(size: 9, weight: .bold)).frame(width: 18, height: 18)
+                    }
+                    .buttonStyle(.plain).foregroundStyle(.secondary)
+                    .disabled(ramp.steps <= 3)
+
                     Text("\(ramp.steps)")
-                        .font(.system(size: 12, design: .monospaced))
-                        .frame(width: 30)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Color.secondary.opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                        .font(.system(size: 11, design: .monospaced))
+                        .frame(width: 20, alignment: .center)
+
+                    Button {
+                        projectStore.update { ds in
+                            if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
+                                ds.colors.ramps[i].steps = min(21, ds.colors.ramps[i].steps + 2)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "plus").font(.system(size: 9, weight: .bold)).frame(width: 18, height: 18)
+                    }
+                    .buttonStyle(.plain).foregroundStyle(.secondary)
+                    .disabled(ramp.steps >= 21)
                 }
 
-                Button(isExpanded ? "Hide variation" : "Variation") {
+                // Reorder
+                VStack(spacing: 1) {
+                    Button { moveUp() } label: {
+                        Image(systemName: "arrow.up")
+                            .font(.system(size: 9, weight: .semibold))
+                            .frame(width: 20, height: 16)
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(index == 0 ? Color.secondary.opacity(0.25) : .secondary)
+                    .disabled(index == 0)
+
+                    Button { moveDown() } label: {
+                        Image(systemName: "arrow.down")
+                            .font(.system(size: 9, weight: .semibold))
+                            .frame(width: 20, height: 16)
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(index == totalCount - 1 ? Color.secondary.opacity(0.25) : .secondary)
+                    .disabled(index == totalCount - 1)
+                }
+
+                // Tune / delete
+                Button(isExpanded ? "Hide" : "Tune") {
                     withAnimation { isExpanded.toggle() }
                 }
                 .font(.caption)
                 .buttonStyle(.bordered)
+
+                Button {
+                    showDeleteAlert = true
+                } label: {
+                    Image(systemName: "trash")
+                        .font(.caption)
+                        .foregroundStyle(.red.opacity(0.7))
+                }
+                .buttonStyle(.plain)
+                .alert("Delete \"\(ramp.name)\"?", isPresented: $showDeleteAlert) {
+                    Button("Delete", role: .destructive) {
+                        projectStore.update { ds in ds.colors.ramps.removeAll { $0.id == ramp.id } }
+                    }
+                    Button("Cancel", role: .cancel) {}
+                } message: {
+                    Text("This action cannot be undone.")
+                }
             }
 
-            // Variation controls (OKLCH sliders)
+            // OKLCH sliders (collapsible)
             if isExpanded {
                 OKLCHControls(ramp: ramp)
-                    .transition(.opacity.combined(with: .move(edge: .top)))
+                    .transition(.opacity)
             }
 
-            // Swatches row
+            // Swatch strip
             HStack(spacing: 4) {
                 ForEach(swatches) { swatch in
                     SwatchCell(swatch: swatch)
@@ -240,6 +298,79 @@ struct ColorRampCard: View {
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color(nsColor: .controlBackgroundColor))
+        )
+    }
+
+    // MARK: - Reorder
+
+    private func moveUp() {
+        projectStore.update { ds in
+            guard index > 0 else { return }
+            ds.colors.ramps.swapAt(index, index - 1)
+        }
+    }
+
+    private func moveDown() {
+        projectStore.update { ds in
+            guard index < ds.colors.ramps.count - 1 else { return }
+            ds.colors.ramps.swapAt(index, index + 1)
+        }
+    }
+
+    // MARK: - Bindings
+
+    private var colorBinding: Binding<Color> {
+        Binding(
+            get: { Color(hex: ramp.seedHex) ?? .blue },
+            set: { color in
+                projectStore.update { ds in
+                    if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
+                        ds.colors.ramps[i].seedHex = color.toHex()
+                    }
+                }
+            }
+        )
+    }
+
+    private var hexBinding: Binding<String> {
+        Binding(
+            get: { ramp.seedHex },
+            set: { val in
+                var hex = val.trimmingCharacters(in: .whitespaces)
+                if !hex.hasPrefix("#") { hex = "#" + hex }
+                guard hex.count == 7, Color(hex: hex) != nil else { return }
+                projectStore.update { ds in
+                    if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
+                        ds.colors.ramps[i].seedHex = hex.uppercased()
+                    }
+                }
+            }
+        )
+    }
+
+    private var nameBinding: Binding<String> {
+        Binding(
+            get: { projectStore.currentProject?.colors.ramps.first(where: { $0.id == ramp.id })?.name ?? ramp.name },
+            set: { val in
+                projectStore.update { ds in
+                    if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
+                        ds.colors.ramps[i].name = val
+                    }
+                }
+            }
+        )
+    }
+
+    private var stepsBinding: Binding<Int> {
+        Binding(
+            get: { projectStore.currentProject?.colors.ramps.first(where: { $0.id == ramp.id })?.steps ?? ramp.steps },
+            set: { val in
+                projectStore.update { ds in
+                    if let i = ds.colors.ramps.firstIndex(where: { $0.id == ramp.id }) {
+                        ds.colors.ramps[i].steps = val
+                    }
+                }
+            }
         )
     }
 }
@@ -254,8 +385,8 @@ struct SwatchCell: View {
         VStack(spacing: 0) {
             // WCAG badges
             VStack(spacing: 2) {
-                WCAGBadge(level: swatch.wcagOnWhite, label: "1:0")
-                WCAGBadge(level: swatch.wcagOnBlack, label: "21:1")
+                WCAGBadge(level: swatch.wcagOnWhite, label: "W", ratio: swatch.contrastOnWhite)
+                WCAGBadge(level: swatch.wcagOnBlack, label: "B", ratio: swatch.contrastOnBlack)
             }
             .padding(4)
 
@@ -263,6 +394,14 @@ struct SwatchCell: View {
             Rectangle()
                 .fill(Color(hex: swatch.hex) ?? .gray)
                 .frame(height: 80)
+            if swatch.wcagOnWhite == .fail && swatch.wcagOnBlack == .fail {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 9))
+                    .foregroundStyle(.orange)
+                    .padding(3)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    .allowsHitTesting(false)
+            }
 
             // Label
             VStack(spacing: 2) {
@@ -289,6 +428,7 @@ struct SwatchCell: View {
 struct WCAGBadge: View {
     let level: WCAGLevel
     let label: String
+    var ratio: Double? = nil
 
     var body: some View {
         HStack(spacing: 2) {
@@ -302,6 +442,7 @@ struct WCAGBadge: View {
         .background(level.color.opacity(0.15))
         .foregroundStyle(level.color)
         .clipShape(RoundedRectangle(cornerRadius: 3))
+        .help(ratio.map { String(format: "%.1f:1 — \(level.label)", $0) } ?? level.label)
     }
 }
 

@@ -1,0 +1,159 @@
+/* =========================================================
+   Avatar — uses only Prism design tokens
+   ========================================================= */
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* ---- Image area ---- */
+.avatar__image-area {
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background-color: var(--avatar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Sizes ---- */
+.avatar--xs {
+  width: 24px;
+  height: 24px;
+}
+
+.avatar--xs .avatar__initials,
+.avatar--xs .avatar__icon-wrap {
+  font-size: var(--font-size-xs);
+}
+
+.avatar--sm {
+  width: 32px;
+  height: 32px;
+}
+
+.avatar--sm .avatar__initials,
+.avatar--sm .avatar__icon-wrap {
+  font-size: var(--font-size-sm);
+}
+
+.avatar--md {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar--md .avatar__initials,
+.avatar--md .avatar__icon-wrap {
+  font-size: var(--font-size-base);
+}
+
+.avatar--lg {
+  width: 56px;
+  height: 56px;
+}
+
+.avatar--lg .avatar__initials,
+.avatar--lg .avatar__icon-wrap {
+  font-size: var(--font-size-xl);
+}
+
+.avatar--xl {
+  width: 72px;
+  height: 72px;
+}
+
+.avatar--xl .avatar__initials,
+.avatar--xl .avatar__icon-wrap {
+  font-size: var(--font-size-2xl);
+}
+
+/* ---- Image ---- */
+.avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+/* ---- Initials ---- */
+.avatar__initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--avatar-text);
+  user-select: none;
+}
+
+/* ---- Fallback icon ---- */
+.avatar__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--avatar-text);
+}
+
+.avatar__fallback-icon {
+  width: 60%;
+  height: 60%;
+}
+
+/* ---- Status dot ---- */
+.avatar__status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-surface);
+}
+
+.avatar--xs .avatar__status {
+  width: 7px;
+  height: 7px;
+}
+
+.avatar--sm .avatar__status {
+  width: 9px;
+  height: 9px;
+}
+
+.avatar--md .avatar__status {
+  width: 11px;
+  height: 11px;
+}
+
+.avatar--lg .avatar__status {
+  width: 13px;
+  height: 13px;
+}
+
+.avatar--xl .avatar__status {
+  width: 16px;
+  height: 16px;
+}
+
+/* Status colors */
+.avatar__status--online {
+  background-color: var(--avatar-status-online);
+}
+
+.avatar__status--offline {
+  background-color: var(--avatar-status-offline);
+}
+
+.avatar__status--busy {
+  background-color: var(--avatar-status-busy);
+}
+
+.avatar__status--away {
+  background-color: var(--avatar-status-away);
+}

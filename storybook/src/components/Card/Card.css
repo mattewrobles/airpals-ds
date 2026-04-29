@@ -1,0 +1,98 @@
+/* =========================================================
+   Card — uses only Prism design tokens
+   ========================================================= */
+
+.card {
+  border-radius: var(--radius-xl);
+  background-color: var(--bg-card);
+  overflow: hidden;
+  transition:
+    box-shadow var(--motion-duration-fast) var(--motion-easing-ease-out),
+    transform var(--motion-duration-fast) var(--motion-easing-ease-out);
+}
+
+/* ---- Variants ---- */
+.card--default {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-default);
+}
+
+.card--elevated {
+  background-color: var(--bg-surface);
+  border: none;
+  box-shadow: var(--shadow-md);
+}
+
+.card--outlined {
+  background-color: transparent;
+  border: 1px solid var(--border-strong);
+}
+
+/* ---- Clickable ---- */
+.card--clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.card--clickable:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+.card--clickable:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.card--clickable:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--border-focus);
+}
+
+/* ---- Padding variants ---- */
+.card--padding-none {
+  padding: var(--spacing-none);
+}
+
+.card--padding-sm {
+  padding: var(--spacing-sm);
+}
+
+.card--padding-md {
+  padding: var(--spacing-md);
+}
+
+.card--padding-lg {
+  padding: var(--spacing-lg);
+}
+
+/* ---- Internal layout ---- */
+.card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card__title {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+}
+
+.card__description {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  color: var(--text-secondary);
+}
+
+.card__content {
+  font-family: var(--font-family-base);
+  color: var(--text-primary);
+}

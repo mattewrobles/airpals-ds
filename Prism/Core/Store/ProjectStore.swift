@@ -9,10 +9,17 @@ final class ProjectStore: ObservableObject {
     @Published var isSaving: Bool = false
     @Published var isDirty: Bool = false
 
+    let localServer = LocalServer()
+
     private let recentProjectsKey = "prism.recentProjects"
 
     init() {
         loadRecentProjects()
+        localServer.tokenProvider = { [weak self] in
+            guard let ds = self?.currentProject else { return Data("{}".utf8) }
+            return TokenExporter.exportJSON(ds: ds)
+        }
+        localServer.start()
     }
 
     // MARK: - Project lifecycle
@@ -118,6 +125,47 @@ extension DesignSystem {
             ColorRamp(name: "Warning", seedHex: "#F59E0B", steps: 11),
             ColorRamp(name: "Error", seedHex: "#EF4444", steps: 11)
         ]
+
+        // Default semantic tokens — Light (index 0) and Dark (index 1)
+        let lightId = ds.modes[0].id.uuidString
+        let darkId  = ds.modes[1].id.uuidString
+
+        func makeToken(_ name: String, light: String, dark: String) -> SemanticToken {
+            SemanticToken(
+                name: name,
+                type: .color,
+                modeValues: [
+                    lightId: .alias(light),
+                    darkId:  .alias(dark)
+                ]
+            )
+        }
+
+        ds.semanticTokens = [
+            // Text
+            makeToken("text/primary",    light: "color/neutral/900",  dark: "color/neutral/50"),
+            makeToken("text/secondary",  light: "color/neutral/600",  dark: "color/neutral/400"),
+            makeToken("text/tertiary",   light: "color/neutral/400",  dark: "color/neutral/600"),
+            makeToken("text/disabled",   light: "color/neutral/300",  dark: "color/neutral/700"),
+            makeToken("text/on-primary", light: "color/neutral/50",   dark: "color/neutral/50"),
+            // Backgrounds
+            makeToken("bg/default",       light: "color/neutral/50",   dark: "color/neutral/950"),
+            makeToken("bg/surface",       light: "color/neutral/100",  dark: "color/neutral/900"),
+            makeToken("bg/card",          light: "color/neutral/50",   dark: "color/neutral/800"),
+            makeToken("bg/primary",       light: "color/primary/500",  dark: "color/primary/500"),
+            makeToken("bg/primary-hover", light: "color/primary/600",  dark: "color/primary/400"),
+            // Borders
+            makeToken("border/default",  light: "color/neutral/200",  dark: "color/neutral/700"),
+            makeToken("border/strong",   light: "color/neutral/400",  dark: "color/neutral/500"),
+            // Icons
+            makeToken("icon/default",    light: "color/neutral/500",  dark: "color/neutral/400"),
+            makeToken("icon/primary",    light: "color/primary/500",  dark: "color/primary/400"),
+            // Status
+            makeToken("status/success",  light: "color/success/500",  dark: "color/success/400"),
+            makeToken("status/warning",  light: "color/warning/500",  dark: "color/warning/400"),
+            makeToken("status/error",    light: "color/error/500",    dark: "color/error/400")
+        ]
+
         return ds
     }
 }

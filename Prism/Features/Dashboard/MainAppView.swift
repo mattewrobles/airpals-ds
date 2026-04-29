@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct MainAppView: View {
     @EnvironmentObject var projectStore: ProjectStore
@@ -17,6 +18,32 @@ struct MainAppView: View {
             ToolbarItem(placement: .navigation) {
                 Text(projectStore.currentProject?.name ?? "")
                     .font(.headline)
+            }
+            ToolbarItem(placement: .navigation) {
+                Button {
+                    let panel = NSOpenPanel()
+                    panel.allowedContentTypes = [UTType(filenameExtension: "prism") ?? .data]
+                    panel.title = "Open Design System"
+                    if panel.runModal() == .OK, let url = panel.url {
+                        try? projectStore.open(url: url)
+                    }
+                } label: {
+                    Label("Open", systemImage: "folder")
+                }
+            }
+            ToolbarItem(placement: .navigation) {
+                Button {
+                    let panel = NSSavePanel()
+                    panel.allowedContentTypes = [UTType(filenameExtension: "prism") ?? .data]
+                    panel.title = "Save Design System"
+                    panel.nameFieldStringValue = (projectStore.currentProject?.name ?? "Untitled") + ".prism"
+                    if panel.runModal() == .OK, let url = panel.url {
+                        try? projectStore.save(to: url)
+                    }
+                } label: {
+                    Label("Save", systemImage: projectStore.isDirty ? "square.and.arrow.down.fill" : "square.and.arrow.down")
+                }
+                .keyboardShortcut("s", modifiers: .command)
             }
             ToolbarItem(placement: .primaryAction) {
                 Button {
@@ -67,7 +94,7 @@ enum DSSection: String, CaseIterable, Identifiable {
         case .typography: return "textformat"
         case .sizes: return "ruler"
         case .spacing: return "arrow.left.and.right"
-        case .radius: return "rounded.rectangle"
+        case .radius: return "capsule.fill"
         case .opacity: return "circle.lefthalf.filled"
         case .shadow: return "rectangle.3.group"
         case .motion: return "waveform.path"
@@ -142,13 +169,20 @@ struct DetailView: View {
         switch section {
         case .colors:       ColorsView()
         case .typography:   TypographyView()
+        case .sizes:        SizesView()
         case .spacing:      SpacingView()
         case .radius:       RadiusView()
         case .shadow:       ShadowView()
+        case .opacity:      OpacityView()
+        case .motion:       MotionView()
+        case .zIndex:       ZIndexView()
+        case .grid:         GridView()
+        case .primitives:   PrimitivesView()
+        case .semantic:     SemanticTokensView()
+        case .component:    ComponentTokensView()
         case .preview:      PreviewView()
         case .audit:        AuditView()
         case .figmaSync:    FigmaSyncView()
-        default:            PlaceholderView(section: section)
         }
     }
 }

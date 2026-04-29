@@ -12,7 +12,7 @@ struct TypeScaleGenerator {
 
         // Steps below base (negative)
         for i in stride(from: below, through: 1, by: -1) {
-            let sizePx = base / pow(ratio, Double(i))
+            let sizePx = snap4(base / pow(ratio, Double(i)))
             steps.append(TypeStep(
                 step: -i,
                 sizePx: sizePx,
@@ -22,16 +22,17 @@ struct TypeScaleGenerator {
         }
 
         // Base (step 0)
+        let snapBase = snap4(base)
         steps.append(TypeStep(
             step: 0,
-            sizePx: base,
-            sizeRem: base / 16,
+            sizePx: snapBase,
+            sizeRem: snapBase / 16,
             tokenName: "base"
         ))
 
         // Steps above base (positive)
         for i in 1...max(1, above) {
-            let sizePx = base * pow(ratio, Double(i))
+            let sizePx = snap4(base * pow(ratio, Double(i)))
             steps.append(TypeStep(
                 step: i,
                 sizePx: sizePx,
@@ -41,6 +42,10 @@ struct TypeScaleGenerator {
         }
 
         return steps
+    }
+
+    private static func snap4(_ value: Double) -> Double {
+        (round(value / 4) * 4).rounded()
     }
 
     // Name generation: xs, sm, md, lg, xl, 2xl, 3xl...

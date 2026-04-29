@@ -89,8 +89,35 @@ struct AuditView: View {
     }
 
     private func generateContrastPairs() -> [ContrastPair] {
-        // TODO: iterate semantic tokens, find text+bg pairs, compute contrast
-        return []
+        guard let ds = projectStore.currentProject else { return [] }
+        let resolver = TokenResolver(ds: ds)
+        let modeName = "Light"
+
+        let textTokens = ds.semanticTokens.filter {
+            $0.name.hasPrefix("text/") || $0.name.hasPrefix("icon/")
+        }
+        let bgTokens = ds.semanticTokens.filter {
+            $0.name.hasPrefix("bg/")
+        }
+
+        var pairs: [ContrastPair] = []
+        for textToken in textTokens {
+            guard let textHex = resolver.resolveHex(tokenName: textToken.name, modeName: modeName) else { continue }
+            for bgToken in bgTokens {
+                guard let bgHex = resolver.resolveHex(tokenName: bgToken.name, modeName: modeName) else { continue }
+                let ratio = ColorGenerator.contrastRatio(hex1: textHex, hex2: bgHex)
+                let level = WCAGLevel.from(ratio: ratio)
+                pairs.append(ContrastPair(
+                    textToken: textToken.name,
+                    bgToken: bgToken.name,
+                    textHex: textHex,
+                    bgHex: bgHex,
+                    ratio: ratio,
+                    wcagLevel: level
+                ))
+            }
+        }
+        return pairs.sorted { $0.ratio < $1.ratio }
     }
 }
 

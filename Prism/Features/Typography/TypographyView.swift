@@ -51,6 +51,30 @@ struct TypoEditTab: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 32) {
 
+            // Platform presets
+            HStack(spacing: 10) {
+                Text("PLATFORM PRESET")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                Button("iOS / Mobile") {
+                    projectStore.update { ds in
+                        ds.typography.baseSize = 17
+                        ds.typography.roles = Self.mobileRoles(families: ds.typography.families)
+                    }
+                }
+                .buttonStyle(.bordered)
+                Button("Web") {
+                    projectStore.update { ds in
+                        ds.typography.baseSize = 16
+                        ds.typography.roles = Self.webRoles(families: ds.typography.families)
+                    }
+                }
+                .buttonStyle(.bordered)
+                Text("Replaces roles with platform-standard scale")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             // ── Scale config ──────────────────────────────────
             ScaleConfigPanel(typo: typo)
 
@@ -82,6 +106,50 @@ struct TypoEditTab: View {
             TypographicRolesPanel(typo: typo)
         }
         .padding(24)
+    }
+
+    static func mobileRoles(families: [TypographyFamily]) -> [TypographicRole] {
+        let fam = families.first?.name ?? "body"
+        let display = families.first(where: { $0.name.lowercased().contains("display") || $0.name.lowercased().contains("heading") })?.name ?? fam
+        func r(_ name: String, step: Int, weight: Int, lh: Double = 1.2, ls: String = "0") -> TypographicRole {
+            TypographicRole(name: name, scaleStep: step, familyName: step >= 2 ? display : fam, weight: weight, lineHeight: lh, letterSpacing: ls)
+        }
+        return [
+            r("Large Title",   step:  4, weight: 700, lh: 1.1),
+            r("Title 1",       step:  3, weight: 700, lh: 1.15),
+            r("Title 2",       step:  2, weight: 700, lh: 1.2),
+            r("Title 3",       step:  1, weight: 600, lh: 1.2),
+            r("Headline",      step:  0, weight: 600, lh: 1.3),
+            r("Body",          step:  0, weight: 400, lh: 1.5),
+            r("Callout",       step: -1, weight: 400, lh: 1.4),
+            r("Subheadline",   step: -1, weight: 400, lh: 1.4),
+            r("Footnote",      step: -2, weight: 400, lh: 1.4),
+            r("Caption 1",     step: -3, weight: 400, lh: 1.3),
+            r("Caption 2",     step: -3, weight: 500, lh: 1.3),
+        ]
+    }
+
+    static func webRoles(families: [TypographyFamily]) -> [TypographicRole] {
+        let fam = families.first?.name ?? "body"
+        let display = families.first(where: { $0.name.lowercased().contains("display") || $0.name.lowercased().contains("heading") })?.name ?? fam
+        func r(_ name: String, step: Int, weight: Int, lh: Double = 1.3, ls: String = "0") -> TypographicRole {
+            TypographicRole(name: name, scaleStep: step, familyName: step >= 1 ? display : fam, weight: weight, lineHeight: lh, letterSpacing: ls)
+        }
+        return [
+            r("Display 1",   step:  5, weight: 700, lh: 1.05, ls: "-0.02em"),
+            r("Display 2",   step:  4, weight: 700, lh: 1.1,  ls: "-0.02em"),
+            r("H1",          step:  3, weight: 700, lh: 1.15, ls: "-0.01em"),
+            r("H2",          step:  2, weight: 600, lh: 1.2),
+            r("H3",          step:  1, weight: 600, lh: 1.25),
+            r("H4",          step:  0, weight: 600, lh: 1.3),
+            r("Lead",        step:  0, weight: 400, lh: 1.6),
+            r("Body",        step: -1, weight: 400, lh: 1.6),
+            r("Body Small",  step: -2, weight: 400, lh: 1.5),
+            r("Caption",     step: -3, weight: 400, lh: 1.4),
+            r("Overline",    step: -3, weight: 600, lh: 1.4, ls: "0.08em"),
+            r("Label",       step: -2, weight: 500, lh: 1.4),
+            r("Code",        step: -1, weight: 400, lh: 1.7),
+        ]
     }
 }
 
@@ -464,7 +532,14 @@ struct AddFamilyButton: View {
     var body: some View {
         Button {
             projectStore.update { ds in
-                ds.typography.families.append(TypographyFamily(name: "new", fontFamily: "Inter"))
+                let newFamily = TypographyFamily(name: "Display", fontFamily: "Inter")
+                let isFirst = ds.typography.families.isEmpty
+                ds.typography.families.append(newFamily)
+                if isFirst {
+                    for i in ds.typography.roles.indices {
+                        ds.typography.roles[i].familyName = newFamily.name
+                    }
+                }
             }
         } label: {
             VStack(spacing: 8) {

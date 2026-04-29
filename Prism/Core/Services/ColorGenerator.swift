@@ -12,6 +12,10 @@ struct ColorGenerator {
         let steps = ramp.steps
         let seed = OKLCHColor.fromHex(ramp.seedHex)
 
+        // Near-achromatic seed (black, white, gray): force chroma=0 to avoid
+        // undefined-hue artifacts (H=0 = red bleed in lighter steps)
+        let isAchromatic = seed.c < 0.02
+
         return (0..<steps).map { index in
             let t = steps <= 1 ? 0.5 : Double(index) / Double(steps - 1)
 
@@ -20,7 +24,8 @@ struct ColorGenerator {
 
             // Chroma: flat with optional falloff at extremes
             let extremeFactor = min(t, 1 - t) * 2  // 0 at edges, 1 at center
-            let chroma = lerp(config.chromaStart, config.chromaEnd, t: t)
+            let chroma = isAchromatic ? 0 :
+                lerp(config.chromaStart, config.chromaEnd, t: t)
                 * (1 - config.chromaFalloff * (1 - extremeFactor))
 
             // Hue from seed + optional shift

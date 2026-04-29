@@ -20,6 +20,9 @@ struct FigmaSyncView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 28) {
 
+                    // Server status
+                    ServerStatusCard(server: projectStore.localServer)
+
                     // Plugin install CTA
                     PluginInstallCard()
 
@@ -188,6 +191,67 @@ struct ModuleSelector: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Server Status Card
+
+struct ServerStatusCard: View {
+    @ObservedObject var server: LocalServer
+
+    var body: some View {
+        HStack(spacing: 14) {
+            // Dot indicator
+            Circle()
+                .fill(server.isRunning ? Color.green : Color.red)
+                .frame(width: 10, height: 10)
+                .overlay(
+                    Circle()
+                        .fill(server.isRunning ? Color.green.opacity(0.3) : Color.clear)
+                        .frame(width: 18, height: 18)
+                )
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(server.isRunning ? "Server running" : "Server stopped")
+                    .font(.subheadline.weight(.semibold))
+                if server.isRunning {
+                    Text("localhost:\(LocalServer.port)/tokens")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fontDesign(.monospaced)
+                } else if let err = server.errorMessage {
+                    Text(err)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                } else {
+                    Text("Figma plugin will auto-fetch tokens")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Spacer()
+
+            Button(server.isRunning ? "Stop" : "Start") {
+                if server.isRunning { server.stop() } else { server.start() }
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+        }
+        .padding(16)
+        .background(
+            server.isRunning
+                ? Color.green.opacity(0.06)
+                : Color(nsColor: .controlBackgroundColor)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(
+                    server.isRunning ? Color.green.opacity(0.25) : Color(nsColor: .separatorColor),
+                    lineWidth: 1
+                )
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 
