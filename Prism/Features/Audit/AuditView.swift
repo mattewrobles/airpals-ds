@@ -1,12 +1,14 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct AuditView: View {
     @EnvironmentObject var projectStore: ProjectStore
     @State private var filterMode: AuditFilter = .all
     @State private var colorBlindMode: ColorBlindMode = .none
+    @State private var auditMode: String = "Light"
 
     private var pairs: [ContrastPair] {
-        generateContrastPairs()
+        generateContrastPairs(modeName: auditMode)
     }
 
     private var filtered: [ContrastPair] {
@@ -24,7 +26,7 @@ struct AuditView: View {
                 icon: "checkmark.shield.fill",
                 title: "Accessibility Audit",
                 subtitle: "WCAG contrast check for all semantic text/background pairs.",
-                tokenCount: pairs.count
+                tokenCount: filtered.count
             )
 
             // Controls
@@ -34,6 +36,13 @@ struct AuditView: View {
                 }
                 .pickerStyle(.segmented)
                 .frame(width: 320)
+
+                Picker("Mode", selection: $auditMode) {
+                    Text("Light").tag("Light")
+                    Text("Dark").tag("Dark")
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 120)
 
                 Spacer()
 
@@ -53,8 +62,10 @@ struct AuditView: View {
                 AuditSummaryBadge(label: "AA Pass", count: pairs.filter { $0.wcagLevel == .aa || $0.wcagLevel == .aaa }.count, color: .green)
                 AuditSummaryBadge(label: "AAA", count: pairs.filter { $0.wcagLevel == .aaa }.count, color: .blue)
                 Spacer()
-                Button("Export Report") {}
-                    .buttonStyle(.bordered)
+                Button("Export Report") {
+                    exportReport()
+                }
+                .buttonStyle(.bordered)
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 12)
@@ -88,10 +99,22 @@ struct AuditView: View {
         }
     }
 
-    private func generateContrastPairs() -> [ContrastPair] {
+    private func exportReport() {
+        let panel = NSSavePanel()
+        panel.allowedContentTypes = [.commaSeparatedText]
+        panel.nameFieldStringValue = "accessibility-report.csv"
+        if panel.runModal() == .OK, let url = panel.url {
+            var csv = "Text Token,Background Token,Text Hex,BG Hex,Contrast Ratio,WCAG Level\n"
+            for pair in filtered {
+                csv += "\(pair.textToken),\(pair.bgToken),\(pair.textHex),\(pair.bgHex),\(String(format: "%.2f", pair.ratio)),\(pair.wcagLevel.label)\n"
+            }
+            try? csv.write(to: url, atomically: true, encoding: .utf8)
+        }
+    }
+
+    private func generateContrastPairs(modeName: String) -> [ContrastPair] {
         guard let ds = projectStore.currentProject else { return [] }
         let resolver = TokenResolver(ds: ds)
-        let modeName = "Light"
 
         let textTokens = ds.semanticTokens.filter {
             $0.name.hasPrefix("text/") || $0.name.hasPrefix("icon/")

@@ -1,10 +1,21 @@
 import SwiftUI
 
+// MARK: - Publish Status
+
+enum PublishStatus {
+    case idle
+    case publishing
+    case success(Date)
+    case error(String)
+}
+
 struct FigmaSyncView: View {
     @EnvironmentObject var projectStore: ProjectStore
     @State private var syncStatus: SyncStatus = .idle
     @State private var showDiff = false
     @State private var exportFormat: ExportFormat = .figmaVariables
+    @State private var storybookPath: String = UserDefaults.standard.string(forKey: "storybookTokensPath") ?? ""
+    @State private var publishStatus: PublishStatus = .idle
 
     var body: some View {
         VStack(spacing: 0) {
@@ -46,6 +57,13 @@ struct FigmaSyncView: View {
                             // TODO: pull
                         }
                     }
+
+                    // Storybook publish
+                    StorybookPublishCard(
+                        ds: projectStore.currentDesignSystem,
+                        storybookPath: $storybookPath,
+                        publishStatus: $publishStatus
+                    )
 
                     // Export manual
                     VStack(alignment: .leading, spacing: 12) {

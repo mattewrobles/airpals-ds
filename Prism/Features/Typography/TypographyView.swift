@@ -411,6 +411,9 @@ struct FontFamilyCard: View {
     @EnvironmentObject var projectStore: ProjectStore
     let family: TypographyFamily
 
+    @State private var fontSearch = ""
+    @State private var showFontPicker = false
+
     private let allWeights: [Int] = [100, 200, 300, 400, 500, 600, 700, 800, 900]
     private let weightNames: [Int: String] = [
         100: "Thin", 200: "ExtraLight", 300: "Light", 400: "Regular",
@@ -431,8 +434,28 @@ struct FontFamilyCard: View {
             }
 
             // Font picker
-            Picker("", selection: familyBinding) {
-                ForEach(availableFamilies.prefix(200), id: \.self) { Text($0).tag($0) }
+            Button {
+                showFontPicker = true
+            } label: {
+                HStack {
+                    Text(family.fontFamily)
+                        .font(.custom(family.fontFamily, size: 13))
+                        .lineLimit(1)
+                    Spacer()
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .background(Color(nsColor: .textBackgroundColor))
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+                .overlay(RoundedRectangle(cornerRadius: 6).strokeBorder(Color.secondary.opacity(0.2)))
+            }
+            .buttonStyle(.plain)
+            .popover(isPresented: $showFontPicker, arrowEdge: .bottom) {
+                FontPickerPopover(selectedFamily: familyBinding, search: $fontSearch)
+                    .frame(width: 220, height: 300)
             }
 
             // Weight chips
