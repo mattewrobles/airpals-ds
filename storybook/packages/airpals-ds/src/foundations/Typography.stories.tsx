@@ -29,16 +29,6 @@ type TypeSpec = {
 const typeScale: TypeSpec[] = [
   /* ── Headings (Lexend) ─────────────────────────────────── */
   {
-    style: 'Dashboard Title',
-    group: 'Headings',
-    tailwind: 'text-lg font-semibold',
-    size: '18px',
-    lineHeight: 'Auto',
-    weight: 'SemiBold',
-    font: 'heading',
-    sample: 'Shipments',
-  },
-  {
     style: 'Heading 1',
     group: 'Headings',
     tailwind: 'text-4xl font-semibold',
@@ -68,7 +58,7 @@ const typeScale: TypeSpec[] = [
     font: 'heading',
     sample: 'Active Deliveries',
   },
-  /* ── Subheading (Lexend) ───────────────────────────────── */
+  /* ── Subheading (Inter) ────────────────────────────────── */
   {
     style: 'Subheading / Regular',
     group: 'Subheading',
@@ -76,7 +66,7 @@ const typeScale: TypeSpec[] = [
     size: '20px',
     lineHeight: '28px',
     weight: 'Regular',
-    font: 'heading',
+    font: 'body',
     sample: 'Track your packages in real time',
   },
   {
@@ -86,7 +76,7 @@ const typeScale: TypeSpec[] = [
     size: '20px',
     lineHeight: '28px',
     weight: 'SemiBold',
-    font: 'heading',
+    font: 'body',
     sample: 'Track your packages in real time',
   },
   /* ── Body Large (Inter) ────────────────────────────────── */
@@ -277,9 +267,8 @@ export const TypeScale: Story = {
             When to use each style
           </div>
           {[
-            { style: 'Dashboard Title', use: 'Page titles inside the dashboard header (18px, Lexend SemiBold)' },
-            { style: 'Heading 1–3',     use: 'Marketing pages, empty states, modal titles' },
-            { style: 'Subheading',      use: 'Section titles inside cards or panels. Use Regular for light, Semibold for emphasis' },
+            { style: 'Heading 1–3', use: 'Marketing pages, empty states, modal titles — Lexend' },
+            { style: 'Subheading',  use: 'Section titles inside cards or panels — Inter. Regular = light, Semibold = emphasis' },
             { style: 'Body Large',      use: 'Primary body copy — descriptions, onboarding text' },
             { style: 'Body Medium',     use: 'Default UI text — table cells, form labels, list items' },
             { style: 'Body Small',      use: 'Secondary info — helper text, metadata, timestamps' },
