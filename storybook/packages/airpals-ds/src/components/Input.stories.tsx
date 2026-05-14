@@ -1,5 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
+
+function CodeBlock({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+        <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">HTML + Tailwind</span>
+        <button
+          onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
+          className="px-2 py-1 text-xs rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors font-mono"
+        >
+          {copied ? '✓ copied' : 'copy'}
+        </button>
+      </div>
+      <pre className="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-300 overflow-x-auto bg-white dark:bg-slate-900 leading-relaxed">
+        {code}
+      </pre>
+    </div>
+  );
+}
 
 /* ── Component ───────────────────────────────────────────── */
 
@@ -198,7 +218,7 @@ export const Disabled: Story = {
 export const AllStates: Story = {
   name: 'All States',
   render: () => (
-    <div className="bg-white dark:bg-slate-900 p-8 font-body">
+    <div className="bg-white dark:bg-slate-900 p-8 font-body space-y-8">
       <div className="grid gap-6 max-w-sm">
         <Input label="Default" placeholder="Origin address…" />
         <Input label="Hover" placeholder="Origin address…" state="Hover" />
@@ -206,6 +226,74 @@ export const AllStates: Story = {
         <Input label="Disabled" value="••••••••" state="Disabled" />
         <Input label="Error" value="abc" status="Error" helperText="Please enter a valid ZIP code" />
         <Input label="Success" value="10001" status="Success" helperText="New York, NY" />
+      </div>
+
+      {/* ── Code snippets ── */}
+      <div>
+        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Code Snippets</p>
+        <div className="space-y-3">
+          {[
+            {
+              label: 'Default',
+              code: `<div class="flex flex-col gap-1.5">
+  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">Label</label>
+  <input
+    type="text"
+    placeholder="Start typing…"
+    class="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2
+           text-base text-brand-navy dark:text-slate-50
+           placeholder:text-slate-300 dark:placeholder:text-slate-600
+           bg-white dark:bg-slate-900 transition-colors"
+  />
+</div>`,
+            },
+            {
+              label: 'Focused',
+              code: `<input
+  type="text"
+  class="w-full border-2 border-brand-blue rounded-lg px-3 py-2
+         text-base text-brand-navy dark:text-slate-50
+         bg-white dark:bg-slate-900 outline-none"
+/>`,
+            },
+            {
+              label: 'Error',
+              code: `<div class="flex flex-col gap-1.5">
+  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">Weight (lbs)</label>
+  <input
+    type="text"
+    class="w-full border border-red-500 rounded-lg px-3 py-2
+           text-base text-brand-navy bg-white dark:bg-slate-900 dark:text-slate-50"
+  />
+  <p class="text-xs text-red-600">Weight must be greater than 0</p>
+</div>`,
+            },
+            {
+              label: 'Success',
+              code: `<div class="flex flex-col gap-1.5">
+  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">ZIP Code</label>
+  <input
+    type="text"
+    class="w-full border border-green-500 rounded-lg px-3 py-2
+           text-base text-brand-navy bg-white dark:bg-slate-900 dark:text-slate-50"
+  />
+  <p class="text-xs text-green-600">Brooklyn, NY</p>
+</div>`,
+            },
+            {
+              label: 'Disabled',
+              code: `<input
+  type="text"
+  disabled
+  class="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2
+         text-base text-brand-navy dark:text-slate-50
+         bg-brand-blue-sky dark:bg-slate-700 opacity-60 cursor-not-allowed"
+/>`,
+            },
+          ].map((s) => (
+            <CodeBlock key={s.label} code={s.code} />
+          ))}
+        </div>
       </div>
     </div>
   ),

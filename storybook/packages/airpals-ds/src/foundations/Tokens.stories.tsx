@@ -87,17 +87,66 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
+/* ── Download all tokens ─────────────────────────────────── */
+
+function DownloadAllTokens() {
+  const handleDownload = () => {
+    const tokens = {
+      spacing: {
+        px: '1px', '0': '0px', '0.5': '2px', '1': '4px', '1.5': '6px',
+        '2': '8px', '2.5': '10px', '3': '12px', '3.5': '14px', '4': '16px',
+        '5': '20px', '6': '24px', '7': '28px', '8': '32px', '9': '36px',
+        '10': '40px', '11': '44px', '12': '48px', '14': '56px', '16': '64px',
+        '20': '80px', '24': '96px', '28': '112px', '32': '128px', '36': '144px',
+        '40': '160px', '44': '176px', '48': '192px', '52': '208px', '56': '224px',
+        '60': '240px', '64': '256px', '72': '288px', '80': '320px', '96': '384px',
+      },
+      borderRadius: {
+        none: '0px', sm: '2px', default: '4px', md: '6px', lg: '8px',
+        xl: '12px', '2xl': '16px', '3xl': '24px', full: '9999px',
+      },
+      borderWidth: { '0': '0px', default: '1px', '2': '2px', '4': '4px', '8': '8px' },
+      colors: {
+        'brand/blue': '#0043FF', 'brand/pink': '#FC4575', 'brand/navy': '#1B306C',
+        'brand/blue-light': '#E6F1FD', 'brand/blue-sky': '#B4D5FF', 'brand/electric-blue': '#00A0FF',
+      },
+    };
+    const blob = new Blob([JSON.stringify(tokens, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'airpals-tokens.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <button
+      onClick={handleDownload}
+      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-brand-navy dark:text-slate-50 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 12l-4-4h2.5V3h3v5H12L8 12zM3 13h10v1H3v-1z"/>
+      </svg>
+      Download tokens.json
+    </button>
+  );
+}
+
 /* ── Story ───────────────────────────────────────────────── */
 
 export const DevReference: Story = {
   name: 'Dev Reference',
   render: () => (
     <div className="bg-white dark:bg-slate-900 p-8 font-body min-h-screen">
-      <div className="mb-8">
-        <h1 className="font-heading text-3xl font-semibold text-brand-navy dark:text-slate-50">Tokens Reference</h1>
-        <p className="mt-2 text-sm text-slate-500">
-          Rule: always use <strong>Semantics</strong> tokens. Never hex. Never slate/indigo direct in Figma.
-        </p>
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="font-heading text-3xl font-semibold text-brand-navy dark:text-slate-50">Tokens Reference</h1>
+          <p className="mt-2 text-sm text-slate-500">
+            Always use <strong>Semantics</strong> tokens. Never hex. <strong>Click CSS var or Tailwind class to copy.</strong>
+          </p>
+        </div>
+        <DownloadAllTokens />
       </div>
 
       {/* SPACING */}

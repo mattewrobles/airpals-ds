@@ -1,5 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
+
+function CodeBlock({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+        <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">HTML + Tailwind</span>
+        <button
+          onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
+          className="px-2 py-1 text-xs rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors font-mono"
+        >
+          {copied ? '✓ copied' : 'copy'}
+        </button>
+      </div>
+      <pre className="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-300 overflow-x-auto bg-white dark:bg-slate-900 leading-relaxed">
+        {code}
+      </pre>
+    </div>
+  );
+}
 
 /* ── Component ───────────────────────────────────────────── */
 
@@ -165,6 +185,25 @@ export const AllShipmentStatuses: Story = {
         <div className="flex flex-wrap gap-2">
           <Badge label="rounded-md (Semi)"   color="Primary" variant="Fill" shape="Semi" />
           <Badge label="rounded-full (Full)" color="Primary" variant="Fill" shape="Full" />
+        </div>
+      </div>
+
+      {/* ── Code snippets ── */}
+      <div>
+        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Code Snippets</p>
+        <div className="space-y-3">
+          {[
+            { label: 'Delivered', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-green-50 text-green-700">Delivered</span>` },
+            { label: 'In Transit', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-blue-50 text-brand-electric-blue">In Transit</span>` },
+            { label: 'Pending Pickup', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-amber-50 text-amber-700">Pending Pickup</span>` },
+            { label: 'Failed', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-red-50 text-red-700">Failed</span>` },
+            { label: 'Cancelled', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-slate-100 text-slate-600">Cancelled</span>` },
+            { label: 'Fill variant', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full bg-brand-blue text-white">Label</span>` },
+            { label: 'Outline variant', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full border border-brand-blue text-brand-blue">Label</span>` },
+            { label: 'Semi shape (rounded-md)', code: `<span class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-md bg-green-50 text-green-700">Label</span>` },
+          ].map((s) => (
+            <CodeBlock key={s.label} code={s.code} />
+          ))}
         </div>
       </div>
     </div>

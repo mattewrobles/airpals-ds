@@ -1,5 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
+
+function CodeBlock({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+        <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">HTML + Tailwind</span>
+        <button
+          onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
+          className="px-2 py-1 text-xs rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors font-mono"
+        >
+          {copied ? '✓ copied' : 'copy'}
+        </button>
+      </div>
+      <pre className="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-300 overflow-x-auto bg-white dark:bg-slate-900 leading-relaxed">
+        {code}
+      </pre>
+    </div>
+  );
+}
 
 /* ── Component ───────────────────────────────────────────── */
 
@@ -243,6 +263,58 @@ export const AllTypes: Story = {
             <code className="font-mono text-xs text-slate-500 break-all">{row.k}</code>
           </div>
         ))}
+      </div>
+
+      {/* ── Code snippets ── */}
+      <div>
+        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Code Snippets</p>
+        <div className="space-y-3">
+          {[
+            {
+              label: 'Primary',
+              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+  bg-brand-blue text-white hover:opacity-90 active:opacity-80
+  px-4 py-2 text-sm">
+  New Shipment
+</button>`,
+            },
+            {
+              label: 'Secondary',
+              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+  border border-brand-blue text-brand-blue bg-transparent hover:bg-brand-blue-light
+  px-4 py-2 text-sm">
+  View Details
+</button>`,
+            },
+            {
+              label: 'Ghost',
+              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+  bg-transparent text-brand-navy hover:bg-slate-100
+  dark:text-slate-50 dark:hover:bg-slate-800
+  px-4 py-2 text-sm">
+  Cancel
+</button>`,
+            },
+            {
+              label: 'Negative',
+              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+  bg-red-600 text-white hover:opacity-90
+  px-4 py-2 text-sm">
+  Delete Shipment
+</button>`,
+            },
+            {
+              label: 'Disabled (any type)',
+              code: `<button disabled class="inline-flex items-center justify-center font-medium rounded-lg
+  bg-brand-blue text-white px-4 py-2 text-sm
+  opacity-50 cursor-not-allowed">
+  New Shipment
+</button>`,
+            },
+          ].map((s) => (
+            <CodeBlock key={s.label} code={s.code} />
+          ))}
+        </div>
       </div>
     </div>
   ),

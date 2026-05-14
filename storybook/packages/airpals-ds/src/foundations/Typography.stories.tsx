@@ -1,5 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
+
+function CopyBtn({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      onClick={() => { navigator.clipboard.writeText(value); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
+      className="ml-1 px-1.5 py-0.5 text-xs rounded bg-slate-100 dark:bg-slate-700 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors font-mono flex-shrink-0"
+    >
+      {copied ? '✓' : 'copy'}
+    </button>
+  );
+}
 
 const meta: Meta = {
   title: 'Foundations/Typography',
@@ -229,18 +241,18 @@ export const TypeScale: Story = {
         </div>
 
         <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-          <div className="grid grid-cols-[180px_1fr_100px_80px_100px] bg-slate-50 dark:bg-slate-800 px-4 py-2 text-xs font-medium text-slate-500 uppercase tracking-wide">
+          <div className="grid grid-cols-[160px_1fr_160px_80px_80px] bg-slate-50 dark:bg-slate-800 px-4 py-2 text-xs font-medium text-slate-500 uppercase tracking-wide">
             <span>Style</span>
             <span>Sample</span>
+            <span>Tailwind class</span>
             <span>Size</span>
-            <span>Line</span>
             <span>Weight</span>
           </div>
           {rows.map((t, i) => (
             <div
               key={t.style}
               className={[
-                'grid grid-cols-[180px_1fr_100px_80px_100px] px-4 py-3 items-center gap-4',
+                'grid grid-cols-[160px_1fr_160px_80px_80px] px-4 py-3 items-center gap-4',
                 'border-t border-slate-200 dark:border-slate-700',
                 t.isFirst && i !== 0 ? 'border-t-2 border-t-slate-300 dark:border-t-slate-600' : '',
                 i % 2 === 0 ? 'bg-white dark:bg-slate-900' : 'bg-slate-50/50 dark:bg-slate-800/50',
@@ -254,8 +266,10 @@ export const TypeScale: Story = {
               >
                 {t.sample}
               </span>
+              <span className="inline-flex items-center font-mono text-xs text-brand-blue dark:text-brand-electric-blue">
+                {t.tailwind}<CopyBtn value={t.tailwind} />
+              </span>
               <span className="font-mono text-xs text-slate-400">{t.size}</span>
-              <span className="font-mono text-xs text-slate-400">{t.lineHeight}</span>
               <span className="font-mono text-xs text-slate-400">{t.weight}</span>
             </div>
           ))}
