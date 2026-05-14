@@ -4,8 +4,10 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "storybook:default": "npm run storybook --workspace=packages/ds-default",
-    "build:default": "npm run build-storybook --workspace=packages/ds-default",
-    "install:all": "npm install"
+    "storybook:default":  "npm run storybook --workspace=packages/ds-default",
+    "build:default":      "npm run build-storybook --workspace=packages/ds-default",
+    "storybook:airpals":  "npm run storybook --workspace=packages/airpals-ds",
+    "build:airpals":      "npm run build-storybook --workspace=packages/airpals-ds",
+    "install:all":        "npm install"
   }
 }
