@@ -34,7 +34,7 @@ module.exports = {
     // slate
     { pattern: /^(bg|text|border)-slate-(50|100|200|300|400|500|600|700|800|900)$/ },
     // text size + weight
-    { pattern: /^(text)-(xs|sm|base|lg|xl|2xl|3xl|4xl)$/ },
+    { pattern: /^(text)-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)$/ },
     { pattern: /^font-(normal|medium|semibold|bold)$/ },
   ],
   plugins: [],
