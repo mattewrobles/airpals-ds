@@ -1,130 +1,47 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
+import { CodeBlock } from '../shared/CodeBlock';
+import { Toggle } from '../lib/Toggle';
+import type { ToggleStyle, ToggleProps } from '../lib/Toggle';
 
-function CodeBlock({ code }: { code: string }) {
-  const [copied, setCopied] = useState(false);
+/* Local helper — stateful toggle with label */
+function ToggleWithLabel({ labelOff, labelOn }: { labelOff: string; labelOn: string }) {
+  const [on, setOn] = useState(false);
   return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-        <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">HTML + Tailwind</span>
-        <button
-          onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
-          className="px-2 py-1 text-xs rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors font-mono"
-        >
-          {copied ? '✓ copied' : 'copy'}
-        </button>
-      </div>
-      <pre className="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-300 overflow-x-auto bg-white dark:bg-slate-900 leading-relaxed">
-        {code}
-      </pre>
+    <div className="inline-flex items-center gap-3">
+      <Toggle style="Navy" active={on} onToggle={() => setOn(v => !v)} />
+      <span className="text-sm font-medium text-[#1b306c]">{on ? labelOn : labelOff}</span>
     </div>
-  );
-}
-
-/* ── Component ───────────────────────────────────────────── */
-
-type ToggleSize = 'sm' | 'md';
-
-type ToggleProps = {
-  checked?: boolean;
-  disabled?: boolean;
-  size?: ToggleSize;
-  label?: string;
-  labelOff?: string;
-  labelOn?: string;
-  onChange?: (checked: boolean) => void;
-};
-
-const sizeMap: Record<ToggleSize, { track: string; thumb: string; translate: string }> = {
-  sm: { track: 'w-8 h-4',  thumb: 'w-3 h-3',  translate: 'translate-x-4' },
-  md: { track: 'w-11 h-6', thumb: 'w-5 h-5',  translate: 'translate-x-5' },
-};
-
-function Toggle({
-  checked: initialChecked = false,
-  disabled = false,
-  size = 'md',
-  label,
-  labelOff,
-  labelOn,
-  onChange,
-}: ToggleProps) {
-  const [isOn, setIsOn] = useState(initialChecked);
-  const { track, thumb, translate } = sizeMap[size];
-
-  const handleClick = () => {
-    if (disabled) return;
-    const next = !isOn;
-    setIsOn(next);
-    onChange?.(next);
-  };
-
-  const isTextSwitch = labelOff !== undefined && labelOn !== undefined;
-
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={isOn}
-      disabled={disabled}
-      onClick={handleClick}
-      className={`inline-flex items-center gap-2.5 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-    >
-      {/* Track */}
-      <div
-        className={`relative ${track} rounded-full transition-colors duration-200 ${
-          isOn ? 'bg-brand-blue' : 'bg-slate-200 dark:bg-slate-600'
-        }`}
-      >
-        {/* Thumb */}
-        <span
-          className={`absolute top-0.5 left-0.5 ${thumb} rounded-full bg-white shadow transition-transform duration-200 ${
-            isOn ? translate : 'translate-x-0'
-          }`}
-        />
-      </div>
-
-      {/* Label */}
-      {isTextSwitch ? (
-        <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">
-          {isOn ? labelOn : labelOff}
-        </span>
-      ) : label ? (
-        <span className="text-sm text-slate-700 dark:text-slate-300">{label}</span>
-      ) : null}
-    </button>
   );
 }
 
 /* ── Meta ────────────────────────────────────────────────── */
 
-const FIGMA_URL = 'https://www.figma.com/design/QCicLCNGhyV9aJrUHZ6C44/Airpals---MVP-WIP?node-id=3672-29542';
+const FIGMA_URL = 'https://www.figma.com/design/3oMpon9bh8T8d0hFQt7l2g/Airpals-Design-system?node-id=625-3651';
 
 const meta: Meta<typeof Toggle> = {
   title: 'Components/Toggle',
   component: Toggle,
   tags: ['autodocs'],
   argTypes: {
-    checked:  { control: 'boolean', description: 'Initial checked state (controlled internally with useState)' },
-    disabled: { control: 'boolean', description: 'Disables interaction — applies opacity-50 + cursor-not-allowed' },
-    size:     { control: 'select', options: ['sm', 'md'], description: 'sm = w-8 h-4 · md = w-11 h-6 (default)' },
-    label:    { control: 'text', description: 'Static label shown next to the toggle' },
-    labelOff: { control: 'text', description: 'Label text when toggle is OFF (text-switch variant)' },
-    labelOn:  { control: 'text', description: 'Label text when toggle is ON (text-switch variant)' },
+    active: { control: 'boolean' },
+    style:  { control: 'select', options: ['Standard', 'Navy', 'Subtle'], description: 'Visual style' },
+    label:  { control: 'text' },
   },
   parameters: {
     design: { type: 'figma', url: FIGMA_URL },
     docs: {
       description: {
         component: [
-          'Two toggle styles from Airpals Figma:',
+          '**Figma node:** `625-3651` · File `3oMpon9bh8T8d0hFQt7l2g`',
           '',
-          '- **Simple switch** — track + thumb, optional static label',
-          '- **Text switch** — label text changes between `labelOff` and `labelOn` states',
+          'Toggle switch — 9 visual styles, 55×32px track, 28×28px knob.',
           '',
-          'State is managed internally via `useState`. Pass `checked` as the initial value.',
-          '',
-          'Colors: OFF = `bg-slate-200` · ON = `bg-brand-blue`.',
+          '| Style | OFF track | ON track | Knob |',
+          '|-------|-----------|----------|------|',
+          '| Standard | `#e5e7eb` | `#e5e7eb` | white→`#0043ff` |',
+          '| Navy (recommended) | `#1b306c` | `#0043ff` | white |',
+          '| Subtle | `#eaeefb` | `#eaeefb` | white→`#0043ff` |',
         ].join('\n'),
       },
     },
@@ -135,203 +52,99 @@ type Story = StoryObj<typeof Toggle>;
 
 /* ── Stories ─────────────────────────────────────────────── */
 
-export const Off: Story = {
-  args: { checked: false, size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Toggle OFF -->
-<button type="button" role="switch" aria-checked="false" class="inline-flex items-center gap-2.5 cursor-pointer">
-  <div class="relative w-11 h-6 rounded-full transition-colors bg-slate-200">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform translate-x-0"></span>
-  </div>
-</button>`,
-      },
-    },
-  },
+export const NavyOff: Story = {
+  name: 'Navy — OFF',
+  args: { style: 'Navy', active: false },
 };
 
-export const On: Story = {
-  args: { checked: true, size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Toggle ON -->
-<button type="button" role="switch" aria-checked="true" class="inline-flex items-center gap-2.5 cursor-pointer">
-  <div class="relative w-11 h-6 rounded-full transition-colors bg-brand-blue">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform translate-x-5"></span>
-  </div>
-</button>`,
-      },
-    },
-  },
+export const NavyOn: Story = {
+  name: 'Navy — ON',
+  args: { style: 'Navy', active: true },
 };
 
-export const Disabled: Story = {
-  args: { checked: false, disabled: true, size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Toggle Disabled -->
-<button type="button" role="switch" aria-checked="false" disabled class="inline-flex items-center gap-2.5 opacity-50 cursor-not-allowed">
-  <div class="relative w-11 h-6 rounded-full bg-slate-200">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow translate-x-0"></span>
-  </div>
-</button>`,
-      },
-    },
-  },
+export const StandardStyle: Story = {
+  name: 'Standard Style',
+  args: { style: 'Standard', active: false },
 };
 
-export const WithLabel: Story = {
-  name: 'With Label',
-  args: { checked: false, label: 'Auto Saver', size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Toggle with label -->
-<button type="button" role="switch" aria-checked="false" class="inline-flex items-center gap-2.5 cursor-pointer">
-  <div class="relative w-11 h-6 rounded-full transition-colors bg-slate-200">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform translate-x-0"></span>
-  </div>
-  <span class="text-sm text-slate-700 font-normal">Auto Saver</span>
-</button>`,
-      },
-    },
-  },
+export const WithTextLabel: Story = {
+  name: 'With Text Label',
+  render: () => <ToggleWithLabel labelOff="Auto Saver Off" labelOn="Auto Saver On" />,
 };
 
-export const TextSwitch: Story = {
-  name: 'Text Switch',
-  args: { checked: false, labelOff: 'Light mode', labelOn: 'Dark mode', size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Text switch variant — label changes with state -->
-<button type="button" role="switch" aria-checked="false" class="inline-flex items-center gap-2.5 cursor-pointer">
-  <div class="relative w-11 h-6 rounded-full transition-colors bg-slate-200">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform translate-x-0"></span>
-  </div>
-  <span class="text-sm text-slate-700 font-medium">Light mode</span>
-</button>
-
-<!-- ON state -->
-<button type="button" role="switch" aria-checked="true" class="inline-flex items-center gap-2.5 cursor-pointer">
-  <div class="relative w-11 h-6 rounded-full transition-colors bg-brand-blue">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform translate-x-5"></span>
-  </div>
-  <span class="text-sm text-slate-700 font-medium">Dark mode</span>
-</button>`,
-      },
-    },
-  },
-};
-
-export const AllVariants: Story = {
-  name: 'All Variants',
+export const AllStyles: Story = {
+  name: 'All Styles',
   render: () => (
-    <div className="bg-white dark:bg-slate-900 p-8 font-body space-y-10">
-
-      {/* Size × State grid */}
+    <div className="bg-white p-8 font-body space-y-8">
       <div>
-        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">Size × State</p>
-        <div className="grid grid-cols-3 gap-x-10 gap-y-5 items-center max-w-xs">
-          {/* Header row */}
-          <span className="text-[10px] text-slate-400 uppercase tracking-wide"></span>
-          <span className="text-[10px] text-slate-400 uppercase tracking-wide">OFF</span>
-          <span className="text-[10px] text-slate-400 uppercase tracking-wide">ON</span>
-
-          {/* md */}
-          <span className="text-xs text-slate-500">md</span>
-          <Toggle size="md" checked={false} />
-          <Toggle size="md" checked={true} />
-
-          {/* sm */}
-          <span className="text-xs text-slate-500">sm</span>
-          <Toggle size="sm" checked={false} />
-          <Toggle size="sm" checked={true} />
-
-          {/* disabled */}
-          <span className="text-xs text-slate-500">disabled</span>
-          <Toggle size="md" checked={false} disabled />
-          <Toggle size="md" checked={true} disabled />
-        </div>
-      </div>
-
-      {/* With labels */}
-      <div>
-        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">With Labels</p>
+        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">Toggle Styles</p>
         <div className="space-y-4">
-          <Toggle size="md" checked={false} label="Auto Saver" />
-          <Toggle size="md" checked={true}  label="Auto Saver" />
-          <Toggle size="sm" checked={false} label="Notifications" />
+          {(['Navy', 'Standard', 'Subtle'] as const).map(s => (
+            <div key={s} className="flex items-center gap-8">
+              <span className="text-xs text-slate-500 w-20">{s}</span>
+              <Toggle style={s} active={false} />
+              <Toggle style={s} active={true} />
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* Text switch */}
       <div>
-        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">Text Switch</p>
-        <div className="space-y-4">
-          <Toggle size="md" checked={false} labelOff="Light mode" labelOn="Dark mode" />
-          <Toggle size="md" checked={true}  labelOff="Light mode" labelOn="Dark mode" />
-          <Toggle size="md" checked={false} labelOff="Standard"   labelOn="Express" />
-        </div>
+        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">With Label</p>
+        <ToggleWithLabel labelOff="Auto Saver Off" labelOn="Auto Saver On" />
       </div>
 
-      {/* Code snippets */}
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Code Snippets</p>
         <div className="space-y-3">
           {[
             {
-              label: 'Toggle OFF — md',
-              code: `<button type="button" role="switch" aria-checked="false" class="inline-flex items-center gap-2.5 cursor-pointer">\n  <div class="relative w-11 h-6 rounded-full bg-slate-200">\n    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow translate-x-0 transition-transform"></span>\n  </div>\n</button>`,
+              label: 'Navy — OFF',
+              html: `<button role="switch" aria-checked="false"
+  class="relative w-[55px] h-8 rounded-full bg-[#1b306c]">
+  <span class="absolute top-0.5 translate-x-0.5 w-7 h-7 rounded-full bg-white shadow"></span>
+</button>`,
+              jsx: `<Toggle style="Navy" active={false} />`,
             },
             {
-              label: 'Toggle ON — md',
-              code: `<button type="button" role="switch" aria-checked="true" class="inline-flex items-center gap-2.5 cursor-pointer">\n  <div class="relative w-11 h-6 rounded-full bg-brand-blue">\n    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow translate-x-5 transition-transform"></span>\n  </div>\n</button>`,
+              label: 'Navy — ON',
+              html: `<button role="switch" aria-checked="true"
+  class="relative w-[55px] h-8 rounded-full bg-[#0043ff]">
+  <span class="absolute top-0.5 translate-x-[27px] w-7 h-7 rounded-full bg-white shadow"></span>
+</button>`,
+              jsx: `<Toggle style="Navy" active={true} />`,
             },
             {
-              label: 'Toggle sm — OFF',
-              code: `<button type="button" role="switch" aria-checked="false" class="inline-flex items-center gap-2.5 cursor-pointer">\n  <div class="relative w-8 h-4 rounded-full bg-slate-200">\n    <span class="absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow translate-x-0 transition-transform"></span>\n  </div>\n</button>`,
+              label: 'Standard — OFF / ON',
+              html: `<!-- OFF -->
+<button class="relative w-[55px] h-8 rounded-full bg-[#e5e7eb]">
+  <span class="absolute top-0.5 translate-x-0.5 w-7 h-7 rounded-full bg-white shadow"></span>
+</button>
+<!-- ON -->
+<button class="relative w-[55px] h-8 rounded-full bg-[#e5e7eb]">
+  <span class="absolute top-0.5 translate-x-[27px] w-7 h-7 rounded-full bg-[#0043ff] shadow"></span>
+</button>`,
+              jsx: `<Toggle style="Standard" active={false} />
+<Toggle style="Standard" active={true} />`,
             },
             {
-              label: 'With label',
-              code: `<button type="button" role="switch" aria-checked="false" class="inline-flex items-center gap-2.5 cursor-pointer">\n  <div class="relative w-11 h-6 rounded-full bg-slate-200">\n    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow translate-x-0 transition-transform"></span>\n  </div>\n  <span class="text-sm text-slate-700">Auto Saver</span>\n</button>`,
+              label: 'With Text Label',
+              html: `<div class="inline-flex items-center gap-3">
+  <button role="switch" aria-checked="true"
+    class="relative w-[50px] h-[26px] rounded-full bg-[#0043ff]">
+    <span class="absolute top-1 translate-x-[27px] w-[18px] h-[18px] rounded-full bg-white shadow"></span>
+  </button>
+  <span class="text-sm font-medium text-[#1b306c]">Auto Saver On</span>
+</div>`,
+              jsx: `<ToggleWithLabel labelOff="Auto Saver Off" labelOn="Auto Saver On" />`,
             },
-            {
-              label: 'Disabled',
-              code: `<button type="button" role="switch" aria-checked="false" disabled class="inline-flex items-center gap-2.5 opacity-50 cursor-not-allowed">\n  <div class="relative w-11 h-6 rounded-full bg-slate-200">\n    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow translate-x-0"></span>\n  </div>\n</button>`,
-            },
-          ].map((s) => (
-            <CodeBlock key={s.label} code={s.code} />
+          ].map(s => (
+            <div key={s.label}>
+              <p className="text-xs text-slate-400 mb-1">{s.label}</p>
+              <CodeBlock code={s.html} jsx={s.jsx} />
+            </div>
           ))}
         </div>
       </div>
     </div>
   ),
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Simple toggle — OFF / ON / Disabled -->
-<button type="button" role="switch" aria-checked="false" class="inline-flex items-center gap-2.5 cursor-pointer">
-  <div class="relative w-11 h-6 rounded-full bg-slate-200">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow translate-x-0 transition-transform"></span>
-  </div>
-</button>
-
-<button type="button" role="switch" aria-checked="true" class="inline-flex items-center gap-2.5 cursor-pointer">
-  <div class="relative w-11 h-6 rounded-full bg-brand-blue">
-    <span class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow translate-x-5 transition-transform"></span>
-  </div>
-</button>`,
-      },
-    },
-  },
 };

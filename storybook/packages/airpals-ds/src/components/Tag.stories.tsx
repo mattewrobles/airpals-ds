@@ -1,61 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
-
-/* ── Component ───────────────────────────────────────────── */
-/*
-  Figma specs (node 625:xxx, file 3oMpon9bh8T8d0hFQt7l2g):
-  key: 4d4781ffd56138317c8ea0b29e5f0258143dcab7
-  4 variants — State: Default / Hover / Focus / Disable
-  Used for: selectable filters, tags in tables
-  Height: ~32px · px-3 py-1 · rounded-lg · border border-slate-200
-  Default: bg-white text-[#1b306c] border-slate-200
-  Hover: bg-[#e6f1fd] border-slate-200
-  Focus/Active: bg-[#e6f1fd] border-[#0043ff] text-[#0043ff]
-  Disabled: bg-gray-100 text-slate-300 border-slate-200
-  Closable: optional × icon
-*/
-
-type TagState = 'Default' | 'Hover' | 'Focus' | 'Disable';
-
-type TagProps = {
-  label: string;
-  state?: TagState;
-  closable?: boolean;
-  onClose?: () => void;
-};
-
-const X_ICON = (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M9 3L3 9M3 3L9 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-  </svg>
-);
-
-function Tag({ label, state = 'Default', closable = false, onClose }: TagProps) {
-  const stateClasses: Record<TagState, string> = {
-    Default: 'bg-white text-[#1b306c] border-slate-200',
-    Hover:   'bg-[#e6f1fd] text-[#1b306c] border-slate-200',
-    Focus:   'bg-[#e6f1fd] text-[#0043ff] border-[#0043ff] border-2',
-    Disable: 'bg-gray-100 text-slate-300 border-slate-200 cursor-not-allowed',
-  };
-
-  return (
-    <span
-      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border text-sm font-medium h-8 transition-colors ${stateClasses[state]}`}
-    >
-      {label}
-      {closable && state !== 'Disable' && (
-        <button
-          onClick={onClose}
-          className="opacity-60 hover:opacity-100 transition-opacity"
-          aria-label={`Remove ${label}`}
-        >
-          {X_ICON}
-        </button>
-      )}
-    </span>
-  );
-}
+import { Tag } from '../lib/Tag';
+import type { TagState, TagProps } from '../lib/Tag';
 
 /* ── Meta ────────────────────────────────────────────────── */
 

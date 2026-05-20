@@ -1,116 +1,45 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
-
-function CodeBlock({ code }: { code: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-        <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">HTML + Tailwind</span>
-        <button
-          onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
-          className="px-2 py-1 text-xs rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors font-mono"
-        >
-          {copied ? '✓ copied' : 'copy'}
-        </button>
-      </div>
-      <pre className="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-300 overflow-x-auto bg-white dark:bg-slate-900 leading-relaxed">
-        {code}
-      </pre>
-    </div>
-  );
-}
-
-/* ── Component ───────────────────────────────────────────── */
-
-type InputState  = 'Default' | 'Hover' | 'Focused' | 'Disabled';
-type InputStatus = 'Default' | 'Error' | 'Success';
-
-type InputProps = {
-  label?: string;
-  placeholder?: string;
-  helperText?: string;
-  state?: InputState;
-  status?: InputStatus;
-  value?: string;
-};
-
-const stateClasses: Record<InputState, string> = {
-  Default:  'border border-slate-200 dark:border-slate-700',
-  Hover:    'border border-slate-300 dark:border-slate-600',
-  Focused:  'border-2 border-brand-blue outline-none',
-  Disabled: 'border border-slate-200 dark:border-slate-700 bg-brand-blue-sky dark:bg-slate-700 cursor-not-allowed',
-};
-
-const statusBorder: Record<InputStatus, string> = {
-  Default: '',
-  Error:   'border-red-500',
-  Success: 'border-green-500',
-};
-
-const helperColor: Record<InputStatus, string> = {
-  Default: 'text-slate-500',
-  Error:   'text-red-600',
-  Success: 'text-green-600',
-};
-
-function Input({ label, placeholder = 'Type here…', helperText, state = 'Default', status = 'Default', value }: InputProps) {
-  const disabled = state === 'Disabled';
-  return (
-    <div className="flex flex-col gap-1.5 w-full">
-      {label && <label className="text-sm font-medium text-brand-navy dark:text-slate-50">{label}</label>}
-      <input
-        type="text"
-        disabled={disabled}
-        defaultValue={value}
-        placeholder={placeholder}
-        className={[
-          'w-full rounded-lg px-3 py-2 text-base text-brand-navy dark:text-slate-50',
-          'placeholder:text-slate-300 dark:placeholder:text-slate-600',
-          'bg-white dark:bg-slate-900 transition-colors',
-          stateClasses[state],
-          state !== 'Focused' ? statusBorder[status] : '',
-          disabled ? 'opacity-60' : '',
-        ].join(' ')}
-      />
-      {helperText && <p className={`text-xs ${helperColor[status]}`}>{helperText}</p>}
-    </div>
-  );
-}
+import React from 'react';
+import { CodeBlock } from '../shared/CodeBlock';
+import { Input } from '../lib/Input';
+import type { InputState, InputStatus, InputProps } from '../lib/Input';
 
 /* ── Meta ────────────────────────────────────────────────── */
 
-const FIGMA_URL = 'https://www.figma.com/design/QCicLCNGhyV9aJrUHZ6C44/Airpals---MVP-WIP?node-id=3672-29542';
+const FIGMA_URL = 'https://www.figma.com/design/3oMpon9bh8T8d0hFQt7l2g/Airpals-Design-system?node-id=625-2537';
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
   tags: ['autodocs'],
   argTypes: {
-    state:       { control: 'select', options: ['Default', 'Hover', 'Focused', 'Disabled'], description: 'Interaction state' },
-    status:      { control: 'select', options: ['Default', 'Error', 'Success'], description: 'Validation status' },
-    label:       { control: 'text', description: 'Label above the field' },
-    placeholder: { control: 'text', description: 'Placeholder text — uses text/disable token' },
-    helperText:  { control: 'text', description: 'Helper text below — color changes with status' },
-    value:       { control: 'text', description: 'Default value' },
+    state:       { control: 'select', options: ['Default', 'Hover', 'Focused', 'Disabled'] },
+    status:      { control: 'select', options: ['Default', 'Error', 'Success'] },
+    label:       { control: 'text' },
+    placeholder: { control: 'text' },
+    helperText:  { control: 'text' },
+    value:       { control: 'text' },
   },
   parameters: {
     design: { type: 'figma', url: FIGMA_URL },
     docs: {
       description: {
         component: [
-          '**Figma key:** `d8b9c1ffd324575a54c030c43023a3b4360bdcfd`',
+          '**Figma node:** `625-2537` · File `3oMpon9bh8T8d0hFQt7l2g`',
           '',
-          '96 variants — State × Status × RightIcon × HelperText × Label.',
+          'Input field — 4 states × 3 statuses. Padding: `12/16/12/20px`. Radius: `6px`.',
           '',
-          '| Token | Usage |',
+          '| Token | Value |',
           '|-------|-------|',
-          '| `border-slate-200` | Default border |',
-          '| `border-2 border-brand-blue` | Focus state |',
-          '| `border-red-500` | Error state |',
-          '| `border-green-500` | Success state |',
-          '| `text-slate-300` | Placeholder color |',
-          '| `bg-brand-blue-sky` | Disabled background |',
+          '| Default border | `#dfe4ea` 1px |',
+          '| Hover border | `#0043ff` 1px |',
+          '| Focus border | `#adbcf2` **3px** |',
+          '| Error border + helper | `#f23030` |',
+          '| Success border + helper | `#22ad5c` |',
+          '| Disabled bg + border | `#f3f4f6` |',
+          '| Label | `#111928` · 16px/500 |',
+          '| Helper | `#4b5563` · 14px/400 |',
+          '| Placeholder | `#9ca3af` |',
         ].join('\n'),
       },
     },
@@ -121,177 +50,87 @@ type Story = StoryObj<typeof Input>;
 
 /* ── Stories ─────────────────────────────────────────────── */
 
-export const Default: Story = {
-  args: { label: 'Origin Address', placeholder: 'Start typing…' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Default -->
-<div class="flex flex-col gap-1.5">
-  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">
-    Origin Address
-  </label>
-  <input
-    type="text"
-    placeholder="Start typing…"
-    class="w-full border border-slate-200 rounded-lg px-3 py-2 text-base
-           text-brand-navy placeholder:text-slate-300
-           bg-white dark:bg-slate-900 dark:border-slate-700 dark:text-slate-50
-           transition-colors"
-  />
-</div>`,
-      },
-    },
-  },
-};
-
-export const Focused: Story = {
-  args: { label: 'Recipient', value: '101 Pacific Street, Brooklyn', state: 'Focused' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Focused — border-2 + brand-blue -->
-<input class="w-full border-2 border-brand-blue rounded-lg px-3 py-2 text-base
-              text-brand-navy bg-white outline-none
-              dark:bg-slate-900 dark:text-slate-50" />`,
-      },
-    },
-  },
-};
-
-export const WithError: Story = {
-  args: { label: 'Weight (lbs)', value: '0', status: 'Error', helperText: 'Weight must be greater than 0' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Error state -->
-<div class="flex flex-col gap-1.5">
-  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">Weight (lbs)</label>
-  <input class="w-full border border-red-500 rounded-lg px-3 py-2 text-base
-                text-brand-navy bg-white dark:bg-slate-900 dark:text-slate-50" />
-  <p class="text-xs text-red-600">Weight must be greater than 0</p>
-</div>`,
-      },
-    },
-  },
-};
-
-export const WithSuccess: Story = {
-  args: { label: 'ZIP Code', value: '11201', status: 'Success', helperText: 'Brooklyn, NY' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Success state -->
-<div class="flex flex-col gap-1.5">
-  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">ZIP Code</label>
-  <input class="w-full border border-green-500 rounded-lg px-3 py-2 text-base
-                text-brand-navy bg-white dark:bg-slate-900 dark:text-slate-50" />
-  <p class="text-xs text-green-600">Brooklyn, NY</p>
-</div>`,
-      },
-    },
-  },
-};
-
-export const Disabled: Story = {
-  args: { label: 'Account Number', value: '••••••••', state: 'Disabled' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Disabled — bg-brand-blue-sky -->
-<input
-  disabled
-  class="w-full border border-slate-200 rounded-lg px-3 py-2 text-base
-         bg-brand-blue-sky text-brand-navy opacity-60 cursor-not-allowed
-         dark:bg-slate-700 dark:border-slate-700 dark:text-slate-50"
-/>`,
-      },
-    },
-  },
-};
+export const Default: Story = { args: { label: 'Origin Address', placeholder: 'Start typing…' } };
+export const Hover: Story = { args: { label: 'Origin Address', placeholder: 'Start typing…', state: 'Hover' } };
+export const Focused: Story = { args: { label: 'Recipient', value: '101 Pacific Street, Brooklyn', state: 'Focused' } };
+export const WithError: Story = { args: { label: 'Weight (lbs)', value: '0', status: 'Error', helperText: 'Weight must be greater than 0' } };
+export const WithSuccess: Story = { args: { label: 'ZIP Code', value: '11201', status: 'Success', helperText: 'Brooklyn, NY' } };
+export const Disabled: Story = { args: { label: 'Account Number', value: '••••••••', state: 'Disabled' } };
 
 export const AllStates: Story = {
   name: 'All States',
   render: () => (
-    <div className="bg-white dark:bg-slate-900 p-8 font-body space-y-8">
+    <div className="bg-white p-8 font-body space-y-8">
       <div className="grid gap-6 max-w-sm">
         <Input label="Default" placeholder="Origin address…" />
-        <Input label="Hover" placeholder="Origin address…" state="Hover" />
+        <Input label="Hover"   placeholder="Origin address…" state="Hover" />
         <Input label="Focused" value="101 Pacific Street, Brooklyn" state="Focused" />
         <Input label="Disabled" value="••••••••" state="Disabled" />
-        <Input label="Error" value="abc" status="Error" helperText="Please enter a valid ZIP code" />
-        <Input label="Success" value="10001" status="Success" helperText="New York, NY" />
+        <Input label="Error"   value="0" status="Error"   helperText="Weight must be greater than 0" />
+        <Input label="Success" value="11201" status="Success" helperText="Brooklyn, NY" />
       </div>
 
-      {/* ── Code snippets ── */}
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Code Snippets</p>
         <div className="space-y-3">
           {[
             {
               label: 'Default',
-              code: `<div class="flex flex-col gap-1.5">
-  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">Label</label>
-  <input
-    type="text"
-    placeholder="Start typing…"
-    class="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2
-           text-base text-brand-navy dark:text-slate-50
-           placeholder:text-slate-300 dark:placeholder:text-slate-600
-           bg-white dark:bg-slate-900 transition-colors"
-  />
+              html: `<div class="flex flex-col gap-1.5">
+  <label class="text-base font-medium text-[#111928]">Label</label>
+  <input type="text" placeholder="Placeholder"
+    class="w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5
+           border border-[#dfe4ea] bg-white
+           text-base text-[#111928] placeholder:text-[#9ca3af] outline-none" />
 </div>`,
+              jsx: `<Input label="Label" placeholder="Placeholder" />`,
+            },
+            {
+              label: 'Hover',
+              html: `<input type="text" class="w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5
+  border border-[#0043ff] bg-white text-base outline-none" />`,
+              jsx: `<Input label="Label" state="Hover" />`,
             },
             {
               label: 'Focused',
-              code: `<input
-  type="text"
-  class="w-full border-2 border-brand-blue rounded-lg px-3 py-2
-         text-base text-brand-navy dark:text-slate-50
-         bg-white dark:bg-slate-900 outline-none"
-/>`,
+              html: `<input type="text" class="w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5
+  border-[3px] border-[#adbcf2] bg-white text-base outline-none" />`,
+              jsx: `<Input label="Label" state="Focused" />`,
             },
             {
               label: 'Error',
-              code: `<div class="flex flex-col gap-1.5">
-  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">Weight (lbs)</label>
-  <input
-    type="text"
-    class="w-full border border-red-500 rounded-lg px-3 py-2
-           text-base text-brand-navy bg-white dark:bg-slate-900 dark:text-slate-50"
-  />
-  <p class="text-xs text-red-600">Weight must be greater than 0</p>
+              html: `<div class="flex flex-col gap-1.5">
+  <label class="text-base font-medium text-[#111928]">Label</label>
+  <input type="text" class="w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5
+    border border-[#f23030] bg-white text-base outline-none" />
+  <p class="text-sm text-[#f23030]">Helper Text</p>
 </div>`,
+              jsx: `<Input label="Label" status="Error" helperText="Helper Text" />`,
             },
             {
               label: 'Success',
-              code: `<div class="flex flex-col gap-1.5">
-  <label class="text-sm font-medium text-brand-navy dark:text-slate-50">ZIP Code</label>
-  <input
-    type="text"
-    class="w-full border border-green-500 rounded-lg px-3 py-2
-           text-base text-brand-navy bg-white dark:bg-slate-900 dark:text-slate-50"
-  />
-  <p class="text-xs text-green-600">Brooklyn, NY</p>
+              html: `<div class="flex flex-col gap-1.5">
+  <label class="text-base font-medium text-[#111928]">Label</label>
+  <input type="text" class="w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5
+    border border-[#22ad5c] bg-white text-base outline-none" />
+  <p class="text-sm text-[#22ad5c]">Helper Text</p>
 </div>`,
+              jsx: `<Input label="Label" status="Success" helperText="Helper Text" />`,
             },
             {
               label: 'Disabled',
-              code: `<input
-  type="text"
-  disabled
-  class="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2
-         text-base text-brand-navy dark:text-slate-50
-         bg-brand-blue-sky dark:bg-slate-700 opacity-60 cursor-not-allowed"
-/>`,
+              html: `<div class="flex flex-col gap-1.5">
+  <label class="text-base font-medium text-[#6b7280]">Label</label>
+  <input type="text" disabled class="w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5
+    border border-[#f3f4f6] bg-[#f3f4f6] text-base cursor-not-allowed outline-none" />
+</div>`,
+              jsx: `<Input label="Label" state="Disabled" />`,
             },
           ].map((s) => (
-            <CodeBlock key={s.label} code={s.code} />
+            <div key={s.label}>
+              <p className="text-xs text-slate-400 mb-1">{s.label}</p>
+              <CodeBlock code={s.html} jsx={s.jsx} />
+            </div>
           ))}
         </div>
       </div>

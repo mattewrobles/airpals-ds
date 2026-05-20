@@ -1,72 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
-
-function CodeBlock({ code }: { code: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-        <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">HTML + Tailwind</span>
-        <button
-          onClick={() => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
-          className="px-2 py-1 text-xs rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors font-mono"
-        >
-          {copied ? '✓ copied' : 'copy'}
-        </button>
-      </div>
-      <pre className="px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-300 overflow-x-auto bg-white dark:bg-slate-900 leading-relaxed">
-        {code}
-      </pre>
-    </div>
-  );
-}
-
-/* ── Component ───────────────────────────────────────────── */
-
-type ButtonProps = {
-  label: string;
-  type?: 'Primary' | 'Secondary' | 'Ghost' | 'Ghost II' | 'Negative' | 'Accent';
-  state?: 'Default' | 'Disabled';
-  size?: 'sm' | 'md' | 'lg';
-};
-
-const typeClasses: Record<string, string> = {
-  Primary:  'bg-brand-blue text-white hover:opacity-90 active:opacity-80',
-  Secondary:'border border-brand-blue text-brand-blue bg-transparent hover:bg-brand-blue-light',
-  Ghost:    'bg-transparent text-brand-navy dark:text-slate-50 hover:bg-slate-100 dark:hover:bg-slate-800',
-  'Ghost II':'bg-slate-100 dark:bg-slate-800 text-brand-navy dark:text-slate-50 hover:bg-slate-200 dark:hover:bg-slate-700',
-  Negative: 'bg-red-600 text-white hover:opacity-90',
-  Accent:   'bg-brand-navy text-white hover:opacity-90',
-};
-
-const sizeClasses: Record<string, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
-};
-
-function Button({ label, type = 'Primary', state = 'Default', size = 'md' }: ButtonProps) {
-  const disabled = state === 'Disabled';
-  return (
-    <button
-      disabled={disabled}
-      className={[
-        'inline-flex items-center justify-center font-medium rounded-lg transition-all',
-        typeClasses[type],
-        sizeClasses[size],
-        disabled ? 'opacity-50 cursor-not-allowed' : '',
-      ].join(' ')}
-    >
-      {label}
-    </button>
-  );
-}
-
-/* ── Figma DS link ───────────────────────────────────────── */
-
-const FIGMA_URL = 'https://www.figma.com/design/QCicLCNGhyV9aJrUHZ6C44/Airpals---MVP-WIP?node-id=3672-29542';
+import React from 'react';
+import { CodeBlock } from '../shared/CodeBlock';
+import { Button } from '../lib/Button';
+import type { ButtonType, ButtonState, ButtonSize, ButtonProps } from '../lib/Button';
 
 /* ── Meta ────────────────────────────────────────────────── */
+
+const FIGMA_URL = 'https://www.figma.com/design/3oMpon9bh8T8d0hFQt7l2g/Airpals-Design-system?node-id=3-7';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -119,84 +59,22 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: { label: 'New Shipment', type: 'Primary', size: 'md' },
-  parameters: {
-    design: { type: 'figma', url: FIGMA_URL },
-    docs: {
-      source: {
-        language: 'html',
-        code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
-  bg-brand-blue text-white hover:opacity-90 active:opacity-80
-  px-4 py-2 text-sm">
-  New Shipment
-</button>`,
-      },
-    },
-  },
 };
 
 export const Secondary: Story = {
   args: { label: 'View Details', type: 'Secondary', size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
-  border border-brand-blue text-brand-blue bg-transparent hover:bg-brand-blue-light
-  px-4 py-2 text-sm">
-  View Details
-</button>`,
-      },
-    },
-  },
 };
 
 export const Ghost: Story = {
   args: { label: 'Cancel', type: 'Ghost', size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
-  bg-transparent text-brand-navy hover:bg-slate-100
-  dark:text-slate-50 dark:hover:bg-slate-800
-  px-4 py-2 text-sm">
-  Cancel
-</button>`,
-      },
-    },
-  },
 };
 
 export const Negative: Story = {
   args: { label: 'Delete Shipment', type: 'Negative', size: 'md' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
-  bg-red-600 text-white hover:opacity-90
-  px-4 py-2 text-sm">
-  Delete Shipment
-</button>`,
-      },
-    },
-  },
 };
 
 export const Disabled: Story = {
   args: { label: 'New Shipment', type: 'Primary', state: 'Disabled' },
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<button disabled class="inline-flex items-center justify-center font-medium rounded-lg
-  bg-brand-blue text-white px-4 py-2 text-sm
-  opacity-50 cursor-not-allowed">
-  New Shipment
-</button>`,
-      },
-    },
-  },
 };
 
 export const Sizes: Story = {
@@ -208,21 +86,6 @@ export const Sizes: Story = {
       <Button label="Large — px-6 py-3" type="Primary" size="lg" />
     </div>
   ),
-  parameters: {
-    docs: {
-      source: {
-        language: 'html',
-        code: `<!-- Small -->
-<button class="... px-3 py-1.5 text-sm">Label</button>
-
-<!-- Medium (default) -->
-<button class="... px-4 py-2 text-sm">Label</button>
-
-<!-- Large -->
-<button class="... px-6 py-3 text-base">Label</button>`,
-      },
-    },
-  },
 };
 
 export const AllTypes: Story = {
@@ -265,54 +128,61 @@ export const AllTypes: Story = {
         ))}
       </div>
 
-      {/* ── Code snippets ── */}
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Code Snippets</p>
         <div className="space-y-3">
           {[
             {
               label: 'Primary',
-              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+              html: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
   bg-brand-blue text-white hover:opacity-90 active:opacity-80
   px-4 py-2 text-sm">
   New Shipment
 </button>`,
+              jsx: `<Button label="New Shipment" type="Primary" />`,
             },
             {
               label: 'Secondary',
-              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+              html: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
   border border-brand-blue text-brand-blue bg-transparent hover:bg-brand-blue-light
   px-4 py-2 text-sm">
   View Details
 </button>`,
+              jsx: `<Button label="View Details" type="Secondary" />`,
             },
             {
               label: 'Ghost',
-              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+              html: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
   bg-transparent text-brand-navy hover:bg-slate-100
   dark:text-slate-50 dark:hover:bg-slate-800
   px-4 py-2 text-sm">
   Cancel
 </button>`,
+              jsx: `<Button label="Cancel" type="Ghost" />`,
             },
             {
               label: 'Negative',
-              code: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
+              html: `<button class="inline-flex items-center justify-center font-medium rounded-lg transition-all
   bg-red-600 text-white hover:opacity-90
   px-4 py-2 text-sm">
   Delete Shipment
 </button>`,
+              jsx: `<Button label="Delete Shipment" type="Negative" />`,
             },
             {
               label: 'Disabled (any type)',
-              code: `<button disabled class="inline-flex items-center justify-center font-medium rounded-lg
+              html: `<button disabled class="inline-flex items-center justify-center font-medium rounded-lg
   bg-brand-blue text-white px-4 py-2 text-sm
   opacity-50 cursor-not-allowed">
   New Shipment
 </button>`,
+              jsx: `<Button label="New Shipment" type="Primary" state="Disabled" />`,
             },
-          ].map((s) => (
-            <CodeBlock key={s.label} code={s.code} />
+          ].map(s => (
+            <div key={s.label}>
+              <p className="text-xs text-slate-400 mb-1">{s.label}</p>
+              <CodeBlock code={s.html} jsx={s.jsx} />
+            </div>
           ))}
         </div>
       </div>
