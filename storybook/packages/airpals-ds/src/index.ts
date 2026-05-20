@@ -48,3 +48,15 @@ export type { TextareaState, TextareaProps } from './lib/Textarea';
 
 export { Toggle } from './lib/Toggle';
 export type { ToggleStyle, ToggleProps } from './lib/Toggle';
+
+export { ToggleWithText } from './lib/ToggleWithText';
+export type { ToggleWithTextSize, ToggleWithTextProps } from './lib/ToggleWithText';
+
+export { AvatarGroup } from './lib/AvatarGroup';
+export type { AvatarGroupSize, AvatarGroupItem, AvatarGroupProps } from './lib/AvatarGroup';
+
+export { Logo } from './lib/Logo';
+export type { LogoOrientation, LogoColor, LogoProps } from './lib/Logo';
+
+export { Icon } from './lib/Icon';
+export type { IconVariant, IconSize, IconProps } from './lib/Icon';

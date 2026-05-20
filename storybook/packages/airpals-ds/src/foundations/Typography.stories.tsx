@@ -22,7 +22,7 @@ const meta: Meta = {
         component: [
           '## Airpals Type Scale',
           '',
-          'Two fonts: **Lexend SemiBold** (h1–h4) · **Inter Regular / SemiBold** (subheading, body, caption).',
+          'Two fonts: **Lexend SemiBold** (h1–h4) · **Inter Regular / SemiBold** (subheading ×2, body, caption).',
           '',
           'Figma Variables collection: `Breakpoints` → modes `Desktop` / `Mobile`.',
           'Each `font-size` property is bound to a variable (e.g. `h1 · text-5xl/size`).',
@@ -81,7 +81,14 @@ const typeScale: TypeSpec[] = [
     weight: 'SemiBold', font: 'heading',
     sample: 'Shipment #1042',
   },
-  /* ── Subheading (Inter SemiBold only) ───────────────────── */
+  /* ── Subheading (Inter Regular + SemiBold) ──────────────── */
+  {
+    style: 'subheading · Regular', figmaVar: 'subheading · text-xl/size', group: 'Subheading',
+    twClass: 'text-xl font-normal', twMobileClass: 'text-lg font-normal',
+    size: '20px', mobileSize: '18px', lh: '28px', mobileLH: '24px',
+    weight: 'Regular', font: 'body',
+    sample: 'Recent shipments',
+  },
   {
     style: 'subheading · SemiBold', figmaVar: 'subheading · text-xl/size', group: 'Subheading',
     twClass: 'text-xl font-semibold', twMobileClass: 'text-lg font-semibold',
@@ -244,7 +251,7 @@ export const TypeScale: Story = {
           </div>
           {[
             { style: 'h1 – h4',        use: 'Page titles, modal headers, section titles. Lexend SemiBold always.' },
-            { style: 'subheading',      use: 'Panel section titles, card headers. Regular = descriptive, SemiBold = interactive.' },
+            { style: 'subheading',      use: 'Panel section titles, card headers. Regular = descriptive labels, SemiBold = interactive or emphasized.' },
             { style: 'body-lg',         use: 'Primary body copy — descriptions, onboarding, empty states.' },
             { style: 'body-md',         use: 'Default UI — table cells, form labels, list items. Most used.' },
             { style: 'body-sm',         use: 'Secondary info — helper text, metadata, timestamps, tooltips.' },
