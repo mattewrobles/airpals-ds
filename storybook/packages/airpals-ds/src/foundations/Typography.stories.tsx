@@ -81,14 +81,7 @@ const typeScale: TypeSpec[] = [
     weight: 'SemiBold', font: 'heading',
     sample: 'Shipment #1042',
   },
-  /* ── Subheading (Inter) ──────────────────────────────────── */
-  {
-    style: 'subheading · Regular', figmaVar: 'subheading · text-xl/size', group: 'Subheading',
-    twClass: 'text-xl font-normal', twMobileClass: 'text-lg font-normal',
-    size: '20px', mobileSize: '18px', lh: '28px', mobileLH: '24px',
-    weight: 'Regular', font: 'body',
-    sample: 'Recent shipments',
-  },
+  /* ── Subheading (Inter SemiBold only) ───────────────────── */
   {
     style: 'subheading · SemiBold', figmaVar: 'subheading · text-xl/size', group: 'Subheading',
     twClass: 'text-xl font-semibold', twMobileClass: 'text-lg font-semibold',
