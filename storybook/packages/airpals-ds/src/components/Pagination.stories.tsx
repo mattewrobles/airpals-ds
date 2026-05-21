@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Pagination } from '../lib/Pagination';
 import type { PaginationProps } from '../lib/Pagination';
 
@@ -39,6 +40,19 @@ const meta: Meta<typeof Pagination> = {
 };
 export default meta;
 type Story = StoryObj<typeof Pagination>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Pagination'}
+      types={['PaginationProps']}
+      jsx={`<Pagination total={50} page={1} perPage={10} onChange={(p) => console.log(p)} />`}
+      figmaKey="4446b332c09cbed4a66d914148a05862a3f25851"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

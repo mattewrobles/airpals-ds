@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import * as HeroOutline from '@heroicons/react/24/outline';
 import * as HeroSolid from '@heroicons/react/24/solid';
+import { UsageBlock } from '../shared/UsageBlock';
 
 const meta: Meta = {
   title: 'Brand/Icons',
@@ -36,6 +37,19 @@ const meta: Meta = {
 };
 export default meta;
 type Story = StoryObj;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={[]}
+      types={[]}
+      jsx={`import { EnvelopeIcon, TruckIcon } from '@heroicons/react/24/outline';\n\n<EnvelopeIcon className="w-5 h-5 text-[#0043ff]" />\n<TruckIcon className="w-6 h-6 text-[#1b306c]" />`}
+      figmaKey="318727013b1e24c56a6a066facec0b6c01bbb069"
+    />
+  ),
+};
 
 // Curated set of icons used in Airpals DS / app
 const AIRPALS_ICONS = [

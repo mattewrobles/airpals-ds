@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Breadcrumbs } from '../lib/Breadcrumbs';
 import type { BreadcrumbSeparator, BreadcrumbItem, BreadcrumbsProps } from '../lib/Breadcrumbs';
 
@@ -39,6 +40,25 @@ const meta: Meta<typeof Breadcrumbs> = {
 };
 export default meta;
 type Story = StoryObj<typeof Breadcrumbs>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Breadcrumbs'}
+      types={['BreadcrumbItem', 'BreadcrumbsProps']}
+      jsx={`<Breadcrumbs
+  items={[
+    { label: 'Home', href: '/' },
+    { label: 'Shipments', href: '/shipments' },
+    { label: '#1042' },
+  ]}
+/>`}
+      figmaKey="1d0edc6fa49b9640eaf8b2b8661b22af676267d9"
+    />
+  ),
+};
 
 const defaultItems: BreadcrumbItem[] = [
   { label: 'Dashboard', href: '#' },

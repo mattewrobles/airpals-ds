@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { UsageBlock } from '../shared/UsageBlock';
 import React from 'react';
 import { AvatarGroup } from '../lib/AvatarGroup';
 
@@ -32,6 +33,26 @@ const meta: Meta<typeof AvatarGroup> = {
 };
 export default meta;
 type Story = StoryObj<typeof AvatarGroup>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'AvatarGroup'}
+      types={['AvatarGroupSize', 'AvatarGroupItem', 'AvatarGroupProps']}
+      jsx={`<AvatarGroup
+  avatars={[
+    { initials: 'MA' },
+    { initials: 'GB' },
+    { initials: 'NH' },
+  ]}
+  total={3}
+/>`}
+      figmaKey="7d25bbb9a9909353ab9702e8de0baa52d700db83"
+    />
+  ),
+};
 
 const SAMPLE_AVATARS = [
   { initials: 'MA', alt: 'Mau A.' },

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { SplitButton } from '../lib/SplitButton';
 import type { SplitButtonSize, SplitButtonType, SplitButtonProps } from '../lib/SplitButton';
 
@@ -35,6 +36,19 @@ const meta: Meta<typeof SplitButton> = {
 };
 export default meta;
 type Story = StoryObj<typeof SplitButton>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'SplitButton'}
+      types={['SplitButtonSize', 'SplitButtonType', 'SplitButtonProps']}
+      jsx={`<SplitButton label="Export" options={['CSV', 'PDF', 'Excel']} />`}
+      figmaKey="ccd1ef4b71562bc9f214b6bbe7c75f0d5fff4be2"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

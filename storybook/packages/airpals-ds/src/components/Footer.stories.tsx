@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Footer } from '../lib/Footer';
 import type { FooterProps } from '../lib/Footer';
 
@@ -39,6 +40,19 @@ const meta: Meta<typeof Footer> = {
 };
 export default meta;
 type Story = StoryObj<typeof Footer>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Footer'}
+      types={['FooterProps']}
+      jsx={`<Footer />`}
+      figmaKey="ddf4c0906a29a7d9dd5ac6cffba9a6fb0aa25bf1"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

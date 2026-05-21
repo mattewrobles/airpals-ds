@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Dropdown } from '../lib/Dropdown';
 import type { DropdownState, DropdownProps } from '../lib/Dropdown';
 
@@ -42,6 +43,23 @@ const meta: Meta<typeof Dropdown> = {
 };
 export default meta;
 type Story = StoryObj<typeof Dropdown>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Dropdown'}
+      types={['DropdownState', 'DropdownProps']}
+      jsx={`<Dropdown
+  label="Carrier"
+  options={['UPS', 'FedEx', 'DHL', 'USPS']}
+  placeholder="Select carrier"
+/>`}
+      figmaKey="ab6bdf420ef071648dce629158fdf9f013d2a10b"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Checkbox } from '../lib/Checkbox';
 import type { CheckboxState, CheckboxActive, CheckboxSize, CheckboxProps } from '../lib/Checkbox';
 
@@ -40,6 +41,19 @@ const meta: Meta<typeof Checkbox> = {
 };
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Checkbox'}
+      types={['CheckboxState', 'CheckboxActive', 'CheckboxSize', 'CheckboxProps']}
+      jsx={`<Checkbox label="Express delivery" />`}
+      figmaKey="bc11ab166204aa70d32348853ff1f4e09c4c699a"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Badge } from '../lib/Badge';
 import type { BadgeColor, BadgeVariant, BadgeShape, BadgeProps } from '../lib/Badge';
 
@@ -44,6 +45,19 @@ const meta: Meta<typeof Badge> = {
 };
 export default meta;
 type Story = StoryObj<typeof Badge>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Badge'}
+      types={['BadgeColor', 'BadgeVariant', 'BadgeShape', 'BadgeProps']}
+      jsx={`<Badge label="In Transit" color="Info" variant="Duo Tone" />`}
+      figmaKey="9469c69590accb9b16f66d63f681e74646d930d5"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

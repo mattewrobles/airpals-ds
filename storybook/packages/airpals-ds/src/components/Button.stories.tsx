@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Button } from '../lib/Button';
 import type { ButtonType, ButtonState, ButtonSize, ButtonProps } from '../lib/Button';
 
@@ -54,6 +55,19 @@ const meta: Meta<typeof Button> = {
 };
 export default meta;
 type Story = StoryObj<typeof Button>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Button'}
+      types={['ButtonType', 'ButtonState', 'ButtonSize', 'ButtonProps']}
+      jsx={`<Button label="New Shipment" />`}
+      figmaKey="1976dd5fb0525a76fb43bf3785fa678114f2c72c"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

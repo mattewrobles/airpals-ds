@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Navbar } from '../lib/Navbar';
 import type { NavbarProps } from '../lib/Navbar';
 
@@ -40,6 +41,19 @@ const meta: Meta<typeof Navbar> = {
 };
 export default meta;
 type Story = StoryObj<typeof Navbar>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Navbar'}
+      types={['NavbarProps']}
+      jsx={`<Navbar />`}
+      figmaKey="3a3f1b66137b2a2319c8482b6c2f6e4f19f0f403"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

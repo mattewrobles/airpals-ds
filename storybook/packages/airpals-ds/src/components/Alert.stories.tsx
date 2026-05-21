@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Alert } from '../lib/Alert';
 import type { AlertType, AlertProps } from '../lib/Alert';
 
@@ -39,6 +40,19 @@ const meta: Meta<typeof Alert> = {
 };
 export default meta;
 type Story = StoryObj<typeof Alert>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Alert'}
+      types={['AlertType', 'AlertProps']}
+      jsx={`<Alert type="Warning" title="Shipment delayed" />`}
+      figmaKey="7ab16d43d264598355e8b9404cb71fa295cfbd3e"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

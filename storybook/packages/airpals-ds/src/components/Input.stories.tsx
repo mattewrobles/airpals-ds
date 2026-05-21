@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Input } from '../lib/Input';
 import type { InputState, InputStatus, InputProps } from '../lib/Input';
 
@@ -47,6 +48,23 @@ const meta: Meta<typeof Input> = {
 };
 export default meta;
 type Story = StoryObj<typeof Input>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Input'}
+      types={['InputState', 'InputStatus', 'InputProps']}
+      jsx={`<Input
+  label="Recipient"
+  placeholder="Full name"
+  helperText="As shown on ID"
+/>`}
+      figmaKey="d8b9c1ffd324575a54c030c43023a3b4360bdcfd"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { UsageBlock } from '../shared/UsageBlock';
 import React from 'react';
 import { Logo } from '../lib/Logo';
 
@@ -38,6 +39,21 @@ const meta: Meta<typeof Logo> = {
 };
 export default meta;
 type Story = StoryObj<typeof Logo>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Logo'}
+      types={['LogoOrientation', 'LogoColor', 'LogoProps']}
+      jsx={`<Logo />
+<Logo orientation="symbol" />
+<Logo color="dark-blue" />`}
+      figmaKey="1299097f3692a6cd9adf26dc7647eeeb484a9b20"
+    />
+  ),
+};
 
 export const Default: Story = {
   args: {

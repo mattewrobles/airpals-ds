@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Textarea } from '../lib/Textarea';
 import type { TextareaState, TextareaProps } from '../lib/Textarea';
 
@@ -42,6 +43,22 @@ const meta: Meta<typeof Textarea> = {
 };
 export default meta;
 type Story = StoryObj<typeof Textarea>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Textarea'}
+      types={['TextareaState', 'TextareaProps']}
+      jsx={`<Textarea
+  label="Delivery notes"
+  placeholder="Add instructions for the carrier…"
+/>`}
+      figmaKey="1ca65d3a68be64f22808a675989481ee9154a726"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

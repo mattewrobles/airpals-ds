@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Toggle } from '../lib/Toggle';
 import type { ToggleStyle, ToggleProps } from '../lib/Toggle';
 
@@ -49,6 +50,19 @@ const meta: Meta<typeof Toggle> = {
 };
 export default meta;
 type Story = StoryObj<typeof Toggle>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Toggle'}
+      types={['ToggleStyle', 'ToggleProps']}
+      jsx={`<Toggle label="Dark mode" />`}
+      figmaKey="4188d5d41c0cf2e87430bf735c7b2066a50b25fb"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

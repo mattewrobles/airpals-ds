@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Avatar } from '../lib/Avatar';
 import type { AvatarSize, AvatarCorner, AvatarVariant, AvatarProps } from '../lib/Avatar';
 
@@ -45,6 +46,19 @@ const meta: Meta<typeof Avatar> = {
 };
 export default meta;
 type Story = StoryObj<typeof Avatar>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Avatar'}
+      types={['AvatarSize', 'AvatarCorner', 'AvatarVariant', 'AvatarProps']}
+      jsx={`<Avatar initials="MA" size="md" />`}
+      figmaKey="70ec4ea20c9aeec1abd83e30ef58feac189dab3e"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

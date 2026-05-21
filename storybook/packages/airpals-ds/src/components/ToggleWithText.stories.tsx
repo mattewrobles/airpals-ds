@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { UsageBlock } from '../shared/UsageBlock';
 import React, { useState } from 'react';
 import { ToggleWithText } from '../lib/ToggleWithText';
 
@@ -27,6 +28,22 @@ const meta: Meta<typeof ToggleWithText> = {
 };
 export default meta;
 type Story = StoryObj<typeof ToggleWithText>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'ToggleWithText'}
+      types={['ToggleWithTextSize', 'ToggleWithTextProps']}
+      jsx={`<ToggleWithText
+  labelOff="Notifications off"
+  labelOn="Notifications on"
+/>`}
+      figmaKey="d4f1d3132c9e1ae9ed1d26b8e6156be9241385b7"
+    />
+  ),
+};
 
 export const Default: Story = {
   args: {

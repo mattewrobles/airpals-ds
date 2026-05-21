@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { RadioIndicator, RadioButton } from '../lib/Radio';
 import type { RadioState, RadioSize, RadioIndicatorProps, RadioButtonProps } from '../lib/Radio';
 
@@ -39,6 +40,19 @@ const meta: Meta<typeof RadioButton> = {
 };
 export default meta;
 type Story = StoryObj<typeof RadioButton>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={['RadioIndicator', 'RadioButton']}
+      types={['RadioState', 'RadioSize', 'RadioIndicatorProps', 'RadioButtonProps']}
+      jsx={`<RadioButton label="Standard (3–5 days)" name="shipping" />`}
+      figmaKey="a65c3087afa61e7fdd518f16012fb0875c0aaca8"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

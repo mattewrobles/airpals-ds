@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { Tag } from '../lib/Tag';
 import type { TagState, TagProps } from '../lib/Tag';
 
@@ -41,6 +42,19 @@ const meta: Meta<typeof Tag> = {
 };
 export default meta;
 type Story = StoryObj<typeof Tag>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'Tag'}
+      types={['TagState', 'TagProps']}
+      jsx={`<Tag label="Priority" />`}
+      figmaKey="4d4781ffd56138317c8ea0b29e5f0258143dcab7"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 

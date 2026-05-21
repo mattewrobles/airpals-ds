@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
+import { UsageBlock } from '../shared/UsageBlock';
 import { ClickableLink } from '../lib/ClickableLink';
 import type { LinkColor, LinkState, ClickableLinkProps } from '../lib/ClickableLink';
 
@@ -40,6 +41,19 @@ const meta: Meta<typeof ClickableLink> = {
 };
 export default meta;
 type Story = StoryObj<typeof ClickableLink>;
+
+export const Usage: Story = {
+  name: 'Usage',
+  parameters: { controls: { disable: true }, docs: { canvas: { sourceState: 'none' } } },
+  render: () => (
+    <UsageBlock
+      component={'ClickableLink'}
+      types={['LinkColor', 'LinkState', 'ClickableLinkProps']}
+      jsx={`<ClickableLink label="View tracking details" />`}
+      figmaKey="4e5c28ed2e0dfb47fc837943f3fa38f896fd51db"
+    />
+  ),
+};
 
 /* ── Stories ─────────────────────────────────────────────── */
 
