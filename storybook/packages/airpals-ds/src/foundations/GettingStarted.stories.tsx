@@ -91,7 +91,7 @@ export const Docs: Story = {
       <div>
         <div className="flex items-center gap-3 mb-2">
           <h1 className="font-heading text-3xl font-semibold text-brand-navy dark:text-slate-50">Getting Started</h1>
-          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.2.1</span>
+          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.2.2</span>
         </div>
         <p className="text-sm text-slate-500 leading-6">
           Airpals Design System — React components built with Tailwind CSS.
@@ -102,9 +102,9 @@ export const Docs: Story = {
       {/* Installation */}
       <Section title="Installation">
         <Step n={1} title="Install the package + peer dependencies">
-          <CodeBlock label="yarn" code="yarn add airpals-ds @heroicons/react" />
+          <CodeBlock label="yarn" code="yarn add airpals-ds @heroicons/react @fontsource/inter @fontsource/lexend" />
           <p className="text-xs text-slate-400 mt-1">
-            <Pill>@heroicons/react</Pill> is required — icons are not bundled.
+            <Pill>@heroicons/react</Pill> is required — icons are not bundled. <Pill>@fontsource/inter</Pill> and <Pill>@fontsource/lexend</Pill> are required for correct typography.
           </p>
         </Step>
         <Step n={2} title="Import and use">
@@ -120,13 +120,22 @@ export const Docs: Story = {
         <Note>
           All components include the <Pill>"use client"</Pill> directive — they work out of the box in the App Router without extra setup.
         </Note>
-        <Step n={1} title="Add transpilePackages to next.config.js">
+        <Step n={1} title="Add transpilePackages to next.config.ts">
           <CodeBlock
-            label="next.config.js"
-            code={`/** @type {import('next').NextConfig} */\nmodule.exports = {\n  transpilePackages: ['airpals-ds'],\n};`}
+            label="next.config.ts"
+            code={`import type { NextConfig } from 'next';\n\nconst nextConfig: NextConfig = {\n  transpilePackages: ['airpals-ds'],\n};\n\nexport default nextConfig;`}
           />
         </Step>
-        <Step n={2} title="Import normally in any Server or Client component">
+        <Step n={2} title="Configure globals.css — font imports must come before Tailwind">
+          <Note>
+            Font imports <strong>must</strong> come before <Pill>@import "tailwindcss"</Pill> — Tailwind v4 processes them in order. The <Pill>@source</Pill> must point to the compiled file, not the folder (Turbopack requirement).
+          </Note>
+          <CodeBlock
+            label="app/globals.css"
+            code={`@import "@fontsource/inter/400.css";\n@import "@fontsource/inter/500.css";\n@import "@fontsource/inter/600.css";\n@import "@fontsource/inter/700.css";\n@import "@fontsource/lexend/400.css";\n@import "@fontsource/lexend/600.css";\n@import "@fontsource/lexend/700.css";\n\n@import "tailwindcss";\n@source "../node_modules/airpals-ds/dist/index.mjs";`}
+          />
+        </Step>
+        <Step n={3} title="Import normally in any Server or Client component">
           <CodeBlock
             label="app/page.tsx"
             code={`import { Button, Alert } from 'airpals-ds';\n\nexport default function Page() {\n  return (\n    <main>\n      <Alert type="Warning" title="Heads up" description="Check your shipment." />\n      <Button label="View details" />\n    </main>\n  );\n}`}
