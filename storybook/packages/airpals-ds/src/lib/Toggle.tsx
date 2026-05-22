@@ -34,13 +34,13 @@ export function Toggle({ active = false, style = 'Navy', label, onToggle }: Togg
         aria-checked={isOn}
         onClick={handleClick}
         className={[
-          'relative w-[55px] h-8 rounded-full transition-colors outline-none',
+          'relative w-[55px] h-8 rounded-full transition-colors outline-none overflow-hidden',
           isOn ? cfg.trackOn : cfg.trackOff,
         ].join(' ')}
       >
         <span
           className={[
-            'absolute top-0.5 w-7 h-7 rounded-full shadow transition-all',
+            'absolute top-0.5 left-0 w-7 h-7 rounded-full shadow transition-all',
             isOn ? cfg.knobOn : cfg.knobOff,
             isOn ? 'translate-x-[25px]' : 'translate-x-0.5',
           ].join(' ')}

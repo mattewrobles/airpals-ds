@@ -44,7 +44,7 @@ export function ToggleWithText({
         aria-checked={isOn}
         onClick={handleClick}
         className={[
-          'relative rounded-full transition-colors outline-none flex-shrink-0',
+          'relative rounded-full transition-colors outline-none flex-shrink-0 overflow-hidden',
           trackW,
           trackH,
           isOn ? trackOn : trackOff,
@@ -53,7 +53,7 @@ export function ToggleWithText({
         <span
           className={[
             'absolute rounded-full shadow transition-all',
-            size === 'compact' ? 'top-1' : 'top-0.5',
+            size === 'compact' ? 'top-1 left-0' : 'top-0.5 left-0',
             knobSize,
             isOn ? knobOnColor : 'bg-white',
             isOn ? knobOn : (size === 'compact' ? 'translate-x-1' : 'translate-x-0.5'),
