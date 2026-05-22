@@ -47,7 +47,7 @@ function Row({ label, code, copyValue }: { label: string; code: string; copyValu
 
 export function UsageBlock({ component, types, jsx, figmaKey }: UsageBlockProps) {
   const names = Array.isArray(component) ? component : [component];
-  const installCmd = `npm install ${PKG}`;
+  const installCmd = `yarn add ${PKG}`;
 
   const importLine = `import { ${names.join(', ')} } from '${PKG}';`;
   const typesLine = types?.length

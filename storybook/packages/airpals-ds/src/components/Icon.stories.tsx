@@ -17,7 +17,7 @@ const meta: Meta = {
           '',
           '### Usage in your project',
           '```bash',
-          'npm install @heroicons/react',
+          'yarn add @heroicons/react',
           '```',
           '```tsx',
           "import { EnvelopeIcon, UserGroupIcon } from '@heroicons/react/24/outline';",
