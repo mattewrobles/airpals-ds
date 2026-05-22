@@ -1,6 +1,6 @@
 {
   "name": "airpals-ds",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Airpals Design System — React components",
   "license": "MIT",
   "packageManager": "yarn@1.22.22",
@@ -15,7 +15,9 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "src/lib",
+    "src/shared"
   ],
   "sideEffects": false,
   "scripts": {
