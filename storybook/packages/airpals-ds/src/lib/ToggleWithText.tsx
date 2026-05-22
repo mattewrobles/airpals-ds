@@ -32,7 +32,7 @@ export function ToggleWithText({
   const trackW = size === 'compact' ? 'w-[50px]' : 'w-[55px]';
   const trackH = size === 'compact' ? 'h-[26px]' : 'h-8';
   const knobSize = size === 'compact' ? 'w-[18px] h-[18px]' : 'w-7 h-7';
-  const knobOn = size === 'compact' ? 'translate-x-[28px]' : 'translate-x-[27px]';
+  const knobOn = size === 'compact' ? 'translate-x-[28px]' : 'translate-x-[25px]';
   const trackOff = size === 'compact' ? 'bg-[#ccccce]' : 'bg-[#e5e7eb]';
   const trackOn = size === 'compact' ? 'bg-[#0043ff]' : 'bg-[#e5e7eb]';
   const knobOnColor = size === 'compact' ? 'bg-white' : 'bg-[#0043ff]';
@@ -52,10 +52,11 @@ export function ToggleWithText({
       >
         <span
           className={[
-            'absolute top-0.5 rounded-full shadow transition-all',
+            'absolute rounded-full shadow transition-all',
+            size === 'compact' ? 'top-1' : 'top-0.5',
             knobSize,
             isOn ? knobOnColor : 'bg-white',
-            isOn ? knobOn : 'translate-x-0.5',
+            isOn ? knobOn : (size === 'compact' ? 'translate-x-1' : 'translate-x-0.5'),
           ].join(' ')}
         />
       </button>

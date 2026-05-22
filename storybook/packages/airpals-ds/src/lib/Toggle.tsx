@@ -42,7 +42,7 @@ export function Toggle({ active = false, style = 'Navy', label, onToggle }: Togg
           className={[
             'absolute top-0.5 w-7 h-7 rounded-full shadow transition-all',
             isOn ? cfg.knobOn : cfg.knobOff,
-            isOn ? 'translate-x-[27px]' : 'translate-x-0.5',
+            isOn ? 'translate-x-[25px]' : 'translate-x-0.5',
           ].join(' ')}
         />
       </button>
