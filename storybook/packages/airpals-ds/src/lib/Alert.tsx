@@ -5,6 +5,7 @@ export type AlertType = 'Error' | 'Warning';
 export type AlertProps = {
   type?: AlertType;
   title: string;
+  description?: string;
   items?: string[];
 };
 
@@ -31,13 +32,17 @@ const alertConfig = {
   },
 };
 
-export function Alert({ type = 'Error', title, items }: AlertProps) {
+export function Alert({ type = 'Error', title, description, items }: AlertProps) {
   const cfg = alertConfig[type];
+  const hasBody = description || (items && items.length > 0);
   return (
     <div className={`flex gap-3 ${cfg.bg} rounded-[6px] p-4`}>
       <span className={cfg.iconColor}>{cfg.icon}</span>
       <div className="flex flex-col gap-2 min-w-0">
-        <p className={`text-sm ${items?.length ? 'font-medium' : 'font-normal'} ${cfg.titleColor} leading-5`}>{title}</p>
+        <p className={`text-sm ${hasBody ? 'font-medium' : 'font-normal'} ${cfg.titleColor} leading-5`}>{title}</p>
+        {description && (
+          <p className="text-sm text-[#374151] leading-5">{description}</p>
+        )}
         {items && items.length > 0 && (
           <ul className="flex flex-col gap-1">
             {items.map((item, i) => (

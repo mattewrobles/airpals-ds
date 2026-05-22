@@ -9,6 +9,7 @@ export type CheckboxProps = {
   active?: CheckboxActive;
   size?: CheckboxSize;
   label?: string;
+  onChange?: (active: CheckboxActive) => void;
 };
 
 const stateBg: Record<CheckboxState, { off: string; on: string }> = {
@@ -18,7 +19,7 @@ const stateBg: Record<CheckboxState, { off: string; on: string }> = {
   Disabled: { off: 'bg-[#cbd5e1]', on: 'bg-[#cbd5e1]' },
 };
 
-export function Checkbox({ state = 'Default', active = 'Off', size = 'Medium', label }: CheckboxProps) {
+export function Checkbox({ state = 'Default', active = 'Off', size = 'Medium', label, onChange }: CheckboxProps) {
   const isOn = active === 'On';
   const isIndeterminate = active === 'Indeterminate';
   const isChecked = isOn || isIndeterminate;
@@ -27,8 +28,13 @@ export function Checkbox({ state = 'Default', active = 'Off', size = 'Medium', l
   const innerSize = size === 'Medium' ? 'w-4 h-4' : 'w-[14px] h-[14px]';
   const cursor = state === 'Disabled' ? 'cursor-not-allowed' : 'cursor-pointer';
 
+  const handleClick = () => {
+    if (state === 'Disabled' || !onChange) return;
+    onChange(isOn ? 'Off' : 'On');
+  };
+
   return (
-    <label className={`inline-flex items-center gap-2 ${cursor}`}>
+    <label className={`inline-flex items-center gap-2 ${cursor}`} onClick={handleClick}>
       <div className={`${outerSize} flex items-center justify-center ${cursor}`}>
         <div className={`${innerSize} rounded-[4px] ${bg} flex items-center justify-center transition-colors`}>
           {isOn && (
