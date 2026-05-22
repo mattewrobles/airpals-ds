@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { Logo } from './Logo';
 
 export type NavbarProps = {
   mobile?: boolean;
@@ -22,9 +23,7 @@ const CHEVRON_DOWN = (
     <path d="M3.5 5.25L7 8.75L10.5 5.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
-const AIRPALS_LOGO = (
-  <span className="font-bold text-xl text-[#1b306c] tracking-tight" style={{ fontFamily: 'Lexend, sans-serif' }}>airpals</span>
-);
+const AIRPALS_LOGO = <Logo color="dark-blue" height={28} />;
 const NAV_LINKS = ['Services', 'About Us', 'For Companies', 'Pricing', 'Contact Us'];
 
 export function Navbar({ mobile = false, collapsed = false }: NavbarProps) {

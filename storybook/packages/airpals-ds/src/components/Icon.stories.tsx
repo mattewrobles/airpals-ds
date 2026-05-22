@@ -69,7 +69,7 @@ const AIRPALS_ICONS = [
   'pencil', 'pencil-square', 'trash', 'document', 'document-text',
   'clipboard', 'clipboard-document', 'clipboard-document-check',
   'calendar', 'calendar-days', 'clock',
-  'tag', 'tag', 'bars-3', 'ellipsis-horizontal', 'ellipsis-vertical',
+  'tag', 'bars-3', 'ellipsis-horizontal', 'ellipsis-vertical',
   'share', 'link', 'external-link', 'arrow-top-right-on-square',
   'eye', 'eye-slash', 'lock-closed', 'lock-open',
   'credit-card', 'banknotes', 'receipt-percent',

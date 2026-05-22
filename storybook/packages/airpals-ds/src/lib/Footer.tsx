@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { Logo } from './Logo';
 
 export type FooterProps = {
   mobile?: boolean;
@@ -27,7 +28,7 @@ export function Footer({ mobile = false }: FooterProps) {
       <footer className="font-body bg-[#1b306c] text-white w-[390px]">
         <div className="px-5 pt-8 pb-6 space-y-6">
           <div className="flex items-center justify-between">
-            <span className="font-bold text-xl" style={{ fontFamily: 'Lexend, sans-serif' }}>airpals</span>
+            <Logo color="white" height={24} />
             <div className="flex gap-3">
               {SOCIAL_ICONS.map(s => (
                 <a key={s} href="#" aria-label={s} className="text-slate-400 hover:text-white transition-colors text-xs font-medium">{s[0]}</a>
@@ -68,7 +69,7 @@ export function Footer({ mobile = false }: FooterProps) {
       <div className="max-w-[1440px] mx-auto px-8 pt-12 pb-8">
         <div className="flex items-start justify-between mb-10">
           <div>
-            <span className="font-bold text-2xl" style={{ fontFamily: 'Lexend, sans-serif' }}>airpals</span>
+            <Logo color="white" height={28} />
             <div className="flex gap-4 mt-3">
               {SOCIAL_ICONS.map(s => (
                 <a key={s} href="#" aria-label={s} className="text-slate-400 hover:text-white transition-colors text-xs font-medium">{s}</a>
