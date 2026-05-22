@@ -19,11 +19,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: storybook/package-lock.json
+          cache: yarn
+          cache-dependency-path: storybook/yarn.lock
 
       - name: Install all workspaces
-        run: npm install --legacy-peer-deps
+        run: yarn install --frozen-lockfile
         working-directory: storybook
 
       - name: Publish ds-default to Chromatic
@@ -47,11 +47,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: storybook/package-lock.json
+          cache: yarn
+          cache-dependency-path: storybook/yarn.lock
 
       - name: Install all workspaces
-        run: npm install --legacy-peer-deps
+        run: yarn install --frozen-lockfile
         working-directory: storybook
 
       - name: Publish airpals-ds to Chromatic
