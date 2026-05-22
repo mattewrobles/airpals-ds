@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Airpals Design System — React components",
   "license": "MIT",
+  "packageManager": "yarn@1.22.22",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/types/index.d.ts",

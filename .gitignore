@@ -21,3 +21,4 @@ plugin/dist/
 # Env
 .env
 *.env.local
+storybook/package-lock.json
