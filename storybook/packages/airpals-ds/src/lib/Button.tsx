@@ -12,6 +12,9 @@ export type ButtonProps = {
   state?: ButtonState;
   size?: ButtonSize;
   onClick?: () => void;
+  className?: string;
+  id?: string;
+  'aria-label'?: string;
 };
 
 const typeClasses: Record<ButtonType, string> = {
@@ -29,20 +32,35 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: 'px-6 py-3 text-base',
 };
 
-export function Button({ label, type = 'Primary', state = 'Default', size = 'md', onClick }: ButtonProps) {
-  const disabled = state === 'Disabled';
-  return (
-    <button
-      disabled={disabled}
-      onClick={onClick}
-      className={[
-        'inline-flex items-center justify-center font-medium rounded-lg transition-all',
-        typeClasses[type],
-        sizeClasses[size],
-        disabled ? 'opacity-50 cursor-not-allowed' : '',
-      ].join(' ')}
-    >
-      {label}
-    </button>
-  );
-}
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      label, type = 'Primary', state = 'Default', size = 'md',
+      onClick, className = '', id,
+      'aria-label': ariaLabel,
+    },
+    ref
+  ) => {
+    const disabled = state === 'Disabled';
+    return (
+      <button
+        ref={ref}
+        type="button"
+        id={id}
+        disabled={disabled}
+        onClick={onClick}
+        aria-label={ariaLabel}
+        className={[
+          'inline-flex items-center justify-center font-medium rounded-lg transition-all',
+          typeClasses[type],
+          sizeClasses[size],
+          disabled ? 'opacity-50 cursor-not-allowed' : '',
+          className,
+        ].join(' ')}
+      >
+        {label}
+      </button>
+    );
+  }
+);
+Button.displayName = 'Button';

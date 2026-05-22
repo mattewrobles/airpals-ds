@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export type ToggleStyle = 'Standard' | 'Navy' | 'Subtle';
 
@@ -20,6 +20,8 @@ const styleConfig: Record<ToggleStyle, { trackOff: string; trackOn: string; knob
 export function Toggle({ active = false, style = 'Navy', label, onToggle }: ToggleProps) {
   const [isOn, setIsOn] = useState(active);
   const cfg = styleConfig[style];
+
+  useEffect(() => { setIsOn(active); }, [active]);
 
   const handleClick = () => {
     const next = !isOn;

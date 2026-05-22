@@ -12,6 +12,12 @@ export type RadioIndicatorProps = {
 
 export type RadioButtonProps = RadioIndicatorProps & {
   label?: string;
+  name?: string;
+  value?: string;
+  checked?: boolean;
+  onChange?: (value: string) => void;
+  id?: string;
+  className?: string;
 };
 
 const ringColor: Record<RadioState, string> = {
@@ -27,7 +33,7 @@ export function RadioIndicator({ state = 'Default', size = '16px' }: RadioIndica
   const cls = ringColor[state];
 
   return (
-    <div className={`${outerSize} flex items-center justify-center`}>
+    <div className={`${outerSize} flex items-center justify-center`} aria-hidden="true">
       <div className={`${ringSize} rounded-full border-2 ${cls} flex items-center justify-center transition-colors`}>
         {state === 'Selected' && <div className="w-2 h-2 rounded-full bg-white" />}
       </div>
@@ -35,15 +41,39 @@ export function RadioIndicator({ state = 'Default', size = '16px' }: RadioIndica
   );
 }
 
-export function RadioButton({ state = 'Default', size = '16px', label = 'Label' }: RadioButtonProps) {
-  const gap = size === '16px' ? 'gap-2' : 'gap-1';
-  const textSize = size === '16px' ? 'text-base' : 'text-sm';
-  const cursor = state === 'Disabled' ? 'cursor-not-allowed' : 'cursor-pointer';
+export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
+  (
+    {
+      state = 'Default', size = '16px', label,
+      name, value, checked, onChange,
+      id, className = '',
+    },
+    ref
+  ) => {
+    const disabled = state === 'Disabled';
+    const indicatorState = checked ? 'Selected' : state;
+    const gap = size === '16px' ? 'gap-2' : 'gap-1';
+    const textSize = size === '16px' ? 'text-base' : 'text-sm';
+    const cursor = disabled ? 'cursor-not-allowed' : 'cursor-pointer';
+    const inputId = id ?? (label && name ? `radio-${name}-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
 
-  return (
-    <label className={`inline-flex items-center ${gap} ${cursor}`}>
-      <RadioIndicator state={state} size={size} />
-      <span className={`${textSize} text-[#1b306c]`}>{label}</span>
-    </label>
-  );
-}
+    return (
+      <label htmlFor={inputId} className={`inline-flex items-center ${gap} ${cursor} ${className}`}>
+        <input
+          ref={ref}
+          type="radio"
+          id={inputId}
+          name={name}
+          value={value}
+          checked={checked}
+          disabled={disabled}
+          onChange={(e) => onChange?.(e.target.value)}
+          className="sr-only"
+        />
+        <RadioIndicator state={indicatorState} size={size} />
+        {label && <span className={`${textSize} text-[#1b306c]`}>{label}</span>}
+      </label>
+    );
+  }
+);
+RadioButton.displayName = 'RadioButton';
