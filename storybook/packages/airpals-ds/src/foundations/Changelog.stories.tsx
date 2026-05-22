@@ -77,6 +77,36 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.2.1',
+    date: '2026-05-21',
+    summary: 'Source files + copy-paste usage',
+    changes: [
+      { type: 'new',     text: 'src/lib/*.tsx source files now shipped inside the npm package — copy any component directly into your project and edit freely' },
+      { type: 'updated', text: 'package.json files field includes src/lib and src/shared alongside dist' },
+      { type: 'fixed',   text: 'Navbar: replaced hardcoded "airpals" text with <Logo color="dark-blue" /> component' },
+      { type: 'fixed',   text: 'Footer: replaced hardcoded "airpals" text with <Logo color="white" /> in both mobile and desktop layouts' },
+      { type: 'fixed',   text: 'Icon palette: duplicate "tag" entry removed — was causing icon accumulation bug when switching Outline/Solid variants' },
+    ],
+  },
+  {
+    version: 'v0.2.0',
+    date: '2026-05-21',
+    summary: 'Controlled components + forwardRef + Next.js App Router',
+    changes: [
+      { type: 'new',     text: '"use client" directive added to all 21 components — Next.js App Router ready out of the box' },
+      { type: 'updated', text: 'Button: forwardRef, explicit type="button", className + aria-label props' },
+      { type: 'updated', text: 'Input: forwardRef, controlled/uncontrolled hybrid (value + defaultValue + onChange), useEffect sync, htmlFor label, aria-invalid' },
+      { type: 'updated', text: 'Textarea: forwardRef, same controlled pattern as Input, character counter uses live value' },
+      { type: 'updated', text: 'Dropdown: forwardRef, onChange callback, ARIA listbox/option roles, hidden input for form name' },
+      { type: 'updated', text: 'RadioButton: rewritten with native sr-only <input type="radio"> for keyboard nav, form submission and screen readers' },
+      { type: 'fixed',   text: 'Toggle: knob no longer escapes track — added left-0 + overflow-hidden, translate-x corrected to 25px' },
+      { type: 'fixed',   text: 'ToggleWithText compact: symmetric 4px padding on both sides (translate-x-1 off, translate-x-[22px] on)' },
+      { type: 'updated', text: '@heroicons/react moved to peerDependencies + externalized in Vite build (bundle: ~600KB → ~86KB)' },
+      { type: 'new',     text: 'Package manager migrated to Yarn (yarn.lock committed, package-lock.json removed)' },
+      { type: 'new',     text: 'Getting Started docs page with install, Next.js setup, TypeScript, and contributing guide' },
+    ],
+  },
+  {
     version: 'v0.5.0',
     date: '2026-05-21',
     summary: 'Next.js compatibility + Yarn',

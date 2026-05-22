@@ -91,7 +91,7 @@ export const Docs: Story = {
       <div>
         <div className="flex items-center gap-3 mb-2">
           <h1 className="font-heading text-3xl font-semibold text-brand-navy dark:text-slate-50">Getting Started</h1>
-          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.1.0</span>
+          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.2.1</span>
         </div>
         <p className="text-sm text-slate-500 leading-6">
           Airpals Design System — React components built with Tailwind CSS.
@@ -146,6 +146,33 @@ export const Docs: Story = {
         </Note>
       </Section>
 
+      {/* Copy-paste */}
+      <Section title="Copy & edit a component">
+        <Note>
+          Since <Pill>v0.2.1</Pill> the source <Pill>.tsx</Pill> files are included in the package.
+          If you need to customize a component, copy it into your project instead of editing <Pill>node_modules</Pill>.
+        </Note>
+        <Step n={1} title="Find the source in node_modules">
+          <CodeBlock
+            label="terminal"
+            code={`ls node_modules/airpals-ds/src/lib/\n# Button.tsx  Input.tsx  Toggle.tsx  ...`}
+          />
+        </Step>
+        <Step n={2} title="Copy it into your project">
+          <CodeBlock
+            label="terminal"
+            code={`cp node_modules/airpals-ds/src/lib/Button.tsx src/components/Button.tsx`}
+          />
+        </Step>
+        <Step n={3} title="Update the import and edit freely">
+          <CodeBlock
+            label="MyComponent.tsx"
+            code={`// before\nimport { Button } from 'airpals-ds';\n\n// after — now it's yours\nimport { Button } from '@/components/Button';`}
+          />
+        </Step>
+        <p className="text-xs text-slate-400">The rest of the components still come from the npm package. Only override what you need.</p>
+      </Section>
+
       {/* Contributing */}
       <Section title="Contributing to the DS">
         <p className="text-sm text-slate-600 dark:text-slate-400 leading-6">
@@ -174,7 +201,7 @@ export const Docs: Story = {
       <Section title="Available components">
         <div className="flex flex-wrap gap-2">
           {['Alert','Avatar','AvatarGroup','Badge','Breadcrumbs','Button','Checkbox',
-            'ClickableLink','Dropdown','Input','Logo','Pagination','RadioButton',
+            'ClickableLink','Dropdown','Footer','Input','Logo','Navbar','Pagination','RadioButton',
             'SplitButton','Tag','Textarea','Toggle','ToggleWithText'].map(c => (
             <Pill key={c}>{c}</Pill>
           ))}
