@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 
 export type ToggleStyle = 'Standard' | 'Navy' | 'Subtle';

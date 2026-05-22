@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 
 export type BadgeColor = 'Primary' | 'Secondary' | 'Dark' | 'Gray' | 'Light' | 'Warning' | 'Danger' | 'Success' | 'Info';

@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 
 export type ButtonType = 'Primary' | 'Secondary' | 'Ghost' | 'Ghost II' | 'Negative' | 'Accent';

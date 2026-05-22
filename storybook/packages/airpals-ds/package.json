@@ -8,9 +8,9 @@
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/types/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
@@ -24,6 +24,7 @@
     "prepublishOnly": "npm run build:lib"
   },
   "peerDependencies": {
+    "@heroicons/react": ">=2",
     "react": ">=17",
     "react-dom": ">=17"
   },
@@ -33,13 +34,14 @@
     "@storybook/addon-designs": "^8.0.0",
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/addon-interactions": "^8.0.0",
+    "@storybook/nextjs": "^8.6.18",
     "@storybook/react": "^8.0.0",
-    "@storybook/react-vite": "^8.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.0",
     "chromatic": "^11.0.0",
+    "next": "^15.5.18",
     "postcss": "^8.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

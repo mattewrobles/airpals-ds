@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 
 export type TextareaState = 'Default' | 'Hover' | 'Focused' | 'Disabled';

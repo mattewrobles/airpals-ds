@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 
 export type TagState = 'Default' | 'Hover' | 'Focus' | 'Disable';
