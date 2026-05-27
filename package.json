@@ -27,9 +27,9 @@
     "prepublishOnly": "npm run build:lib"
   },
   "dependencies": {
-    "@heroicons/react": "^1.0.6",
     "@fontsource/inter": "^5.0.0",
-    "@fontsource/lexend": "^5.0.0"
+    "@fontsource/lexend": "^5.0.0",
+    "@heroicons/react": "^1.0.6"
   },
   "peerDependencies": {
     "react": ">=17",
@@ -42,6 +42,7 @@
     "@storybook/addon-interactions": "^8.0.0",
     "@storybook/nextjs": "^8.6.18",
     "@storybook/react": "^8.0.0",
+    "@storybook/react-vite": "^8.6.18",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.7.0",
