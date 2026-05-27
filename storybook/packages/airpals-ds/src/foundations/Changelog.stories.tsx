@@ -77,6 +77,30 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.3.0',
+    date: '2026-05-27',
+    summary: 'Semantic token system + Alert rewrite',
+    changes: [
+      { type: 'new',     text: 'tokens.css: status primitive scales (green/red/amber/blue 50–950) + status semantic tokens for bg/text/icon/border in light and dark mode' },
+      { type: 'new',     text: 'tokens.css: typography scale tokens (--type-h1 through --type-xs with size, line-height and weight)' },
+      { type: 'updated', text: 'tailwind.config.js: semantic color groups surface/ink/line/icon mapped to CSS vars + ds-* fontSize scale + updated safelist patterns' },
+      { type: 'updated', text: 'Alert: full rewrite — 5 use cases (error/warning/success/info/alert) replacing 2-type system, new border prop, all colors via semantic tokens' },
+      { type: 'updated', text: 'All 21 components migrated from hardcoded hex to semantic Tailwind classes (surface-accent, ink-primary, line-focus, etc.)' },
+      { type: 'new',     text: 'Dark mode ready — components now respond to .dark class via CSS variable swapping (was broken with hardcoded hex)' },
+    ],
+  },
+  {
+    version: 'v0.2.3',
+    date: '2026-05-27',
+    summary: 'Tailwind + Icons fix (Jimmy feedback)',
+    changes: [
+      { type: 'fixed',   text: 'Storybook viteFinal: PostCSS not passed to Vite internal — Tailwind styles were imported but never processed' },
+      { type: 'fixed',   text: 'tailwind.config.js content: added .storybook/**/*.{ts,tsx} — classes used in stories/preview were being purged' },
+      { type: 'fixed',   text: 'tailwind.css: @import (Google Fonts) moved before @tailwind base — CSS spec requires @import first' },
+      { type: 'fixed',   text: 'Icon.tsx: silent .catch(() => null) replaced with console.warn — icons were failing invisibly' },
+    ],
+  },
+  {
     version: 'v0.2.1',
     date: '2026-05-21',
     summary: 'Source files + copy-paste usage',
