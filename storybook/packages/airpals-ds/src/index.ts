@@ -1,5 +1,5 @@
 export { Alert } from './lib/Alert';
-export type { AlertType, AlertProps } from './lib/Alert';
+export type { AlertUseCase, AlertProps } from './lib/Alert';
 
 export { Avatar } from './lib/Avatar';
 export type { AvatarSize, AvatarCorner, AvatarVariant, AvatarProps } from './lib/Avatar';
