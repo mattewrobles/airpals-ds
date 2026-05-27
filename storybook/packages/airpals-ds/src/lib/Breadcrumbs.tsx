@@ -29,7 +29,7 @@ const SEPARATORS: Record<BreadcrumbSeparator, string> = {
 export function Breadcrumbs({ items, separator = 'slash', showHomeIcon = false, coloredBg = false }: BreadcrumbsProps) {
   const sep = SEPARATORS[separator];
   const wrapClass = coloredBg
-    ? 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#e6f1fd]'
+    ? 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-secondary'
     : 'inline-flex items-center gap-1.5';
 
   return (
@@ -38,9 +38,9 @@ export function Breadcrumbs({ items, separator = 'slash', showHomeIcon = false, 
         {showHomeIcon && (
           <>
             <li>
-              <a href="#" className="text-slate-400 hover:text-[#1b306c] transition-colors" aria-label="Home">{HOME_ICON}</a>
+              <a href="#" className="text-ink-tertiary hover:text-ink-primary transition-colors" aria-label="Home">{HOME_ICON}</a>
             </li>
-            {items.length > 0 && <li aria-hidden="true" className="text-slate-300 text-sm select-none">{sep}</li>}
+            {items.length > 0 && <li aria-hidden="true" className="text-ink-disable text-sm select-none">{sep}</li>}
           </>
         )}
         {items.map((item, i) => {
@@ -49,12 +49,12 @@ export function Breadcrumbs({ items, separator = 'slash', showHomeIcon = false, 
             <React.Fragment key={i}>
               <li>
                 {isLast ? (
-                  <span className="text-sm font-medium text-[#1b306c]" aria-current="page">{item.label}</span>
+                  <span className="text-sm font-medium text-ink-primary" aria-current="page">{item.label}</span>
                 ) : (
-                  <a href={item.href ?? '#'} className="text-sm text-slate-500 hover:text-[#1b306c] transition-colors">{item.label}</a>
+                  <a href={item.href ?? '#'} className="text-sm text-ink-secondary hover:text-ink-primary transition-colors">{item.label}</a>
                 )}
               </li>
-              {!isLast && <li aria-hidden="true" className="text-slate-300 text-sm select-none">{sep}</li>}
+              {!isLast && <li aria-hidden="true" className="text-ink-disable text-sm select-none">{sep}</li>}
             </React.Fragment>
           );
         })}

@@ -25,13 +25,13 @@ const TRUST_ITEMS = [{ label: 'SOC 2 Type II' }, { label: 'AICPA Certified' }, {
 export function Footer({ mobile = false }: FooterProps) {
   if (mobile) {
     return (
-      <footer className="font-body bg-[#1b306c] text-white w-[390px]">
+      <footer className="font-body bg-surface-accent-contrast text-ink-on-accent w-[390px]">
         <div className="px-5 pt-8 pb-6 space-y-6">
           <div className="flex items-center justify-between">
             <Logo color="white" height={24} />
             <div className="flex gap-3">
               {SOCIAL_ICONS.map(s => (
-                <a key={s} href="#" aria-label={s} className="text-slate-400 hover:text-white transition-colors text-xs font-medium">{s[0]}</a>
+                <a key={s} href="#" aria-label={s} className="text-slate-400 hover:text-ink-on-accent transition-colors text-xs font-medium">{s[0]}</a>
               ))}
             </div>
           </div>
@@ -40,7 +40,7 @@ export function Footer({ mobile = false }: FooterProps) {
               <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">{col.title}</h3>
               <ul className="space-y-2">
                 {col.links.map(link => (
-                  <li key={link}><a href="#" className="text-sm text-slate-300 hover:text-white transition-colors">{link}</a></li>
+                  <li key={link}><a href="#" className="text-sm text-slate-300 hover:text-ink-on-accent transition-colors">{link}</a></li>
                 ))}
               </ul>
             </div>
@@ -48,8 +48,8 @@ export function Footer({ mobile = false }: FooterProps) {
           <div>
             <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Newsletter</h3>
             <div className="flex gap-2">
-              <input type="email" placeholder="your@email.com" className="flex-1 px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/20 text-white placeholder:text-slate-400 focus:outline-none focus:border-white/40" />
-              <button className="px-3 py-2 bg-[#0043ff] text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors whitespace-nowrap">Subscribe</button>
+              <input type="email" placeholder="your@email.com" className="flex-1 px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/20 text-ink-on-accent placeholder:text-slate-400 focus:outline-none focus:border-white/40" />
+              <button className="px-3 py-2 bg-surface-accent text-ink-on-accent text-sm font-medium rounded-lg hover:opacity-90 transition-colors whitespace-nowrap">Subscribe</button>
             </div>
           </div>
         </div>
@@ -65,22 +65,22 @@ export function Footer({ mobile = false }: FooterProps) {
   }
 
   return (
-    <footer className="font-body bg-[#1b306c] text-white w-full">
+    <footer className="font-body bg-surface-accent-contrast text-ink-on-accent w-full">
       <div className="max-w-[1440px] mx-auto px-8 pt-12 pb-8">
         <div className="flex items-start justify-between mb-10">
           <div>
             <Logo color="white" height={28} />
             <div className="flex gap-4 mt-3">
               {SOCIAL_ICONS.map(s => (
-                <a key={s} href="#" aria-label={s} className="text-slate-400 hover:text-white transition-colors text-xs font-medium">{s}</a>
+                <a key={s} href="#" aria-label={s} className="text-slate-400 hover:text-ink-on-accent transition-colors text-xs font-medium">{s}</a>
               ))}
             </div>
           </div>
           <div className="flex-shrink-0">
             <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Newsletter</p>
             <div className="flex gap-2">
-              <input type="email" placeholder="your@email.com" className="w-60 px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/20 text-white placeholder:text-slate-400 focus:outline-none focus:border-white/40" />
-              <button className="px-4 py-2 bg-[#0043ff] text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors">Subscribe</button>
+              <input type="email" placeholder="your@email.com" className="w-60 px-3 py-2 rounded-lg text-sm bg-white/10 border border-white/20 text-ink-on-accent placeholder:text-slate-400 focus:outline-none focus:border-white/40" />
+              <button className="px-4 py-2 bg-surface-accent text-ink-on-accent text-sm font-medium rounded-lg hover:opacity-90 transition-colors">Subscribe</button>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ export function Footer({ mobile = false }: FooterProps) {
               <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">{col.title}</h3>
               <ul className="space-y-2.5">
                 {col.links.map(link => (
-                  <li key={link}><a href="#" className="text-sm text-slate-300 hover:text-white transition-colors">{link}</a></li>
+                  <li key={link}><a href="#" className="text-sm text-slate-300 hover:text-ink-on-accent transition-colors">{link}</a></li>
                 ))}
               </ul>
             </div>

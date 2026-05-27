@@ -53,32 +53,32 @@ export function Pagination({ totalPages = 10, currentPage: externalPage, onPageC
   return (
     <div className="inline-flex items-center gap-1 font-body">
       {showFirstLast && (
-        <button onClick={() => go(1)} disabled={current === 1} className={`${btnBase} text-slate-500 hover:bg-[#e6f1fd] disabled:text-slate-200 disabled:cursor-not-allowed`} aria-label="First page">
+        <button onClick={() => go(1)} disabled={current === 1} className={`${btnBase} text-ink-secondary hover:bg-surface-secondary disabled:text-ink-disable disabled:cursor-not-allowed`} aria-label="First page">
           {CHEVRON_DBL_LEFT}
         </button>
       )}
-      <button onClick={() => go(current - 1)} disabled={current === 1} className={`${btnBase} text-slate-500 hover:bg-[#e6f1fd] disabled:text-slate-200 disabled:cursor-not-allowed`} aria-label="Previous page">
+      <button onClick={() => go(current - 1)} disabled={current === 1} className={`${btnBase} text-ink-secondary hover:bg-surface-secondary disabled:text-ink-disable disabled:cursor-not-allowed`} aria-label="Previous page">
         {CHEVRON_LEFT}
       </button>
       {pages.map((p, i) =>
         p === '...' ? (
-          <span key={`ellipsis-${i}`} className="inline-flex items-center justify-center h-9 min-w-9 text-slate-400 text-sm">…</span>
+          <span key={`ellipsis-${i}`} className="inline-flex items-center justify-center h-9 min-w-9 text-ink-tertiary text-sm">…</span>
         ) : (
           <button
             key={p}
             onClick={() => go(p as number)}
-            className={`${btnBase} ${p === current ? 'bg-[#0043ff] text-white' : 'text-[#1b306c] hover:bg-[#e6f1fd]'}`}
+            className={`${btnBase} ${p === current ? 'bg-surface-accent text-ink-on-accent' : 'text-ink-primary hover:bg-surface-secondary'}`}
             aria-current={p === current ? 'page' : undefined}
           >
             {p}
           </button>
         )
       )}
-      <button onClick={() => go(current + 1)} disabled={current === totalPages} className={`${btnBase} text-slate-500 hover:bg-[#e6f1fd] disabled:text-slate-200 disabled:cursor-not-allowed`} aria-label="Next page">
+      <button onClick={() => go(current + 1)} disabled={current === totalPages} className={`${btnBase} text-ink-secondary hover:bg-surface-secondary disabled:text-ink-disable disabled:cursor-not-allowed`} aria-label="Next page">
         {CHEVRON_RIGHT}
       </button>
       {showFirstLast && (
-        <button onClick={() => go(totalPages)} disabled={current === totalPages} className={`${btnBase} text-slate-500 hover:bg-[#e6f1fd] disabled:text-slate-200 disabled:cursor-not-allowed`} aria-label="Last page">
+        <button onClick={() => go(totalPages)} disabled={current === totalPages} className={`${btnBase} text-ink-secondary hover:bg-surface-secondary disabled:text-ink-disable disabled:cursor-not-allowed`} aria-label="Last page">
           {CHEVRON_DBL_RIGHT}
         </button>
       )}

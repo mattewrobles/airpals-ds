@@ -14,15 +14,15 @@ export type IconProps = {
 };
 
 /**
- * Airpals DS Icon — wraps @heroicons/react (v2).
- * The Airpals DS icon set matches HeroIcons v2 naming (Outline + Solid).
+ * Airpals DS Icon — wraps @heroicons/react (v1).
+ * The Airpals DS icon set matches HeroIcons v1 naming (Outline + Solid).
  *
  * Usage:
  *   <Icon name="envelope" />
  *   <Icon name="user-group" variant="solid" size={20} />
  *
- * Names: kebab-case, e.g. "x-mark", "arrow-right", "chart-bar-square"
- * Full list: heroicons.com
+ * Names: kebab-case, e.g. "mail", "arrow-right", "chart-bar"
+ * Full list: v1.heroicons.com
  */
 export function Icon({ name, variant = 'outline', size = 24, className, color }: IconProps) {
   // Dynamic import via __heroicon__ global set by the story environment.
@@ -52,23 +52,23 @@ function HeroIcon({ name, variant, size }: { name: string; variant: IconVariant;
       .split('-')
       .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
       .join('');
-    const suffix = variant === 'outline' ? '' : 'Solid';
-    const iconName = suffix ? `${pascal}Icon` : `${pascal}Icon`;
 
     if (variant === 'outline') {
-      import('@heroicons/react/24/outline')
+      import('@heroicons/react/outline')
         .then((mod) => {
           const key = `${pascal}Icon` as keyof typeof mod;
           if (mod[key]) setComponent(() => mod[key] as React.ComponentType<React.SVGProps<SVGSVGElement>>);
+          else console.warn(`[Icon] "${name}" not found in @heroicons/react/outline`);
         })
-        .catch(() => null);
+        .catch((err) => console.warn(`[Icon] Failed to load "${name}" (outline):`, err));
     } else {
-      import('@heroicons/react/24/solid')
+      import('@heroicons/react/solid')
         .then((mod) => {
           const key = `${pascal}Icon` as keyof typeof mod;
           if (mod[key]) setComponent(() => mod[key] as React.ComponentType<React.SVGProps<SVGSVGElement>>);
+          else console.warn(`[Icon] "${name}" not found in @heroicons/react/solid`);
         })
-        .catch(() => null);
+        .catch((err) => console.warn(`[Icon] Failed to load "${name}" (solid):`, err));
     }
   }, [name, variant]);
 

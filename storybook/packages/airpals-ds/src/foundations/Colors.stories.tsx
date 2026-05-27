@@ -27,6 +27,67 @@ function useCopy(timeout = 1400) {
   return { copy, copied };
 }
 
+/* ── WCAG contrast helpers ───────────────────────────────── */
+
+function hexToRgb(hex: string): [number, number, number] | null {
+  const clean = hex.replace('#', '').trim();
+  if (clean.length !== 6) return null;
+  return [
+    parseInt(clean.slice(0, 2), 16) / 255,
+    parseInt(clean.slice(2, 4), 16) / 255,
+    parseInt(clean.slice(4, 6), 16) / 255,
+  ];
+}
+
+function relativeLuminance(rgb: [number, number, number]): number {
+  const lin = rgb.map(c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+  return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+}
+
+function contrastRatio(hexA: string, hexB: string): number {
+  const rgbA = hexToRgb(hexA);
+  const rgbB = hexToRgb(hexB);
+  if (!rgbA || !rgbB) return 0;
+  const L1 = relativeLuminance(rgbA);
+  const L2 = relativeLuminance(rgbB);
+  const lighter = Math.max(L1, L2);
+  const darker = Math.min(L1, L2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function WcagBadges({ hex }: { hex: string }) {
+  const rawHex = hex.split(' /')[0].trim();
+  const vsWhite = contrastRatio(rawHex, '#ffffff');
+  const vsBlack = contrastRatio(rawHex, '#000000');
+
+  const badge = (ratio: number, against: string) => {
+    const isAAA = ratio >= 7;
+    const isAA = ratio >= 4.5;
+    return (
+      <span
+        key={against}
+        className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium font-mono ${
+          isAAA ? 'bg-green-100 text-green-700' :
+          isAA  ? 'bg-blue-100 text-blue-700'  :
+                  'bg-slate-100 text-slate-500'
+        }`}
+        title={`vs ${against === '#ffffff' ? 'white' : 'black'}: ${ratio.toFixed(2)}:1`}
+      >
+        {against === '#ffffff' ? '☀' : '●'}
+        {isAAA ? 'AAA' : isAA ? 'AA' : 'fail'}
+        <span className="opacity-60">{ratio.toFixed(1)}</span>
+      </span>
+    );
+  };
+
+  return (
+    <div className="flex gap-1 flex-wrap mt-0.5">
+      {badge(vsWhite, '#ffffff')}
+      {badge(vsBlack, '#000000')}
+    </div>
+  );
+}
+
 /* ── Swatch card ─────────────────────────────────────────── */
 
 type Swatch = { name: string; var: string; tailwind: string; hex: string };
@@ -67,6 +128,9 @@ function SwatchCard({ s }: { s: Swatch }) {
       >
         {copied === `var(${s.var})` ? '✓ copied' : `var(${s.var})`}
       </button>
+
+      {/* WCAG contrast badges */}
+      <WcagBadges hex={s.hex} />
     </div>
   );
 }

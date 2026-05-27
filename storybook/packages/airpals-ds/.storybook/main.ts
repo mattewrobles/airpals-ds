@@ -1,4 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import { mergeConfig } from 'vite';
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: [
@@ -26,6 +28,13 @@ const config: StorybookConfig = {
       propFilter: (prop) =>
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
+  },
+  viteFinal: async (config) => {
+    return mergeConfig(config, {
+      css: {
+        postcss: path.resolve(__dirname, '../postcss.config.js'),
+      },
+    });
   },
 };
 

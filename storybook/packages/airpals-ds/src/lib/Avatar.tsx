@@ -36,7 +36,7 @@ export function Avatar({ size = 'md', corner = 'Full', variant = 'Initials', ini
 
   return (
     <div className="relative inline-flex flex-shrink-0">
-      <div className={`${cfg.px} ${radius} overflow-hidden bg-[#0043ff] flex items-center justify-center`}>
+      <div className={`${cfg.px} ${radius} overflow-hidden bg-surface-accent flex items-center justify-center`}>
         {variant === 'Image' && src ? (
           <img src={src} alt={initials} className="w-full h-full object-cover" />
         ) : variant === 'Image' ? (
@@ -46,11 +46,11 @@ export function Avatar({ size = 'md', corner = 'Full', variant = 'Initials', ini
             <ellipse cx="20" cy="35" rx="13" ry="10" fill="#94a3b8"/>
           </svg>
         ) : (
-          <span className={`${cfg.textSize} text-white leading-none`}>{initials}</span>
+          <span className={`${cfg.textSize} text-ink-on-accent leading-none`}>{initials}</span>
         )}
       </div>
       {badge && (
-        <span className={`absolute ${cfg.badgePos} ${cfg.badgeSize} rounded-full bg-[#22c55e] border-2 border-white`} />
+        <span className={`absolute ${cfg.badgePos} ${cfg.badgeSize} rounded-full bg-surface-success border-2 border-surface-primary`} />
       )}
     </div>
   );

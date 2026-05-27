@@ -17,12 +17,12 @@ export type SplitButtonProps = {
 type ColorTokens = { main: string; divider: string; hover: string; text: string };
 
 const typeTokens: Record<SplitButtonType, ColorTokens> = {
-  Primary:   { main: 'bg-[#0043ff]', divider: 'bg-blue-500',  hover: 'hover:bg-blue-700',  text: 'text-white' },
-  Secondary: { main: 'bg-[#e6f1fd]', divider: 'bg-blue-200',  hover: 'hover:bg-blue-200',  text: 'text-[#0043ff]' },
-  Info:      { main: 'bg-[#00a0ff]', divider: 'bg-sky-400',   hover: 'hover:bg-sky-600',   text: 'text-white' },
-  Success:   { main: 'bg-[#22ad5c]', divider: 'bg-green-500', hover: 'hover:bg-green-700', text: 'text-white' },
-  Warning:   { main: 'bg-[#f59e0b]', divider: 'bg-amber-400', hover: 'hover:bg-amber-600', text: 'text-white' },
-  Danger:    { main: 'bg-[#ef4444]', divider: 'bg-red-400',   hover: 'hover:bg-red-600',   text: 'text-white' },
+  Primary:   { main: 'bg-surface-accent',          divider: 'bg-line-accent',   hover: 'hover:opacity-90',       text: 'text-ink-on-accent' },
+  Secondary: { main: 'bg-surface-secondary',        divider: 'bg-line-focus',    hover: 'hover:bg-surface-tertiary', text: 'text-ink-accent' },
+  Info:      { main: 'bg-surface-info',             divider: 'bg-blue-400',      hover: 'hover:opacity-90',       text: 'text-ink-info' },
+  Success:   { main: 'bg-surface-success',          divider: 'bg-green-500',     hover: 'hover:opacity-90',       text: 'text-ink-success' },
+  Warning:   { main: 'bg-surface-warning',          divider: 'bg-amber-400',     hover: 'hover:opacity-90',       text: 'text-ink-warning' },
+  Danger:    { main: 'bg-surface-error',            divider: 'bg-red-400',       hover: 'hover:opacity-90',       text: 'text-ink-error' },
 };
 
 const sizeTokens: Record<SplitButtonSize, { px: string; py: string; text: string; chevronPx: string }> = {
@@ -61,9 +61,9 @@ export function SplitButton({
         {CHEVRON_DOWN}
       </button>
       {open && !disabled && (
-        <div className="absolute top-full left-0 mt-1 min-w-[140px] bg-white border border-slate-200 rounded-lg shadow-md z-10 overflow-hidden">
+        <div className="absolute top-full left-0 mt-1 min-w-[140px] bg-surface-primary border border-line-primary rounded-lg shadow-md z-10 overflow-hidden">
           {options.map(opt => (
-            <button key={opt} onClick={() => setOpen(false)} className="w-full text-left px-3 py-2 text-sm text-[#1b306c] hover:bg-[#e6f1fd] transition-colors">
+            <button key={opt} onClick={() => setOpen(false)} className="w-full text-left px-3 py-2 text-sm text-ink-primary hover:bg-surface-secondary transition-colors">
               {opt}
             </button>
           ))}

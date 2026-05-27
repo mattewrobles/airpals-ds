@@ -53,7 +53,7 @@ export function AvatarGroup({ avatars, max = 4, size = 'lg', total }: AvatarGrou
           return (
             <div
               key="counter"
-              className={`${baseClass} bg-[#e6f1fd] text-[#0043ff]`}
+              className={`${baseClass} bg-surface-secondary text-ink-accent`}
               style={borderStyle}
             >
               +{remaining}
@@ -76,7 +76,7 @@ export function AvatarGroup({ avatars, max = 4, size = 'lg', total }: AvatarGrou
         return (
           <div
             key={i}
-            className={`${baseClass} bg-[#0043ff] text-white`}
+            className={`${baseClass} bg-surface-accent text-ink-on-accent`}
             style={borderStyle}
           >
             {item!.initials ?? '?'}

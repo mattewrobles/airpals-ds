@@ -22,8 +22,8 @@ const EXTERNAL_ICON = (
 export function ClickableLink({ label, href = '#', color = 'Blue', state, external = false }: ClickableLinkProps) {
   const colorClass =
     color === 'Blue'
-      ? 'text-[#0043ff] hover:underline'
-      : 'text-[#1b306c] hover:text-[#0043ff] hover:underline';
+      ? 'text-ink-accent hover:underline'
+      : 'text-ink-primary hover:text-ink-accent hover:underline';
   const hoverOverride = state === 'Hover' ? 'underline' : '';
 
   return (

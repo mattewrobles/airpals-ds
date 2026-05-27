@@ -11,10 +11,13 @@ export type ToggleProps = {
   onToggle?: (v: boolean) => void;
 };
 
+// Track off uses surface-disable (slate-200). On state varies per style.
+// Navy: track always shows the brand color (off=navy, on=accent).
+// Standard/Subtle: track stays neutral, knob shows the accent color when on.
 const styleConfig: Record<ToggleStyle, { trackOff: string; trackOn: string; knobOff: string; knobOn: string }> = {
-  Standard: { trackOff: 'bg-[#e5e7eb]', trackOn: 'bg-[#e5e7eb]', knobOff: 'bg-white',     knobOn: 'bg-[#0043ff]' },
-  Navy:     { trackOff: 'bg-[#1b306c]', trackOn: 'bg-[#0043ff]', knobOff: 'bg-white',     knobOn: 'bg-white' },
-  Subtle:   { trackOff: 'bg-[#eaeefb]', trackOn: 'bg-[#eaeefb]', knobOff: 'bg-white',     knobOn: 'bg-[#0043ff]' },
+  Standard: { trackOff: 'bg-surface-disable', trackOn: 'bg-surface-disable',   knobOff: 'bg-surface-primary', knobOn: 'bg-surface-accent' },
+  Navy:     { trackOff: 'bg-surface-accent-contrast', trackOn: 'bg-surface-accent', knobOff: 'bg-surface-primary', knobOn: 'bg-surface-primary' },
+  Subtle:   { trackOff: 'bg-surface-secondary',       trackOn: 'bg-surface-secondary', knobOff: 'bg-surface-primary', knobOn: 'bg-surface-accent' },
 };
 
 export function Toggle({ active = false, style = 'Navy', label, onToggle }: ToggleProps) {
@@ -48,7 +51,7 @@ export function Toggle({ active = false, style = 'Navy', label, onToggle }: Togg
           ].join(' ')}
         />
       </button>
-      {label && <span className="text-sm font-medium text-[#1b306c]">{label}</span>}
+      {label && <span className="text-sm font-medium text-ink-primary">{label}</span>}
     </label>
   );
 }

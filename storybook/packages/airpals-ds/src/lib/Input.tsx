@@ -50,15 +50,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const helperId = helperText && inputId ? `${inputId}-helper` : undefined;
 
     const borderClass =
-      state === 'Focused'  ? 'border-[3px] border-[#adbcf2]' :
-      state === 'Hover'    ? 'border border-[#0043ff]' :
-      state === 'Disabled' ? 'border border-[#f3f4f6]' :
-      status === 'Error'   ? 'border border-[#f23030]' :
-      status === 'Success' ? 'border border-[#22ad5c]' :
-                             'border border-[#dfe4ea]';
-    const bgClass = state === 'Disabled' ? 'bg-[#f3f4f6]' : 'bg-white';
-    const labelColor = state === 'Disabled' ? 'text-[#6b7280]' : 'text-[#111928]';
-    const helperColor = status === 'Error' ? 'text-[#f23030]' : status === 'Success' ? 'text-[#22ad5c]' : 'text-[#4b5563]';
+      state === 'Focused'  ? 'border-[3px] border-line-focus' :
+      state === 'Hover'    ? 'border border-line-accent' :
+      state === 'Disabled' ? 'border border-line-primary' :
+      status === 'Error'   ? 'border border-line-error' :
+      status === 'Success' ? 'border border-line-success' :
+                             'border border-line-primary';
+    const bgClass = state === 'Disabled' ? 'bg-surface-disable' : 'bg-surface-primary';
+    const labelColor = state === 'Disabled' ? 'text-ink-disable' : 'text-ink-primary';
+    const helperColor = status === 'Error' ? 'text-ink-error' : status === 'Success' ? 'text-ink-success' : 'text-ink-secondary';
 
     return (
       <div className="flex flex-col gap-1.5 w-full">
@@ -80,8 +80,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           aria-describedby={ariaDescribedBy ?? helperId}
           aria-invalid={status === 'Error' || undefined}
           className={[
-            'w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5 text-base text-[#111928]',
-            'placeholder:text-[#9ca3af] outline-none transition-colors',
+            'w-full rounded-[6px] pt-3 pr-4 pb-3 pl-5 text-base text-ink-primary',
+            'placeholder:text-ink-tertiary outline-none transition-colors',
             bgClass, borderClass,
             disabled ? 'cursor-not-allowed' : '',
             className,

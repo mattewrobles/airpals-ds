@@ -25,7 +25,7 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', '@heroicons/react', /@heroicons\/react\/.*/],
+      external: ['react', 'react-dom', 'react/jsx-runtime', '@heroicons/react', /@heroicons\/react\/.+/],
       output: {
         globals: {
           react: 'React',

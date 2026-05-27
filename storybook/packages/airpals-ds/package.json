@@ -1,6 +1,6 @@
 {
   "name": "airpals-ds",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Airpals Design System — React components",
   "license": "MIT",
   "packageManager": "yarn@1.22.22",
@@ -26,13 +26,16 @@
     "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build:lib"
   },
+  "dependencies": {
+    "@heroicons/react": "^1.0.6",
+    "@fontsource/inter": "^5.0.0",
+    "@fontsource/lexend": "^5.0.0"
+  },
   "peerDependencies": {
-    "@heroicons/react": ">=2",
     "react": ">=17",
     "react-dom": ">=17"
   },
   "devDependencies": {
-    "@heroicons/react": "^2.2.0",
     "@storybook/addon-a11y": "^8.0.0",
     "@storybook/addon-designs": "^8.0.0",
     "@storybook/addon-essentials": "^8.0.0",

@@ -14,11 +14,12 @@ export type CheckboxProps = {
   onChange?: (active: CheckboxActive) => void;
 };
 
+// Off state: line-secondary (slate-300). On state: surface-accent (brand blue).
 const stateBg: Record<CheckboxState, { off: string; on: string }> = {
-  Default:  { off: 'bg-[#cbd5e1]', on: 'bg-[#0043ff]' },
-  Hover:    { off: 'bg-[#94a3b8]', on: 'bg-[#1773ff]' },
-  Focused:  { off: 'bg-[#115fd8]', on: 'bg-[#115fd8]' },
-  Disabled: { off: 'bg-[#cbd5e1]', on: 'bg-[#cbd5e1]' },
+  Default:  { off: 'bg-line-secondary',  on: 'bg-surface-accent' },
+  Hover:    { off: 'bg-slate-400',        on: 'bg-surface-accent hover:opacity-90' },
+  Focused:  { off: 'bg-line-accent',      on: 'bg-line-accent' },
+  Disabled: { off: 'bg-surface-disable',  on: 'bg-surface-disable' },
 };
 
 export function Checkbox({ state = 'Default', active = 'Off', size = 'Medium', label, onChange }: CheckboxProps) {
@@ -51,7 +52,7 @@ export function Checkbox({ state = 'Default', active = 'Off', size = 'Medium', l
           )}
         </div>
       </div>
-      {label && <span className="text-sm text-[#111928]">{label}</span>}
+      {label && <span className="text-sm text-ink-primary">{label}</span>}
     </label>
   );
 }

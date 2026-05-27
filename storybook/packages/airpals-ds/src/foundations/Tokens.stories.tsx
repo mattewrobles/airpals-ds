@@ -128,7 +128,194 @@ function DownloadAllTokens() {
       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
         <path d="M8 12l-4-4h2.5V3h3v5H12L8 12zM3 13h10v1H3v-1z"/>
       </svg>
-      Download tokens.json
+      tokens.json
+    </button>
+  );
+}
+
+function DownloadCSSVars() {
+  const handleDownload = () => {
+    const css = `:root {
+  /* Brand Primitives */
+  --primitive-brand-blue: #0043FF;
+  --primitive-brand-pink: #FC4575;
+  --primitive-brand-navy: #1B306C;
+  --primitive-brand-blue-light: #E6F1FD;
+  --primitive-brand-blue-sky: #B4D5FF;
+  --primitive-brand-electric-blue: #00A0FF;
+
+  /* Spacing */
+  --spacing-px: 1px;
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+
+  /* Border Radius */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-default: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+
+  /* Border Width */
+  --border-0: 0px;
+  --border-default: 1px;
+  --border-2: 2px;
+  --border-4: 4px;
+  --border-8: 8px;
+
+  /* Semantic — Light mode */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #E6F1FD;
+  --color-bg-tertiary: #B4D5FF;
+  --color-bg-accent: #0043FF;
+  --color-bg-accent-subtle: #e0e7ff;
+  --color-bg-accent-contrast: #1B306C;
+  --color-bg-disable: #e2e8f0;
+
+  --color-text-primary: #1B306C;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+  --color-text-disable: #cbd5e1;
+  --color-text-accent: #0043FF;
+  --color-text-on-accent: #ffffff;
+  --color-text-invert: #ffffff;
+
+  --color-border-primary: #e2e8f0;
+  --color-border-secondary: #cbd5e1;
+  --color-border-accent: #0043FF;
+
+  --color-icon-primary: #1B306C;
+  --color-icon-secondary: #64748b;
+  --color-icon-tertiary: #cbd5e1;
+  --color-icon-accent: #0043FF;
+  --color-icon-on-accent: #ffffff;
+  --color-icon-invert: #ffffff;
+  --color-icon-disable: #cbd5e1;
+
+  --color-ilus-background: #E6F1FD;
+  --color-ilus-details: #00A0FF;
+  --color-ilus-contorn: #1B306C;
+  --color-ilus-clothes: #B4D5FF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-primary: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-bg-tertiary: #334155;
+    --color-bg-accent-subtle: #1e1b4b;
+    --color-bg-disable: #64748b;
+
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #94a3b8;
+    --color-text-tertiary: #94a3b8;
+    --color-text-disable: #475569;
+    --color-text-accent: #E6F1FD;
+    --color-text-invert: #0f172a;
+
+    --color-border-primary: #334155;
+    --color-border-secondary: #1e293b;
+
+    --color-icon-primary: #e2e8f0;
+    --color-icon-tertiary: #94a3b8;
+    --color-icon-invert: #0f172a;
+    --color-icon-disable: #475569;
+  }
+}`;
+    const blob = new Blob([css], { type: 'text/css' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'airpals-tokens.css';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <button
+      onClick={handleDownload}
+      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-brand-navy dark:text-slate-50 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 12l-4-4h2.5V3h3v5H12L8 12zM3 13h10v1H3v-1z"/>
+      </svg>
+      tokens.css
+    </button>
+  );
+}
+
+function DownloadTailwindConfig() {
+  const handleDownload = () => {
+    const content = `/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        'brand-blue':          '#0043FF',
+        'brand-pink':          '#FC4575',
+        'brand-navy':          '#1B306C',
+        'brand-blue-light':    '#E6F1FD',
+        'brand-blue-sky':      '#B4D5FF',
+        'brand-electric-blue': '#00A0FF',
+      },
+      fontFamily: {
+        heading: ['Lexend', 'sans-serif'],
+        body:    ['Inter', 'sans-serif'],
+      },
+      fontSize: {
+        // Airpals DS type scale
+        // Caption  → text-xs  (12px)
+        // Body SM  → text-sm  (14px)
+        // Body MD  → text-base (16px)
+        // Body LG  → text-lg  (18px)
+        // H4       → text-xl  (20px)
+        // H3       → text-2xl (24px)
+        // H2       → text-3xl (30px)
+        // H1       → text-4xl (36px)
+      },
+      borderRadius: {
+        // DS scale uses Tailwind defaults:
+        // sm=2 · DEFAULT=4 · md=6 · lg=8 · xl=12 · 2xl=16 · 3xl=24 · full=9999
+      },
+    },
+  },
+  plugins: [],
+};
+`;
+    const blob = new Blob([content], { type: 'text/javascript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'tailwind.config.js';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <button
+      onClick={handleDownload}
+      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-brand-navy dark:text-slate-50 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 12l-4-4h2.5V3h3v5H12L8 12zM3 13h10v1H3v-1z"/>
+      </svg>
+      tailwind.config.js
     </button>
   );
 }
@@ -146,7 +333,11 @@ export const DevReference: Story = {
             Always use <strong>Semantics</strong> tokens. Never hex. <strong>Click CSS var or Tailwind class to copy.</strong>
           </p>
         </div>
-        <DownloadAllTokens />
+        <div className="flex items-center gap-2 flex-wrap">
+          <DownloadAllTokens />
+          <DownloadCSSVars />
+          <DownloadTailwindConfig />
+        </div>
       </div>
 
       {/* SPACING */}

@@ -18,10 +18,10 @@ const X_ICON = (
 );
 
 const stateClasses: Record<TagState, string> = {
-  Default: 'bg-white text-[#1b306c] border-slate-200',
-  Hover:   'bg-[#e6f1fd] text-[#1b306c] border-slate-200',
-  Focus:   'bg-[#e6f1fd] text-[#0043ff] border-[#0043ff] border-2',
-  Disable: 'bg-gray-100 text-slate-300 border-slate-200 cursor-not-allowed',
+  Default: 'bg-surface-primary text-ink-primary border-line-primary',
+  Hover:   'bg-surface-secondary text-ink-primary border-line-primary',
+  Focus:   'bg-surface-secondary text-ink-accent border-line-accent border-2',
+  Disable: 'bg-surface-disable text-ink-disable border-line-primary cursor-not-allowed',
 };
 
 export function Tag({ label, state = 'Default', closable = false, onClose }: TagProps) {

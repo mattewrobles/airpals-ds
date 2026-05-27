@@ -52,21 +52,20 @@ export function Dropdown({
   const dropdownId = id ?? (label ? `dropdown-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
 
   const borderClass =
-    state === 'Focused' ? 'border-2 border-[#0043ff]' :
-    state === 'Hover'   ? 'border-slate-300' :
-                          'border-slate-200';
-  const bgClass = disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white cursor-pointer';
-  const textClass = disabled ? 'text-slate-300' : selected ? 'text-[#1b306c]' : 'text-slate-400';
-  const iconClass = disabled ? 'text-slate-300' : 'text-slate-500';
+    state === 'Focused' ? 'border-2 border-line-accent' :
+    state === 'Hover'   ? 'border-line-secondary' :
+                          'border-line-primary';
+  const bgClass = disabled ? 'bg-surface-disable cursor-not-allowed' : 'bg-surface-primary cursor-pointer';
+  const textClass = disabled ? 'text-ink-disable' : selected ? 'text-ink-primary' : 'text-ink-tertiary';
+  const iconClass = disabled ? 'text-ink-disable' : 'text-ink-secondary';
 
   return (
     <div className={`relative w-64 font-body ${className}`}>
       {label && (
-        <label htmlFor={dropdownId} className="block text-sm font-medium text-[#1b306c] mb-1">
+        <label htmlFor={dropdownId} className="block text-sm font-medium text-ink-primary mb-1">
           {label}
         </label>
       )}
-      {/* Hidden native select for form/name support */}
       {name && (
         <input type="hidden" name={name} value={selected} />
       )}
@@ -85,14 +84,14 @@ export function Dropdown({
       {open && !disabled && (
         <ul
           role="listbox"
-          className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-md z-20 overflow-hidden"
+          className="absolute top-full left-0 right-0 mt-1 bg-surface-primary border border-line-primary rounded-lg shadow-md z-20 overflow-hidden"
         >
           {options.map(opt => (
             <li key={opt} role="option" aria-selected={selected === opt}>
               <button
                 type="button"
                 onClick={() => handleSelect(opt)}
-                className={`w-full text-left px-3 py-2 text-sm transition-colors ${selected === opt ? 'bg-[#e6f1fd] text-[#0043ff]' : 'text-[#1b306c] hover:bg-[#e6f1fd]'}`}
+                className={`w-full text-left px-3 py-2 text-sm transition-colors ${selected === opt ? 'bg-surface-secondary text-ink-accent' : 'text-ink-primary hover:bg-surface-secondary'}`}
               >
                 {opt}
               </button>

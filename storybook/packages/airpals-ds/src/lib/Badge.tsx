@@ -14,15 +14,51 @@ export type BadgeProps = {
 };
 
 const colorTokens: Record<BadgeColor, { fill: string; outline: string; duo: string }> = {
-  Primary:   { fill: 'bg-[#0043ff] text-white',     outline: 'border border-[#0043ff] text-[#0043ff]', duo: 'bg-[#0043ff]/10 text-[#0043ff]' },
-  Secondary: { fill: 'bg-[#fc4575] text-white',     outline: 'border border-[#fc4575] text-[#fc4575]', duo: 'bg-[#fc4575]/10 text-[#fc4575]' },
-  Dark:      { fill: 'bg-[#0a0a0a] text-white',     outline: 'border border-[#0a0a0a] text-[#0a0a0a]', duo: 'bg-[#0a0a0a]/10 text-[#0a0a0a]' },
-  Gray:      { fill: 'bg-[#637381] text-white',     outline: 'border border-[#637381] text-[#637381]', duo: 'bg-[#637381]/10 text-[#637381]' },
-  Light:     { fill: 'bg-[#e5e7eb] text-[#374151]', outline: 'border border-[#e5e7eb] text-[#374151]', duo: 'bg-[#e5e7eb]/50 text-[#374151]' },
-  Warning:   { fill: 'bg-[#f59e0b] text-white',     outline: 'border border-[#f59e0b] text-[#f59e0b]', duo: 'bg-[#f59e0b]/10 text-[#f59e0b]' },
-  Danger:    { fill: 'bg-[#ef4444] text-white',     outline: 'border border-[#ef4444] text-[#ef4444]', duo: 'bg-[#ef4444]/10 text-[#ef4444]' },
-  Success:   { fill: 'bg-[#22ad5c] text-white',     outline: 'border border-[#22ad5c] text-[#22ad5c]', duo: 'bg-[#22ad5c]/10 text-[#22ad5c]' },
-  Info:      { fill: 'bg-[#00a0ff] text-white',     outline: 'border border-[#00a0ff] text-[#00a0ff]', duo: 'bg-[#00a0ff]/10 text-[#00a0ff]' },
+  Primary:   {
+    fill:    'bg-surface-accent text-ink-on-accent',
+    outline: 'border border-line-accent text-ink-accent',
+    duo:     'bg-surface-secondary text-ink-accent',
+  },
+  Secondary: {
+    fill:    'bg-brand-pink text-white',
+    outline: 'border border-brand-pink text-brand-pink',
+    duo:     'bg-brand-pink/10 text-brand-pink',
+  },
+  Dark: {
+    fill:    'bg-surface-accent-contrast text-ink-on-accent',
+    outline: 'border border-surface-accent-contrast text-ink-primary',
+    duo:     'bg-surface-accent-contrast/10 text-ink-primary',
+  },
+  Gray: {
+    fill:    'bg-slate-500 text-white',
+    outline: 'border border-slate-500 text-slate-500',
+    duo:     'bg-slate-500/10 text-slate-500',
+  },
+  Light: {
+    fill:    'bg-surface-disable text-ink-secondary',
+    outline: 'border border-line-primary text-ink-secondary',
+    duo:     'bg-surface-disable/50 text-ink-secondary',
+  },
+  Warning: {
+    fill:    'bg-surface-warning text-ink-warning',
+    outline: 'border border-line-error text-ink-warning',
+    duo:     'bg-surface-warning text-ink-warning',
+  },
+  Danger: {
+    fill:    'bg-surface-error text-ink-error',
+    outline: 'border border-line-error text-ink-error',
+    duo:     'bg-surface-error text-ink-error',
+  },
+  Success: {
+    fill:    'bg-surface-success text-ink-success',
+    outline: 'border border-line-success text-ink-success',
+    duo:     'bg-surface-success text-ink-success',
+  },
+  Info: {
+    fill:    'bg-surface-info text-ink-info',
+    outline: 'border border-line-accent text-ink-info',
+    duo:     'bg-surface-info text-ink-info',
+  },
 };
 
 export function Badge({ label, color = 'Primary', variant = 'Fill', shape = 'Full' }: BadgeProps) {

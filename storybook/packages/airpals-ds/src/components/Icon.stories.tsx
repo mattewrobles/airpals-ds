@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
-import * as HeroOutline from '@heroicons/react/24/outline';
-import * as HeroSolid from '@heroicons/react/24/solid';
+import * as HeroOutline from '@heroicons/react/outline';
+import * as HeroSolid from '@heroicons/react/solid';
 import { UsageBlock } from '../shared/UsageBlock';
 
 const meta: Meta = {
@@ -13,23 +13,23 @@ const meta: Meta = {
         component: [
           '## Airpals Icons',
           '',
-          'The Airpals DS icon set is **HeroIcons v2** (451 icons, Outline + Solid).',
+          'The Airpals DS icon set is **HeroIcons v1** (232 icons, Outline + Solid).',
           '',
           '### Usage in your project',
           '```bash',
           'yarn add @heroicons/react',
           '```',
           '```tsx',
-          "import { EnvelopeIcon, UserGroupIcon } from '@heroicons/react/24/outline';",
-          "import { EnvelopeIcon } from '@heroicons/react/24/solid';",
+          "import { MailIcon, UserGroupIcon } from '@heroicons/react/outline';",
+          "import { MailIcon } from '@heroicons/react/solid';",
           '',
           '// Size via width/height prop or className',
-          '<EnvelopeIcon className="w-5 h-5 text-[#0043ff]" />',
+          '<MailIcon className="w-5 h-5 text-[#0043ff]" />',
           '```',
           '',
           '### Figma DS naming → HeroIcons',
-          '`Icon/Outline/envelope` → `EnvelopeIcon` from `@heroicons/react/24/outline`',
-          '`Icon/Solid/envelope` → `EnvelopeIcon` from `@heroicons/react/24/solid`',
+          '`Icon/Outline/mail` → `MailIcon` from `@heroicons/react/outline`',
+          '`Icon/Solid/mail` → `MailIcon` from `@heroicons/react/solid`',
         ].join('\n'),
       },
     },
@@ -45,39 +45,39 @@ export const Usage: Story = {
     <UsageBlock
       component={[]}
       types={[]}
-      jsx={`import { EnvelopeIcon, TruckIcon } from '@heroicons/react/24/outline';\n\n<EnvelopeIcon className="w-5 h-5 text-[#0043ff]" />\n<TruckIcon className="w-6 h-6 text-[#1b306c]" />`}
+      jsx={`import { MailIcon, TruckIcon } from '@heroicons/react/outline';\n\n<MailIcon className="w-5 h-5 text-[#0043ff]" />\n<TruckIcon className="w-6 h-6 text-[#1b306c]" />`}
       figmaKey="318727013b1e24c56a6a066facec0b6c01bbb069"
     />
   ),
 };
 
-// Curated set of icons used in Airpals DS / app
+// Curated set of icons used in Airpals DS / app (HeroIcons v1 names)
 const AIRPALS_ICONS = [
-  'envelope', 'envelope-open', 'bell', 'bell-slash',
-  'user', 'user-group', 'user-plus', 'user-minus', 'users',
-  'building-office', 'building-office-2',
-  'map-pin', 'map', 'globe-alt',
-  'truck', 'paper-airplane', 'archive-box', 'archive-box-arrow-down',
-  'cube', 'cube-transparent',
-  'check', 'check-circle', 'x-mark', 'x-circle',
-  'exclamation-triangle', 'exclamation-circle', 'information-circle',
+  'mail', 'mail-open', 'bell',
+  'user', 'user-group', 'user-add', 'user-remove', 'users',
+  'office-building',
+  'location-marker', 'map', 'globe',
+  'truck', 'paper-airplane', 'archive',
+  'cube',
+  'check', 'check-circle', 'x', 'x-circle',
+  'exclamation', 'exclamation-circle', 'information-circle',
   'arrow-right', 'arrow-left', 'arrow-up', 'arrow-down',
-  'arrow-right-circle', 'arrow-path', 'arrows-right-left',
+  'arrow-circle-right', 'refresh', 'switch-horizontal',
   'chevron-right', 'chevron-left', 'chevron-up', 'chevron-down',
-  'magnifying-glass', 'funnel', 'adjustments-horizontal',
-  'plus', 'plus-circle', 'minus', 'minus-circle',
-  'pencil', 'pencil-square', 'trash', 'document', 'document-text',
-  'clipboard', 'clipboard-document', 'clipboard-document-check',
-  'calendar', 'calendar-days', 'clock',
-  'tag', 'bars-3', 'ellipsis-horizontal', 'ellipsis-vertical',
-  'share', 'link', 'external-link', 'arrow-top-right-on-square',
-  'eye', 'eye-slash', 'lock-closed', 'lock-open',
-  'credit-card', 'banknotes', 'receipt-percent',
+  'search', 'filter', 'adjustments',
+  'plus', 'plus-circle', 'minus',
+  'pencil', 'pencil-alt', 'trash', 'document', 'document-text',
+  'clipboard', 'clipboard-copy', 'clipboard-check',
+  'calendar', 'clock',
+  'tag', 'menu', 'dots-horizontal', 'dots-vertical',
+  'share', 'link', 'external-link',
+  'eye', 'eye-off', 'lock-closed', 'lock-open',
+  'credit-card', 'cash',
   'chart-bar', 'chart-pie', 'presentation-chart-line',
-  'cog', 'cog-6-tooth', 'wrench', 'wrench-screwdriver',
-  'home', 'inbox', 'inbox-arrow-down', 'inbox-stack',
-  'photo', 'camera', 'qr-code', 'printer',
-  'phone', 'device-phone-mobile',
+  'cog', 'wrench',
+  'home', 'inbox', 'inbox-in',
+  'photograph', 'camera', 'qr-code', 'printer',
+  'phone', 'device-mobile',
   'star', 'heart', 'flag', 'bookmark',
   'logout' as string,
 ];
@@ -104,7 +104,7 @@ export const IconPalette: Story = {
     });
 
     const copy = (name: string) => {
-      const imp = `import { ${toComponentName(name)} } from '@heroicons/react/24/${variant}';`;
+      const imp = `import { ${toComponentName(name)} } from '@heroicons/react/${variant}';`;
       navigator.clipboard.writeText(imp);
       setCopied(name);
       setTimeout(() => setCopied(''), 1400);
@@ -188,11 +188,11 @@ export const IconPalette: Story = {
           <p>
             <span className="text-[#7dd3fc]">import</span>
             {' { '}
-            <span className="text-[#fde68a]">EnvelopeIcon</span>
+            <span className="text-[#fde68a]">MailIcon</span>
             {' } '}
             <span className="text-[#7dd3fc]">from</span>
             {' '}
-            <span className="text-[#86efac]">'@heroicons/react/24/outline'</span>
+            <span className="text-[#86efac]">'@heroicons/react/outline'</span>
             ;
           </p>
           <p className="mt-2 text-slate-400">
@@ -212,7 +212,7 @@ export const IconPalette: Story = {
 export const SizeComparison: Story = {
   name: 'Size Comparison',
   render: () => {
-    const icons = ['envelope', 'truck', 'user', 'check-circle', 'arrow-right', 'cog-6-tooth'];
+    const icons = ['mail', 'truck', 'user', 'check-circle', 'arrow-right', 'cog'];
     return (
       <div className="bg-white p-6">
         <div className="flex flex-col gap-6">

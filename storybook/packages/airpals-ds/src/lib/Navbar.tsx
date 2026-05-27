@@ -31,23 +31,23 @@ export function Navbar({ mobile = false, collapsed = false }: NavbarProps) {
 
   if (mobile) {
     return (
-      <nav className="font-body bg-white border-b border-slate-200 w-[390px]">
+      <nav className="font-body bg-surface-primary border-b border-line-primary w-[390px]">
         <div className="flex items-center justify-between px-4 h-16">
           {AIRPALS_LOGO}
-          <button onClick={() => setMenuOpen(v => !v)} className="text-[#1b306c] p-1" aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
+          <button onClick={() => setMenuOpen(v => !v)} className="text-ink-primary p-1" aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
             {menuOpen ? X_ICON : HAMBURGER}
           </button>
         </div>
         {menuOpen && (
-          <div className="border-t border-slate-100 px-4 py-3 space-y-1">
+          <div className="border-t border-line-primary px-4 py-3 space-y-1">
             {NAV_LINKS.map(link => (
-              <a key={link} href="#" className="flex items-center py-3 text-sm font-medium text-[#1b306c] hover:text-[#0043ff] border-b border-slate-100 last:border-0 transition-colors">
+              <a key={link} href="#" className="flex items-center py-3 text-sm font-medium text-ink-primary hover:text-ink-accent border-b border-line-primary last:border-0 transition-colors">
                 {link}
                 {link === 'Services' && <span className="ml-auto">{CHEVRON_DOWN}</span>}
               </a>
             ))}
             <div className="pt-3">
-              <a href="#" className="flex items-center justify-center w-full bg-[#0043ff] text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-blue-700 transition-colors">
+              <a href="#" className="flex items-center justify-center w-full bg-surface-accent text-ink-on-accent text-sm font-medium rounded-lg px-4 py-2.5 hover:opacity-90 transition-colors">
                 Dashboard →
               </a>
             </div>
@@ -58,19 +58,19 @@ export function Navbar({ mobile = false, collapsed = false }: NavbarProps) {
   }
 
   return (
-    <nav className="font-body bg-white border-b border-slate-200 w-full">
+    <nav className="font-body bg-surface-primary border-b border-line-primary w-full">
       <div className="max-w-[1440px] mx-auto px-8 h-[108px] flex items-center justify-between gap-8">
         <div className="flex-shrink-0">{AIRPALS_LOGO}</div>
         <div className="flex items-center gap-6">
           {NAV_LINKS.map(link => (
-            <a key={link} href="#" className="text-sm font-medium text-[#1b306c] hover:text-[#0043ff] whitespace-nowrap transition-colors">
+            <a key={link} href="#" className="text-sm font-medium text-ink-primary hover:text-ink-accent whitespace-nowrap transition-colors">
               {link}{link === 'Services' && CHEVRON_DOWN}
             </a>
           ))}
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
-          <button className="text-sm text-slate-500 hover:text-[#1b306c] transition-colors">Search...</button>
-          <a href="#" className="bg-[#0043ff] text-white text-sm font-medium rounded-lg px-4 py-2 hover:bg-blue-700 transition-colors whitespace-nowrap">
+          <button className="text-sm text-ink-secondary hover:text-ink-primary transition-colors">Search...</button>
+          <a href="#" className="bg-surface-accent text-ink-on-accent text-sm font-medium rounded-lg px-4 py-2 hover:opacity-90 transition-colors whitespace-nowrap">
             Dashboard →
           </a>
         </div>
