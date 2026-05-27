@@ -148,14 +148,71 @@ npm run build-storybook
 
 ---
 
-## Publishing
+## Publishing to npm
+
+### Prerequisites
+
+You need publish access to the `airpals-ds` package on npm. Ask Mau for credentials or get added as a collaborator at [npmjs.com/package/airpals-ds](https://www.npmjs.com/package/airpals-ds).
+
+### Login (first time or if logged out)
 
 ```bash
-# Bump version in package.json, then:
-npm publish
+npm login
+# Username: matthewrobles
+# Enter password + OTP when prompted
 ```
 
-The `prepublishOnly` script runs `build:lib` automatically before publishing.
+### Step-by-step release
+
+```bash
+# 1. Make sure you're on main and up to date
+git checkout main
+git pull origin main
+
+# 2. Bump the version in package.json
+#    Follow semantic versioning:
+#    - Patch (0.3.0 → 0.3.1): bug fixes, no API changes
+#    - Minor (0.3.0 → 0.4.0): new components or props, backwards compatible
+#    - Major (0.3.0 → 1.0.0): breaking API changes
+
+# 3. Update the Changelog story
+#    src/foundations/Changelog.stories.tsx → add entry for the new version
+
+# 4. Build and publish (prepublishOnly runs build:lib automatically)
+npm publish
+
+# 5. Commit and push the version bump
+git add package.json src/foundations/Changelog.stories.tsx
+git commit -m "chore: bump version to x.x.x"
+git push origin main
+```
+
+### What happens automatically
+
+- `prepublishOnly` script runs `build:lib` before publishing
+- `build:lib` compiles TypeScript + bundles with Vite → outputs to `dist/`
+- Chromatic Storybook deploys on every push to `main` via GitHub Actions
+
+### Verify the release
+
+```bash
+# Check it's live on npm
+npm view airpals-ds version
+
+# Or visit:
+# https://www.npmjs.com/package/airpals-ds
+```
+
+### In the consuming project
+
+```bash
+# Update to latest
+npm install airpals-ds@latest
+# or
+yarn upgrade airpals-ds
+# or
+pnpm update airpals-ds
+```
 
 ---
 
