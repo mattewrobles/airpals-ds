@@ -1,42 +1,11 @@
-name: Storybook → Chromatic
+name: Airpals DS → Chromatic
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'storybook/**'
 
 jobs:
-  # ── ds-default (Prism) ────────────────────────────────────
-  chromatic-default:
-    name: Chromatic — ds-default
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: yarn
-          cache-dependency-path: storybook/yarn.lock
-
-      - name: Install all workspaces
-        run: yarn install --frozen-lockfile
-        working-directory: storybook
-
-      - name: Publish ds-default to Chromatic
-        uses: chromaui/action@latest
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: storybook/packages/ds-default
-          buildScriptName: build-storybook
-          exitZeroOnChanges: true
-          exitOnceUploaded: true
-
-  # ── airpals-ds ────────────────────────────────────────────
-  chromatic-airpals:
+  chromatic:
     name: Chromatic — airpals-ds
     runs-on: ubuntu-latest
     steps:
@@ -47,18 +16,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
-          cache-dependency-path: storybook/yarn.lock
 
-      - name: Install all workspaces
-        run: yarn install --frozen-lockfile
-        working-directory: storybook
+      - name: Install dependencies
+        run: npm install
 
-      - name: Publish airpals-ds to Chromatic
+      - name: Publish to Chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_AIRPALS_TOKEN }}
-          workingDir: storybook/packages/airpals-ds
           buildScriptName: build-storybook
           exitZeroOnChanges: true
           exitOnceUploaded: true
