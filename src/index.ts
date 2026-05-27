@@ -60,3 +60,5 @@ export type { LogoOrientation, LogoColor, LogoProps } from './lib/Logo';
 
 export { Icon } from './lib/Icon';
 export type { IconVariant, IconSize, IconProps } from './lib/Icon';
+
+import './tokens/tokens.css';
