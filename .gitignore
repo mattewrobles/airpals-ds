@@ -22,3 +22,6 @@ plugin/dist/
 .env
 *.env.local
 storybook/package-lock.json
+node_modules
+dist
+.idea

@@ -1,6 +1,6 @@
 {
   "name": "airpals-ds",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Airpals Design System — React components",
   "license": "MIT",
   "packageManager": "yarn@1.22.22",
@@ -17,9 +17,12 @@
   "files": [
     "dist",
     "src/lib",
-    "src/shared"
+    "src/shared",
+    "src/tokens/tokens.css"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build",
