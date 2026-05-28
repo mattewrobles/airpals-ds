@@ -77,14 +77,22 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.3.3',
+    date: '2026-05-27',
+    summary: 'Deps fix per Jimmy + Tailwind v3 content fix',
+    changes: [
+      { type: 'fixed',   text: '@heroicons/react back to dependencies at ^1.0.6 (v1) — installs automatically with the package' },
+      { type: 'updated', text: 'tailwindcss added to peerDependencies — required in consuming project for Tailwind classes to work' },
+      { type: 'fixed',   text: 'README: critical Tailwind v3 fix — content array must include node_modules/airpals-ds/dist or component styles get purged (colors/spacing not showing)' },
+    ],
+  },
+  {
     version: 'v0.3.2',
     date: '2026-05-27',
-    summary: 'Peer deps fix + Tailwind v3 setup docs',
+    summary: 'tokens.css shipped in package + sideEffects fix (Jimmy)',
     changes: [
-      { type: 'fixed',   text: '@heroicons/react moved from dependencies to peerDependencies — consuming projects already have it installed, no longer bundled twice' },
-      { type: 'updated', text: 'tailwindcss added to peerDependencies — required in consuming project for component styles to work' },
-      { type: 'fixed',   text: 'README: added critical Tailwind v3 setup — content array must include node_modules/airpals-ds/dist or component classes get purged (styles not showing)' },
-      { type: 'updated', text: 'README: clarified peer deps, fonts (optional), and Next.js transpilePackages setup' },
+      { type: 'updated', text: 'package.json files: added src/tokens/tokens.css — CSS token file now included in npm package' },
+      { type: 'fixed',   text: 'sideEffects: ["**/*.css"] — prevents bundlers from tree-shaking CSS imports' },
     ],
   },
   {
