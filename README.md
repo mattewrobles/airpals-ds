@@ -44,36 +44,58 @@ export default function Example() {
 
 ---
 
-## Next.js App Router setup
+## Setup
 
-### `next.config.ts`
+### Peer dependencies
+
+`@heroicons/react` and `tailwindcss` are required in your project. If you don't have them yet:
+
+```bash
+yarn add @heroicons/react tailwindcss
+```
+
+### Tailwind v3 — required config
+
+> ⚠️ **Components will appear unstyled without this step.**
+
+In your `tailwind.config.js`, add the airpals-ds dist to the `content` array so Tailwind doesn't purge the component classes:
+
+```js
+// tailwind.config.js
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}',  // your existing paths
+    './node_modules/airpals-ds/dist/**/*.{js,mjs}',  // ← add this
+  ],
+  // ...rest of your config
+}
+```
+
+### Tailwind v4
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@source "../node_modules/airpals-ds/dist/index.mjs";
+```
+
+### Fonts (optional)
+
+airpals-ds ships Inter and Lexend via `@fontsource`. If your project already loads these fonts another way, you can skip this. Otherwise, import in your CSS:
+
+```css
+@import "@fontsource/inter/400.css";
+@import "@fontsource/lexend/400.css";
+```
+
+### Next.js App Router
+
+Add to `next.config.ts`:
 
 ```ts
 const nextConfig = {
   transpilePackages: ['airpals-ds'],
 };
-```
-
-### `globals.css` (Tailwind v4)
-
-```css
-/* Fonts must come before Tailwind */
-@import "@fontsource/inter/400.css";
-@import "@fontsource/lexend/400.css";
-@import "tailwindcss";
-
-/* Scan airpals-ds bundle for Tailwind classes */
-@source "../node_modules/airpals-ds/dist/index.mjs";
-```
-
-### `globals.css` (Tailwind v3)
-
-```css
-@import "@fontsource/inter/400.css";
-@import "@fontsource/lexend/400.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 ```
 
 ---

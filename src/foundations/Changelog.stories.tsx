@@ -77,6 +77,17 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.3.2',
+    date: '2026-05-27',
+    summary: 'Peer deps fix + Tailwind v3 setup docs',
+    changes: [
+      { type: 'fixed',   text: '@heroicons/react moved from dependencies to peerDependencies — consuming projects already have it installed, no longer bundled twice' },
+      { type: 'updated', text: 'tailwindcss added to peerDependencies — required in consuming project for component styles to work' },
+      { type: 'fixed',   text: 'README: added critical Tailwind v3 setup — content array must include node_modules/airpals-ds/dist or component classes get purged (styles not showing)' },
+      { type: 'updated', text: 'README: clarified peer deps, fonts (optional), and Next.js transpilePackages setup' },
+    ],
+  },
+  {
     version: 'v0.3.0',
     date: '2026-05-27',
     summary: 'Semantic token system + Alert rewrite',
