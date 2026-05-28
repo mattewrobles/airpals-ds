@@ -77,6 +77,25 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.3.3',
+    date: '2026-05-27',
+    summary: 'Deps fix per Jimmy + Tailwind v3 content fix',
+    changes: [
+      { type: 'fixed',   text: '@heroicons/react back to dependencies at ^1.0.6 (v1) — installs automatically with the package' },
+      { type: 'updated', text: 'tailwindcss added to peerDependencies — required in consuming project for Tailwind classes to work' },
+      { type: 'fixed',   text: 'README: critical Tailwind v3 fix — content array must include node_modules/airpals-ds/dist or component styles get purged (colors/spacing not showing)' },
+    ],
+  },
+  {
+    version: 'v0.3.2',
+    date: '2026-05-27',
+    summary: 'tokens.css shipped in package + sideEffects fix (Jimmy)',
+    changes: [
+      { type: 'updated', text: 'package.json files: added src/tokens/tokens.css — CSS token file now included in npm package' },
+      { type: 'fixed',   text: 'sideEffects: ["**/*.css"] — prevents bundlers from tree-shaking CSS imports' },
+    ],
+  },
+  {
     version: 'v0.3.0',
     date: '2026-05-27',
     summary: 'Semantic token system + Alert rewrite',
