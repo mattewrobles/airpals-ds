@@ -61,4 +61,7 @@ export type { LogoOrientation, LogoColor, LogoProps } from './lib/Logo';
 export { Icon } from './lib/Icon';
 export type { IconVariant, IconSize, IconProps } from './lib/Icon';
 
+export { ButtonDemo } from './lib/ButtonDemo';
+export type { ButtonDemoProps } from './lib/ButtonDemo';
+
 import './index.css';
