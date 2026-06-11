@@ -31,10 +31,10 @@ const meta: Meta<typeof Tag> = {
           '',
           '| State | Style |',
           '|-------|-------|',
-          '| Default | `bg-white border-slate-200 text-[#1b306c]` |',
-          '| Hover | `bg-[#e6f1fd] border-slate-200` |',
-          '| Focus | `bg-[#e6f1fd] border-[#0043ff] text-[#0043ff] border-2` |',
-          '| Disable | `bg-gray-100 text-slate-300` |',
+          '| Default | `bg-brand-blue/[.08] text-ink-primary` — blue tint bg, navy text, no border |',
+          '| Hover   | `bg-surface-accent text-ink-on-accent` — solid brand blue, white text |',
+          '| Focus   | `bg-brand-blue/[.08] text-ink-primary ring-1 ring-brand-blue/30` — same as Default + ring |',
+          '| Disable | `bg-surface-disable text-ink-primary cursor-not-allowed` — slate-200 bg |',
         ].join('\n'),
       },
     },
@@ -104,13 +104,18 @@ export const AllVariants: Story = {
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Code Snippet</p>
         <CodeBlock
           code={`<!-- Default -->
-<span class="inline-flex items-center px-3 py-1 h-8 rounded-lg border border-slate-200 bg-white text-sm font-medium text-[#1b306c]">
+<span class="inline-flex items-center px-3.5 py-[5px] rounded-md bg-brand-blue/[.08] text-base font-normal text-[#1b306c]">
   Same-Day
 </span>
 
-<!-- Active/Focus -->
-<span class="inline-flex items-center px-3 py-1 h-8 rounded-lg border-2 border-[#0043ff] bg-[#e6f1fd] text-sm font-medium text-[#0043ff]">
+<!-- Hover / Selected -->
+<span class="inline-flex items-center px-3.5 py-[5px] rounded-md bg-[#0043ff] text-base font-normal text-white">
   All
+</span>
+
+<!-- Focus -->
+<span class="inline-flex items-center px-3.5 py-[5px] rounded-md bg-brand-blue/[.08] text-base font-normal text-[#1b306c] ring-1 ring-brand-blue/30">
+  In Transit
 </span>`}
           jsx={`<Tag label="Same-Day" />
 <Tag label="All" state="Focus" />`}
