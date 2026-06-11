@@ -20,27 +20,87 @@ yarn add airpals-ds
 Peer dependencies required:
 
 ```bash
-npm install react react-dom @heroicons/react @fontsource/inter @fontsource/lexend
+npm install react react-dom
 ```
 
 ---
 
 ## Usage
 
+### 1. Import CSS and Components
+
+To use the components, you must import the library's CSS in your main application file (e.g., `layout.tsx` or `_app.tsx`):
+
 ```tsx
+import 'airpals-ds/style.css'; // This includes the tokens and utility classes
 import { Button, Alert, Badge, Input } from 'airpals-ds';
-import type { ButtonType, AlertUseCase } from 'airpals-ds';
 
 export default function Example() {
   return (
     <>
       <Button label="Ship it" type="Primary" />
       <Alert useCase="success" title="Shipment created successfully." />
-      <Badge label="Active" color="Success" />
     </>
   );
 }
 ```
+
+---
+
+## Tailwind CSS Configuration
+
+Since this library uses a custom theme (colors, typography, etc.), you need to configure Tailwind in your project to recognize these classes.
+
+### Tailwind v3
+
+Add the library's preset and content path to your `tailwind.config.js`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // 1. Add the preset to inherit Airpals theme
+  presets: [require('airpals-ds/tailwind.preset')],
+
+  // 2. Add the library to the content array
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}', // your app's files
+    './node_modules/airpals-ds/dist/**/*.{js,mjs,cjs}', // scan the library
+  ],
+  // ...
+}
+```
+
+### Tailwind v4
+
+In your main CSS file:
+
+```css
+@import "tailwindcss";
+
+/* 1. Import Airpals tokens and variables */
+@import "airpals-ds/style.css";
+
+/* 2. Scan airpals-ds bundle for Tailwind classes */
+@source "../node_modules/airpals-ds/dist/index.mjs";
+
+/* 3. (Optional) Define theme aliases for v4 if not using the preset */
+@theme {
+  --color-brand-blue: #0043FF;
+  --color-brand-pink: #FC4575;
+  /* ... etc or use variables from style.css */
+}
+```
+
+---
+
+## Troubleshooting Colores y Estilos
+
+Si los componentes se ven sin colores o con estilos incorrectos, verifica lo siguiente:
+
+1. **¿Importaste el CSS?** Asegúrate de tener `import 'airpals-ds/style.css'` en tu archivo de entrada principal (`layout.tsx`, `_app.tsx` o `index.tsx`).
+2. **¿Configuraste el preset?** (Solo Tailwind v3) Sin el `presets: [require('airpals-ds/tailwind.preset')]`, Tailwind no reconocerá clases como `bg-surface-primary`.
+3. **¿El `content` es correcto?** Verifica que la ruta a `node_modules/airpals-ds` en tu `tailwind.config.js` sea correcta. Si usas un monorepo, la ruta podría ser `../../node_modules/airpals-ds/...`.
+4. **Caché de Next.js**: A veces, borrar la carpeta `.next` y reiniciar el servidor de desarrollo soluciona problemas de carga de estilos.
 
 ---
 
@@ -77,6 +137,9 @@ module.exports = {
 /* globals.css */
 @import "tailwindcss";
 @source "../node_modules/airpals-ds/dist/index.mjs";
+
+/* Import the library's compiled CSS if you're not using @source */
+/* @import "airpals-ds/style.css"; */
 ```
 
 ### Fonts (optional)
@@ -96,6 +159,11 @@ Add to `next.config.ts`:
 const nextConfig = {
   transpilePackages: ['airpals-ds'],
 };
+@import "airpals-ds/style.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 ```
 
 ---

@@ -195,6 +195,10 @@ const backgroundTokens: Swatch[] = [
   { name: 'background/accent-subtle',    var: '--color-bg-accent-subtle',    tailwind: 'bg-indigo-100 dark:bg-indigo-950', hex: '#e0e7ff / #1e1b4b' },
   { name: 'background/accent-contrast',  var: '--color-bg-accent-contrast',  tailwind: 'bg-brand-navy',                    hex: '#1B306C' },
   { name: 'background/disable',          var: '--color-bg-disable',          tailwind: 'bg-slate-200 dark:bg-slate-500',   hex: '#e2e8f0 / #64748b' },
+  { name: 'background/success',          var: '--color-bg-success',          tailwind: 'bg-surface-success',               hex: '#f0fdf4 / #052e16' },
+  { name: 'background/error',            var: '--color-bg-error',            tailwind: 'bg-surface-error',                 hex: '#fef2f2 / #450a0a' },
+  { name: 'background/warning',          var: '--color-bg-warning',          tailwind: 'bg-surface-warning',               hex: '#fffbeb / #451a03' },
+  { name: 'background/info',             var: '--color-bg-info',             tailwind: 'bg-surface-info',                  hex: '#eff6ff / #172554' },
 ];
 
 const textTokens: Swatch[] = [
@@ -205,12 +209,18 @@ const textTokens: Swatch[] = [
   { name: 'text/accent',    var: '--color-text-accent',    tailwind: 'text-brand-blue dark:text-brand-blue-light', hex: '#0043FF / #E6F1FD' },
   { name: 'text/on-accent', var: '--color-text-on-accent', tailwind: 'text-white',                          hex: '#ffffff' },
   { name: 'text/invert',    var: '--color-text-invert',    tailwind: 'text-white dark:text-slate-900',      hex: '#ffffff / #0f172a' },
+  { name: 'text/success',   var: '--color-text-success',   tailwind: 'text-ink-success',                    hex: '#16a34a / #4ade80' },
+  { name: 'text/error',     var: '--color-text-error',     tailwind: 'text-ink-error',                      hex: '#ef4444 / #f87171' },
+  { name: 'text/warning',   var: '--color-text-warning',   tailwind: 'text-ink-warning',                    hex: '#f59e0b / #fbbf24' },
+  { name: 'text/info',      var: '--color-text-info',      tailwind: 'text-ink-info',                       hex: '#3b82f6 / #60a5fa' },
 ];
 
 const borderTokens: Swatch[] = [
   { name: 'border/primary',   var: '--color-border-primary',   tailwind: 'border-slate-200 dark:border-slate-700', hex: '#e2e8f0 / #334155' },
   { name: 'border/secondary', var: '--color-border-secondary', tailwind: 'border-slate-300 dark:border-slate-800', hex: '#cbd5e1 / #1e293b' },
   { name: 'border/accent',    var: '--color-border-accent',    tailwind: 'border-brand-blue',                      hex: '#0043FF' },
+  { name: 'border/error',     var: '--color-border-error',     tailwind: 'border-line-error',                      hex: '#ef4444 / #f87171' },
+  { name: 'border/success',   var: '--color-border-success',   tailwind: 'border-line-success',                    hex: '#16a34a / #4ade80' },
 ];
 
 const iconTokens: Swatch[] = [
@@ -219,6 +229,10 @@ const iconTokens: Swatch[] = [
   { name: 'icon/tertiary',  var: '--color-icon-tertiary',  tailwind: 'text-slate-300 dark:text-slate-400',  hex: '#cbd5e1 / #94a3b8' },
   { name: 'icon/accent',    var: '--color-icon-accent',    tailwind: 'text-brand-blue',                     hex: '#0043FF' },
   { name: 'icon/disable',   var: '--color-icon-disable',   tailwind: 'text-slate-300 dark:text-slate-600',  hex: '#cbd5e1 / #475569' },
+  { name: 'icon/error',     var: '--color-icon-error',     tailwind: 'text-icon-error',                     hex: '#ef4444 / #f87171' },
+  { name: 'icon/success',   var: '--color-icon-success',   tailwind: 'text-icon-success',                   hex: '#16a34a / #4ade80' },
+  { name: 'icon/warning',   var: '--color-icon-warning',   tailwind: 'text-icon-warning',                   hex: '#f59e0b / #fbbf24' },
+  { name: 'icon/info',      var: '--color-icon-info',      tailwind: 'text-icon-info',                      hex: '#3b82f6 / #60a5fa' },
 ];
 
 const ilustracionesTokens: Swatch[] = [
