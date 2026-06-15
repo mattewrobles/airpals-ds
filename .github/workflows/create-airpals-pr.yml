@@ -1,0 +1,61 @@
+name: Sync to Airpals
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Clone Airpals repo
+        env:
+          TOKEN: ${{ secrets.AIRPALS_TOKEN }}
+        run: |
+          git clone https://x-access-token:$TOKEN@github.com/AIRPALS/airpals-ds.git target
+
+      - name: Sync files
+        run: |
+          rsync -av \
+            --delete \
+            --exclude='.git' \
+            ./ target/
+
+      - name: Commit changes
+        working-directory: target
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          BRANCH=sync-${GITHUB_SHA}
+
+          git checkout -b $BRANCH
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+
+          git commit -m "sync from mattewrobles/airpals-ds"
+
+          git push origin $BRANCH
+
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
+
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.AIRPALS_TOKEN }}
+        run: |
+          gh pr create \
+            --repo AIRPALS/airpals-ds \
+            --base main \
+            --head ${BRANCH} \
+            --title "Sync from mattewrobles/airpals-ds" \
+            --body "Automated PR generated from upstream repository changes."
