@@ -24,11 +24,12 @@ const X_ICON = (
 // Hover:   brand-blue solid, white text
 // Focus:   same bg as Default + brand-blue ring at 30% opacity
 // Disable: slate-200 bg, same navy text (not muted), non-interactive
+// Figma exact: Focus=border-2 border-rgba(55,88,249,0.3), Disable=opacity-40
 const stateClasses: Record<TagState, string> = {
-  Default: 'bg-brand-blue/[.08] text-ink-primary',
-  Hover:   'bg-surface-accent text-ink-on-accent',
-  Focus:   'bg-brand-blue/[.08] text-ink-primary ring-1 ring-brand-blue/30',
-  Disable: 'bg-surface-disable text-ink-primary cursor-not-allowed',
+  Default: 'bg-[rgba(55,88,249,0.08)] text-[#111928]',
+  Hover:   'bg-[#0043ff] text-white',
+  Focus:   'bg-[rgba(55,88,249,0.08)] text-[#111928] border-2 border-[rgba(55,88,249,0.3)]',
+  Disable: 'bg-[#e5e7eb] text-[#111928] opacity-40 cursor-not-allowed',
 };
 
 export function Tag({

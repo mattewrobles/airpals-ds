@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
 import { UsageBlock } from '../shared/UsageBlock';
 import { Textarea } from '../lib/Textarea';
-import type { TextareaState, TextareaProps } from '../lib/Textarea';
+import type { TextareaProps } from '../lib/Textarea';
 
 /* ── Meta ────────────────────────────────────────────────── */
 
@@ -14,7 +14,6 @@ const meta: Meta<typeof Textarea> = {
   component: Textarea,
   tags: ['autodocs'],
   argTypes: {
-    state:       { control: 'select', options: ['Default', 'Hover', 'Focused', 'Disabled'] },
     label:       { control: 'text' },
     placeholder: { control: 'text' },
     helperText:  { control: 'text' },
@@ -67,7 +66,7 @@ export const Default: Story = {
 };
 
 export const Focused: Story = {
-  args: { label: 'Delivery Notes', placeholder: 'Add any special instructions…', state: 'Focused' },
+  args: { label: 'Delivery Notes', placeholder: 'Add any special instructions…' },
 };
 
 export const WithHelperText: Story = {
@@ -79,7 +78,7 @@ export const WithCounter: Story = {
 };
 
 export const Disabled: Story = {
-  args: { label: 'Notes', placeholder: 'Not editable', state: 'Disabled' },
+  args: { label: 'Notes', placeholder: 'Not editable', disabled: true },
 };
 
 export const AllStates: Story = {
@@ -87,9 +86,7 @@ export const AllStates: Story = {
   render: () => (
     <div className="bg-white p-8 font-body space-y-6 max-w-lg">
       <Textarea label="Default" placeholder="Placeholder" />
-      <Textarea label="Hover" placeholder="Placeholder" state="Hover" />
-      <Textarea label="Focused" placeholder="Placeholder" state="Focused" />
-      <Textarea label="Disabled" placeholder="Placeholder" state="Disabled" />
+      <Textarea label="Disabled" placeholder="Placeholder" disabled />
       <Textarea label="With Helper" placeholder="Placeholder" helperText="Helper text below the field" />
       <Textarea label="With Counter" placeholder="Type here…" maxLength={50} />
 

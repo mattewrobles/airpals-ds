@@ -2,7 +2,12 @@
 
 import React from 'react';
 
-export type AvatarGroupSize = 'md' | 'lg';
+// Figma 747-8469 — AvatarGroup
+// Sizes: xs=20 sm=24 md=40 lg=48 xl=56 (group-specific, not Avatar sizes)
+// Overlap: 10px negative margin (mr-[-10px]) on all except last
+// Always Full Radius (circles)
+
+export type AvatarGroupSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'Extra Small' | 'Small' | 'Medium' | 'Large' | 'Extra Large';
 
 export type AvatarGroupItem = {
   src?: string;
@@ -15,48 +20,82 @@ export type AvatarGroupProps = {
   max?: number;
   size?: AvatarGroupSize;
   total?: number;
+  className?: string;
 };
 
-const sizeConfig: Record<AvatarGroupSize, { px: number; font: string; offset: number; border: number }> = {
-  md: { px: 50, font: 'text-sm font-semibold', offset: 38, border: 2 },
-  lg: { px: 60, font: 'text-base font-semibold', offset: 48, border: 2 },
+const SIZE_MAP: Record<string, { px: number; fontSize: number }> = {
+  'xs':          { px: 20, fontSize: 9  },
+  'sm':          { px: 24, fontSize: 10 },
+  'md':          { px: 40, fontSize: 14 },
+  'lg':          { px: 48, fontSize: 16 },
+  'xl':          { px: 56, fontSize: 18 },
+  'Extra Small': { px: 20, fontSize: 9  },
+  'Small':       { px: 24, fontSize: 10 },
+  'Medium':      { px: 40, fontSize: 14 },
+  'Large':       { px: 48, fontSize: 16 },
+  'Extra Large': { px: 56, fontSize: 18 },
 };
 
-export function AvatarGroup({ avatars, max = 4, size = 'lg', total }: AvatarGroupProps) {
-  const cfg = sizeConfig[size];
+const OVERLAP = 10;
+
+const PLACEHOLDER_SVG = (
+  <svg viewBox="0 0 40 40" fill="none" style={{ width: '100%', height: '100%' }}>
+    <rect width="40" height="40" fill="#e2e8f0"/>
+    <circle cx="20" cy="15" r="7" fill="#94a3b8"/>
+    <ellipse cx="20" cy="35" rx="13" ry="10" fill="#94a3b8"/>
+  </svg>
+);
+
+export function AvatarGroup({
+  avatars,
+  max = 4,
+  size = 'md',
+  total,
+  className = '',
+}: AvatarGroupProps) {
+  const cfg = SIZE_MAP[size] ?? SIZE_MAP['md'];
   const visible = avatars.slice(0, max);
   const remaining = (total ?? avatars.length) - visible.length;
-  const items = remaining > 0 ? [...visible, null] : visible;
-  const totalWidth = cfg.px + (items.length - 1) * cfg.offset;
+  const items: (AvatarGroupItem | null)[] = remaining > 0 ? [...visible, null] : visible;
+
+  const step = cfg.px - OVERLAP;
+  const totalWidth = cfg.px + (items.length - 1) * step;
 
   return (
-    <div className="relative inline-flex" style={{ width: totalWidth, height: cfg.px }}>
+    <div
+      className={`relative inline-flex ${className}`}
+      style={{ width: totalWidth, height: cfg.px }}
+    >
       {items.map((item, i) => {
-        const left = i * cfg.offset;
+        const left = i * step;
+        const zIndex = items.length - i;
         const isCounter = item === null;
 
-        const baseClass = [
-          'absolute rounded-full flex items-center justify-center overflow-hidden',
-          cfg.font,
-        ].join(' ');
-
-        const borderStyle = {
-          width: cfg.px,
-          height: cfg.px,
+        const baseStyle: React.CSSProperties = {
+          position: 'absolute',
           left,
           top: 0,
-          border: `${cfg.border}px solid white`,
-          zIndex: items.length - i,
+          width: cfg.px,
+          height: cfg.px,
+          borderRadius: '50%',
+          border: '2px solid #ffffff',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+          zIndex,
         };
 
         if (isCounter) {
           return (
             <div
               key="counter"
-              className={`${baseClass} bg-surface-secondary text-ink-accent`}
-              style={borderStyle}
+              style={{ ...baseStyle, backgroundColor: '#e6f1fd', color: '#0043ff' }}
             >
-              +{remaining}
+              <span style={{ fontSize: cfg.fontSize, fontWeight: 600, lineHeight: 1 }}>
+                +{remaining}
+              </span>
             </div>
           );
         }
@@ -66,20 +105,26 @@ export function AvatarGroup({ avatars, max = 4, size = 'lg', total }: AvatarGrou
             <img
               key={i}
               src={item!.src}
-              alt={item!.alt ?? ''}
-              className="absolute rounded-full object-cover"
-              style={borderStyle}
+              alt={item!.alt ?? item!.initials ?? ''}
+              style={{ ...baseStyle, objectFit: 'cover' }}
             />
           );
         }
 
+        if (item!.initials) {
+          return (
+            <div key={i} style={{ ...baseStyle, backgroundColor: '#0043ff' }}>
+              <span style={{ fontSize: cfg.fontSize, fontWeight: 600, color: '#ffffff', lineHeight: 1, userSelect: 'none' }}>
+                {item!.initials}
+              </span>
+            </div>
+          );
+        }
+
+        // Image placeholder
         return (
-          <div
-            key={i}
-            className={`${baseClass} bg-surface-accent text-ink-on-accent`}
-            style={borderStyle}
-          >
-            {item!.initials ?? '?'}
+          <div key={i} style={{ ...baseStyle, backgroundColor: '#e2e8f0' }}>
+            {PLACEHOLDER_SVG}
           </div>
         );
       })}

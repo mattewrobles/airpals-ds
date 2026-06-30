@@ -52,12 +52,12 @@ export const Usage: Story = {
 
 /* ── Stories ─────────────────────────────────────────────── */
 
-export const Primary: Story = { args: { label: 'New Shipment', type: 'Primary', size: 'M' } };
-export const Secondary: Story = { args: { label: 'New Shipment', type: 'Secondary', size: 'M' } };
-export const Success: Story = { args: { label: 'Confirm', type: 'Success', size: 'M' } };
-export const Warning: Story = { args: { label: 'Review', type: 'Warning', size: 'M' } };
-export const Danger: Story = { args: { label: 'Delete', type: 'Danger', size: 'M' } };
-export const Disabled: Story = { args: { label: 'New Shipment', type: 'Primary', size: 'M', disabled: true } };
+export const Primary: Story = { args: { label: 'New Shipment', type: 'Primary', size: 'md' } };
+export const Secondary: Story = { args: { label: 'New Shipment', type: 'Secondary', size: 'md' } };
+export const Success: Story = { args: { label: 'Confirm', type: 'Success', size: 'md' } };
+export const Warning: Story = { args: { label: 'Review', type: 'Warning', size: 'md' } };
+export const Danger: Story = { args: { label: 'Delete', type: 'Danger', size: 'md' } };
+export const Disabled: Story = { args: { label: 'New Shipment', type: 'Primary', size: 'md', disabled: true } };
 
 export const AllVariants: Story = {
   name: 'All Variants',
@@ -67,7 +67,7 @@ export const AllVariants: Story = {
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Types — Size M</p>
         <div className="flex flex-wrap gap-3">
           {(['Primary', 'Secondary', 'Info', 'Success', 'Warning', 'Danger'] as const).map((t) => (
-            <SplitButton key={t} label={t} type={t} size="M" />
+            <SplitButton key={t} label={t} type={t} size="md" />
           ))}
         </div>
       </div>
@@ -75,7 +75,7 @@ export const AllVariants: Story = {
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Sizes — Primary</p>
         <div className="flex items-center gap-3">
-          {(['XS', 'S', 'M', 'L'] as const).map((s) => (
+          {(['xs', 'sm', 'md', 'lg'] as const).map((s) => (
             <SplitButton key={s} label={s} type="Primary" size={s} />
           ))}
         </div>
@@ -85,7 +85,7 @@ export const AllVariants: Story = {
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Disabled state</p>
         <div className="flex flex-wrap gap-3">
           {(['Primary', 'Success', 'Danger'] as const).map((t) => (
-            <SplitButton key={t} label={t} type={t} size="M" disabled />
+            <SplitButton key={t} label={t} type={t} size="md" disabled />
           ))}
         </div>
       </div>

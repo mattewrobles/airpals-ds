@@ -15,7 +15,6 @@ const meta: Meta<typeof Navbar> = {
   tags: ['autodocs'],
   argTypes: {
     mobile:    { control: 'boolean' },
-    collapsed: { control: 'boolean' },
   },
   parameters: {
     layout: 'fullscreen',
@@ -58,8 +57,7 @@ export const Usage: Story = {
 /* ── Stories ─────────────────────────────────────────────── */
 
 export const Desktop: Story = { args: { mobile: false } };
-export const MobileCollapsed: Story = { name: 'Mobile — Collapsed', args: { mobile: true, collapsed: true } };
-export const MobileExpanded: Story = { name: 'Mobile — Expanded', args: { mobile: true, collapsed: false } };
+export const Mobile: Story = { name: 'Mobile', args: { mobile: true } };
 
 export const AllVariants: Story = {
   name: 'All Variants',
@@ -71,13 +69,8 @@ export const AllVariants: Story = {
       </div>
 
       <div className="px-8">
-        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Mobile — Collapsed</p>
-        <Navbar mobile={true} collapsed={true} />
-      </div>
-
-      <div className="px-8">
-        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Mobile — Expanded</p>
-        <Navbar mobile={true} collapsed={false} />
+        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Mobile</p>
+        <Navbar mobile={true} />
       </div>
 
       <div className="px-8">

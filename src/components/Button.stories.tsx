@@ -3,7 +3,7 @@ import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
 import { UsageBlock } from '../shared/UsageBlock';
 import { Button } from '../lib/Button';
-import type { ButtonType, ButtonState, ButtonSize, ButtonProps } from '../lib/Button';
+import type { ButtonType, ButtonState, ButtonProps } from '../lib/Button';
 
 /* ── Meta ────────────────────────────────────────────────── */
 
@@ -23,11 +23,6 @@ const meta: Meta<typeof Button> = {
       control: 'select',
       options: ['Default', 'Disabled'],
       description: 'Interaction state',
-    },
-    size:  {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'sm = 28px · md = 36px · lg = 48px',
     },
     label: { control: 'text', description: 'Button label text' },
   },
@@ -62,7 +57,7 @@ export const Usage: Story = {
   render: () => (
     <UsageBlock
       component={'Button'}
-      types={['ButtonType', 'ButtonState', 'ButtonSize', 'ButtonProps']}
+      types={['ButtonType', 'ButtonState', 'ButtonProps']}
       jsx={`<Button label="New Shipment" />`}
       figmaKey="1976dd5fb0525a76fb43bf3785fa678114f2c72c"
     />
@@ -72,19 +67,19 @@ export const Usage: Story = {
 /* ── Stories ─────────────────────────────────────────────── */
 
 export const Primary: Story = {
-  args: { label: 'New Shipment', type: 'Primary', size: 'md' },
+  args: { label: 'New Shipment', type: 'Primary' },
 };
 
 export const Secondary: Story = {
-  args: { label: 'View Details', type: 'Secondary', size: 'md' },
+  args: { label: 'View Details', type: 'Secondary' },
 };
 
 export const Ghost: Story = {
-  args: { label: 'Cancel', type: 'Ghost', size: 'md' },
+  args: { label: 'Cancel', type: 'Ghost' },
 };
 
 export const Negative: Story = {
-  args: { label: 'Delete Shipment', type: 'Negative', size: 'md' },
+  args: { label: 'Delete Shipment', type: 'Negative' },
 };
 
 export const Disabled: Story = {
@@ -95,9 +90,9 @@ export const Sizes: Story = {
   name: 'Sizes',
   render: () => (
     <div className="flex flex-wrap items-center gap-3 p-4 bg-white dark:bg-slate-900 font-body">
-      <Button label="Small — px-3 py-1.5" type="Primary" size="sm" />
-      <Button label="Medium (default) — px-4 py-2" type="Primary" size="md" />
-      <Button label="Large — px-6 py-3" type="Primary" size="lg" />
+      <Button label="Default" type="Primary" />
+      <Button label="With icon left" type="Primary" iconLeft={<span>📦</span>} />
+      <Button label="Disabled" type="Primary" state="Disabled" />
     </div>
   ),
 };

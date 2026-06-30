@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export type LogoOrientation = 'horizontal' | 'symbol';
+export type LogoOrientation = 'horizontal' | 'vertical' | 'symbol';
 export type LogoColor = 'original' | 'dark-blue' | 'white';
 
 export type LogoProps = {
@@ -56,6 +56,34 @@ function TextPaths({ fill }: { fill: string }) {
 export function Logo({ orientation = 'horizontal', color = 'original', height = 30, className }: LogoProps) {
   const textFill = color === 'original' ? BLUE : color === 'dark-blue' ? NAVY : 'white';
   const scale = height / 30;
+
+  // Vertical: symbol (45×30) centered above wordmark
+  // Figma size: 87×64 — symbol centered at top, text (90×22) at bottom
+  if (orientation === 'vertical') {
+    const vw = Math.round(87 * scale);
+    const vh = Math.round(64 * scale);
+    return (
+      <svg
+        width={vw}
+        height={vh}
+        viewBox="0 0 87 64"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+        aria-label="Airpals"
+      >
+        {/* Symbol centered horizontally: x offset = (87-45)/2 = 21 */}
+        <g transform="translate(21, 0)">
+          <SymbolSVG color={color} />
+        </g>
+        {/* Wordmark scaled down to fit 87px width — original text spans x55–145 = 90px */}
+        {/* Scale 87/90 ≈ 0.967, translate to y=38, x offset to center */}
+        <g transform="translate(-53.1, 38) scale(0.967)">
+          <TextPaths fill={textFill} />
+        </g>
+      </svg>
+    );
+  }
 
   if (orientation === 'symbol') {
     const w = Math.round(45 * scale);

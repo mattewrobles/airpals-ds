@@ -15,8 +15,6 @@ const meta: Meta<typeof Breadcrumbs> = {
   tags: ['autodocs'],
   argTypes: {
     separator:   { control: 'select', options: ['slash', 'chevron', 'arrow'] },
-    showHomeIcon: { control: 'boolean' },
-    coloredBg:   { control: 'boolean', description: 'Wrap in bg-[#e6f1fd] pill' },
   },
   parameters: {
     design: { type: 'figma', url: FIGMA_URL },
@@ -71,8 +69,6 @@ const defaultItems: BreadcrumbItem[] = [
 export const Slash: Story = { args: { items: defaultItems, separator: 'slash' } };
 export const Chevron: Story = { args: { items: defaultItems, separator: 'chevron' } };
 export const Arrow: Story = { args: { items: defaultItems, separator: 'arrow' } };
-export const WithHomeIcon: Story = { name: 'With Home Icon', args: { items: defaultItems, separator: 'slash', showHomeIcon: true } };
-export const ColoredBackground: Story = { name: 'Colored Background', args: { items: defaultItems, separator: 'slash', coloredBg: true } };
 export const TwoLevels: Story = { name: 'Two Levels', args: { items: [{ label: 'Shipments', href: '#' }, { label: 'Order #1234' }] } };
 
 export const AllVariants: Story = {
@@ -83,9 +79,6 @@ export const AllVariants: Story = {
         { label: 'Slash separator', props: { items: defaultItems, separator: 'slash' as const } },
         { label: 'Chevron separator', props: { items: defaultItems, separator: 'chevron' as const } },
         { label: 'Arrow separator', props: { items: defaultItems, separator: 'arrow' as const } },
-        { label: 'With home icon', props: { items: defaultItems, separator: 'slash' as const, showHomeIcon: true } },
-        { label: 'Colored background', props: { items: defaultItems, separator: 'slash' as const, coloredBg: true } },
-        { label: 'Home icon + colored bg', props: { items: defaultItems, separator: 'chevron' as const, showHomeIcon: true, coloredBg: true } },
         { label: 'Two levels', props: { items: [{ label: 'Shipments', href: '#' }, { label: 'Order #1234' }], separator: 'slash' as const } },
       ].map(({ label, props }) => (
         <div key={label}>

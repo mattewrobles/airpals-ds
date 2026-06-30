@@ -14,8 +14,9 @@ const meta: Meta<typeof RadioButton> = {
   component: RadioButton,
   tags: ['autodocs'],
   argTypes: {
-    state: { control: 'select', options: ['Default', 'Hover', 'Selected', 'Disabled'] },
-    size:  { control: 'select', options: ['16px', '14px'] },
+    checked:  { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    size:     { control: 'select', options: ['16px', '14px'] },
     label: { control: 'text' },
   },
   parameters: {
@@ -57,15 +58,15 @@ export const Usage: Story = {
 /* ── Stories ─────────────────────────────────────────────── */
 
 export const Default: Story = {
-  args: { state: 'Default', size: '16px', label: 'Standard Shipping' },
+  args: { size: '16px', label: 'Standard Shipping' },
 };
 
 export const Selected: Story = {
-  args: { state: 'Selected', size: '16px', label: 'Express Shipping' },
+  args: { checked: true, size: '16px', label: 'Express Shipping' },
 };
 
 export const Disabled: Story = {
-  args: { state: 'Disabled', size: '16px', label: 'Overnight (unavailable)' },
+  args: { disabled: true, size: '16px', label: 'Overnight (unavailable)' },
 };
 
 export const RadioGroup: Story = {
@@ -84,7 +85,10 @@ export const RadioGroup: Story = {
           {options.map(opt => (
             <RadioButton
               key={opt.id}
-              state={selected === opt.id ? 'Selected' : 'Default'}
+              checked={selected === opt.id}
+              onChange={() => setSelected(opt.id)}
+              name="shipping"
+              value={opt.id}
               label={opt.label}
               size="16px"
             />
@@ -102,9 +106,9 @@ export const AllStates: Story = {
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">States — 16px</p>
         <div className="flex flex-col gap-3">
-          {(['Default', 'Hover', 'Selected', 'Disabled'] as const).map(s => (
+          {(['Default', 'Selected', 'Disabled'] as const).map(s => (
             <div key={s} className="flex items-center gap-4">
-              <RadioButton state={s} size="16px" label={s} />
+              <RadioButton checked={s === 'Selected'} disabled={s === 'Disabled'} size="16px" label={s} />
             </div>
           ))}
         </div>
@@ -112,8 +116,8 @@ export const AllStates: Story = {
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-4">Sizes</p>
         <div className="flex flex-col gap-3">
-          <RadioButton state="Selected" size="16px" label="16px size" />
-          <RadioButton state="Selected" size="14px" label="14px size" />
+          <RadioButton checked size="16px" label="16px size" />
+          <RadioButton checked size="14px" label="14px size" />
         </div>
       </div>
 

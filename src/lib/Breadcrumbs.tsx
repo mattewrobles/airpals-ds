@@ -1,60 +1,89 @@
 "use client";
 
 import React from 'react';
+import { ChevronRightIcon, ArrowRightIcon } from '@heroicons/react/solid';
 
-export type BreadcrumbSeparator = 'slash' | 'chevron' | 'arrow';
+// Figma 779-1625 (atom) + 625-2136 (full)
+// Active/last item: Inter SemiBold 16px, #1b306c (text/primary)
+// Inactive items: Inter Regular 16px, #475569 (text/secondary)
+// Separator options: chevron-right (default) | slash "/" | arrow →
+// Gap: 10px between items + separators
+// Optional leading icon (18px) on any item
+
+export type BreadcrumbSeparator = 'chevron' | 'slash' | 'arrow';
 
 export type BreadcrumbItem = {
   label: string;
   href?: string;
+  icon?: React.ReactNode;
 };
 
 export type BreadcrumbsProps = {
   items: BreadcrumbItem[];
   separator?: BreadcrumbSeparator;
-  showHomeIcon?: boolean;
-  coloredBg?: boolean;
+  className?: string;
 };
 
-const HOME_ICON = (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <path d="M1.167 5.833L7 1.167l5.833 4.666V12.25a.583.583 0 01-.583.583H9.333a.583.583 0 01-.583-.583V9.333H5.25v2.917a.583.583 0 01-.583.583H1.75a.583.583 0 01-.583-.583V5.833z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
+const ChevronRight = () => (
+  <ChevronRightIcon style={{ width: 18, height: 18, color: '#94a3b8', flexShrink: 0 }} aria-hidden="true" />
 );
 
-const SEPARATORS: Record<BreadcrumbSeparator, string> = {
-  slash: '/', chevron: '›', arrow: '→',
-};
+const ArrowRight = () => (
+  <ArrowRightIcon style={{ width: 18, height: 18, color: '#94a3b8', flexShrink: 0 }} aria-hidden="true" />
+);
 
-export function Breadcrumbs({ items, separator = 'slash', showHomeIcon = false, coloredBg = false }: BreadcrumbsProps) {
-  const sep = SEPARATORS[separator];
-  const wrapClass = coloredBg
-    ? 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-secondary'
-    : 'inline-flex items-center gap-1.5';
+function Separator({ type }: { type: BreadcrumbSeparator }) {
+  if (type === 'slash') {
+    return (
+      <span
+        aria-hidden="true"
+        style={{ color: '#1b306c', fontSize: 16, fontWeight: 600, lineHeight: '24px', width: 18, textAlign: 'center', flexShrink: 0 }}
+      >
+        /
+      </span>
+    );
+  }
+  if (type === 'arrow') return <ArrowRight />;
+  return <ChevronRight />;
+}
 
+export function Breadcrumbs({ items, separator = 'chevron', className = '' }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Breadcrumb" className="font-body">
-      <ol className={wrapClass}>
-        {showHomeIcon && (
-          <>
-            <li>
-              <a href="#" className="text-ink-tertiary hover:text-ink-primary transition-colors" aria-label="Home">{HOME_ICON}</a>
-            </li>
-            {items.length > 0 && <li aria-hidden="true" className="text-ink-disable text-sm select-none">{sep}</li>}
-          </>
-        )}
+    <nav aria-label="Breadcrumb" className={className}>
+      <ol style={{ display: 'flex', alignItems: 'center', gap: 10, listStyle: 'none', margin: 0, padding: 0 }}>
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
           return (
             <React.Fragment key={i}>
-              <li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                {item.icon && (
+                  <span aria-hidden="true" style={{ display: 'flex', alignItems: 'center', width: 18, height: 18, color: isLast ? '#1b306c' : '#475569', flexShrink: 0 }}>
+                    {item.icon}
+                  </span>
+                )}
                 {isLast ? (
-                  <span className="text-sm font-medium text-ink-primary" aria-current="page">{item.label}</span>
+                  <span
+                    aria-current="page"
+                    style={{ fontSize: 16, fontWeight: 600, lineHeight: '24px', color: '#1b306c', whiteSpace: 'nowrap', fontFamily: 'Inter' }}
+                  >
+                    {item.label}
+                  </span>
                 ) : (
-                  <a href={item.href ?? '#'} className="text-sm text-ink-secondary hover:text-ink-primary transition-colors">{item.label}</a>
+                  <a
+                    href={item.href ?? '#'}
+                    style={{ fontSize: 16, fontWeight: 400, lineHeight: '24px', color: '#475569', whiteSpace: 'nowrap', textDecoration: 'none', fontFamily: 'Inter' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#1b306c')}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#475569')}
+                  >
+                    {item.label}
+                  </a>
                 )}
               </li>
-              {!isLast && <li aria-hidden="true" className="text-ink-disable text-sm select-none">{sep}</li>}
+              {!isLast && (
+                <li aria-hidden="true" style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+                  <Separator type={separator} />
+                </li>
+              )}
             </React.Fragment>
           );
         })}

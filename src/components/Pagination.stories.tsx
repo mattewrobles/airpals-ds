@@ -16,7 +16,6 @@ const meta: Meta<typeof Pagination> = {
   argTypes: {
     totalPages:   { control: { type: 'number', min: 1, max: 50 } },
     currentPage:  { control: { type: 'number', min: 1 } },
-    showFirstLast: { control: 'boolean' },
   },
   parameters: {
     design: { type: 'figma', url: FIGMA_URL },
@@ -60,7 +59,7 @@ export const Default: Story = { args: { totalPages: 10, currentPage: 1 } };
 export const MiddlePage: Story = { name: 'Middle Page', args: { totalPages: 10, currentPage: 5 } };
 export const LastPage: Story = { name: 'Last Page', args: { totalPages: 10, currentPage: 10 } };
 export const FewPages: Story = { name: 'Few Pages', args: { totalPages: 4, currentPage: 2 } };
-export const WithFirstLast: Story = { name: 'With First/Last', args: { totalPages: 20, currentPage: 10, showFirstLast: true } };
+export const ManyPages: Story = { name: 'Many Pages', args: { totalPages: 20, currentPage: 10 } };
 
 export const AllVariants: Story = {
   name: 'All Variants',

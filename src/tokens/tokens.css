@@ -40,6 +40,7 @@
   --primitive-green-50:   #f0fdf4;
   --primitive-green-400:  #4ade80;
   --primitive-green-600:  #16a34a;
+  --primitive-green-700:  #15803d;
   --primitive-green-950:  #052e16;
 
   /* Status — Red */
@@ -53,12 +54,14 @@
   --primitive-amber-50:   #fffbeb;
   --primitive-amber-400:  #fbbf24;
   --primitive-amber-500:  #f59e0b;
+  --primitive-amber-700:  #b45309;
   --primitive-amber-950:  #451a03;
 
   /* Status — Blue */
   --primitive-blue-50:    #eff6ff;
   --primitive-blue-400:   #60a5fa;
   --primitive-blue-500:   #3b82f6;
+  --primitive-blue-600:   #2563eb;
   --primitive-blue-950:   #172554;
 
   /* Base */
@@ -93,10 +96,10 @@
   --color-text-accent:    var(--primitive-brand-blue);
   --color-text-on-accent: var(--primitive-white);
   --color-text-invert:    var(--primitive-white);
-  --color-text-success:   var(--primitive-green-600);
-  --color-text-error:     var(--primitive-red-500);
-  --color-text-warning:   var(--primitive-amber-500);
-  --color-text-info:      var(--primitive-blue-500);
+  --color-text-success:   var(--primitive-green-700);
+  --color-text-error:     var(--primitive-red-600);
+  --color-text-warning:   var(--primitive-amber-700);
+  --color-text-info:      var(--primitive-blue-600);
 
   /* ── Border ─────────────────────────────────────────── */
   --color-border-primary: var(--primitive-slate-200);
@@ -104,8 +107,8 @@
   --color-border-accent:  var(--primitive-brand-blue);
   --color-border-disable: var(--primitive-slate-300);
   --color-border-focus:   var(--primitive-indigo-300);
-  --color-border-error:   var(--primitive-red-500);
-  --color-border-success: var(--primitive-green-600);
+  --color-border-error:   var(--primitive-red-600);
+  --color-border-success: var(--primitive-green-700);
   --color-border-invert:  var(--primitive-white);
 
   /* ── Icon ───────────────────────────────────────────── */
@@ -116,10 +119,10 @@
   --color-icon-accent:     var(--primitive-brand-blue);
   --color-icon-on-accent:  var(--primitive-white);
   --color-icon-invert:     var(--primitive-white);
-  --color-icon-success:    var(--primitive-green-600);
-  --color-icon-error:      var(--primitive-red-500);
-  --color-icon-warning:    var(--primitive-amber-500);
-  --color-icon-info:       var(--primitive-blue-500);
+  --color-icon-success:    var(--primitive-green-700);
+  --color-icon-error:      var(--primitive-red-600);
+  --color-icon-warning:    var(--primitive-amber-700);
+  --color-icon-info:       var(--primitive-blue-600);
 
   /* ── Ilustraciones ──────────────────────────────────── */
   --color-ilus-background: var(--primitive-brand-blue-light);
@@ -247,4 +250,33 @@
   --color-icon-error:     var(--primitive-red-400);
   --color-icon-warning:   var(--primitive-amber-400);
   --color-icon-info:      var(--primitive-blue-400);
+}
+
+/* =========================================================
+   8. MOTION TOKENS
+   — Use these for all transitions/animations in the DS.
+   — Never hardcode durations or easings.
+   ========================================================= */
+
+:root {
+  /* Duration */
+  --motion-fast:   100ms;   /* micro: hover bg, icon color   */
+  --motion-base:   200ms;   /* standard: open/close, reveal  */
+  --motion-slow:   350ms;   /* emphasis: modals, page shifts  */
+
+  /* Easing — Material Motion curves */
+  --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1); /* entering — decelerate */
+  --ease-in:   cubic-bezier(0.4, 0.0, 1, 1);   /* exiting  — accelerate */
+  --ease-std:  cubic-bezier(0.4, 0.0, 0.2, 1); /* standard transitions  */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* playful bounce    */
+}
+
+/* Accessibility — disable all motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

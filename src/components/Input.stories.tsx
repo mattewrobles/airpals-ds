@@ -3,7 +3,7 @@ import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
 import { UsageBlock } from '../shared/UsageBlock';
 import { Input } from '../lib/Input';
-import type { InputState, InputStatus, InputProps } from '../lib/Input';
+import type { InputStatus, InputProps } from '../lib/Input';
 
 /* ── Meta ────────────────────────────────────────────────── */
 
@@ -14,7 +14,6 @@ const meta: Meta<typeof Input> = {
   component: Input,
   tags: ['autodocs'],
   argTypes: {
-    state:       { control: 'select', options: ['Default', 'Hover', 'Focused', 'Disabled'] },
     status:      { control: 'select', options: ['Default', 'Error', 'Success'] },
     label:       { control: 'text' },
     placeholder: { control: 'text' },
@@ -69,11 +68,9 @@ export const Usage: Story = {
 /* ── Stories ─────────────────────────────────────────────── */
 
 export const Default: Story = { args: { label: 'Origin Address', placeholder: 'Start typing…' } };
-export const Hover: Story = { args: { label: 'Origin Address', placeholder: 'Start typing…', state: 'Hover' } };
-export const Focused: Story = { args: { label: 'Recipient', value: '101 Pacific Street, Brooklyn', state: 'Focused' } };
 export const WithError: Story = { args: { label: 'Weight (lbs)', value: '0', status: 'Error', helperText: 'Weight must be greater than 0' } };
 export const WithSuccess: Story = { args: { label: 'ZIP Code', value: '11201', status: 'Success', helperText: 'Brooklyn, NY' } };
-export const Disabled: Story = { args: { label: 'Account Number', value: '••••••••', state: 'Disabled' } };
+export const Disabled: Story = { args: { label: 'Account Number', value: '••••••••', disabled: true } };
 
 export const AllStates: Story = {
   name: 'All States',
@@ -81,9 +78,8 @@ export const AllStates: Story = {
     <div className="bg-white p-8 font-body space-y-8">
       <div className="grid gap-6 max-w-sm">
         <Input label="Default" placeholder="Origin address…" />
-        <Input label="Hover"   placeholder="Origin address…" state="Hover" />
-        <Input label="Focused" value="101 Pacific Street, Brooklyn" state="Focused" />
-        <Input label="Disabled" value="••••••••" state="Disabled" />
+        <Input label="Focused" value="101 Pacific Street, Brooklyn" />
+        <Input label="Disabled" value="••••••••" disabled />
         <Input label="Error"   value="0" status="Error"   helperText="Weight must be greater than 0" />
         <Input label="Success" value="11201" status="Success" helperText="Brooklyn, NY" />
       </div>

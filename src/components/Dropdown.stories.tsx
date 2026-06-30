@@ -14,8 +14,6 @@ const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
   tags: ['autodocs'],
   argTypes: {
-    state:    { control: 'select', options: ['Default', 'Hover', 'Focused', 'Disabled'] },
-    expanded: { control: 'boolean' },
     label:    { control: 'text' },
     placeholder: { control: 'text' },
   },
@@ -65,24 +63,25 @@ export const Usage: Story = {
 
 export const Default: Story = { args: { placeholder: 'Select an option' } };
 export const WithLabel: Story = { name: 'With Label', args: { label: 'Carrier', placeholder: 'Select carrier' } };
-export const Expanded: Story = { args: { label: 'Carrier', expanded: true, options: ['FedEx', 'UPS', 'USPS', 'Same-Day'] } };
-export const Focused: Story = { args: { label: 'Carrier', state: 'Focused' } };
-export const Disabled: Story = { args: { label: 'Carrier', state: 'Disabled', placeholder: 'Select carrier' } };
+export const WithOptions: Story = { name: 'With Options', args: { label: 'Carrier', options: ['FedEx', 'UPS', 'USPS', 'Same-Day'] } };
+export const Disabled: Story = { args: { label: 'Carrier', disabled: true, placeholder: 'Select carrier' } };
 
 export const AllVariants: Story = {
   name: 'All Variants',
   render: () => (
     <div className="bg-white p-8 font-body space-y-8">
       <div className="grid grid-cols-2 gap-8">
-        {(['Default', 'Hover', 'Focused', 'Disabled'] as const).map((state) => (
-          <div key={state}>
-            <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">{state}</p>
-            <Dropdown label="Carrier" placeholder="Select carrier" state={state} />
-          </div>
-        ))}
         <div>
-          <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Expanded</p>
-          <Dropdown label="Carrier" expanded={true} options={['FedEx', 'UPS', 'USPS', 'Same-Day']} />
+          <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Default</p>
+          <Dropdown label="Carrier" placeholder="Select carrier" />
+        </div>
+        <div>
+          <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Disabled</p>
+          <Dropdown label="Carrier" placeholder="Select carrier" disabled />
+        </div>
+        <div>
+          <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">With value</p>
+          <Dropdown label="Carrier" defaultValue="FedEx" options={['FedEx', 'UPS', 'USPS', 'Same-Day']} />
         </div>
         <div>
           <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">No Label</p>
