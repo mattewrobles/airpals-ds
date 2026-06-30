@@ -159,6 +159,13 @@ Add to `next.config.ts`:
 const nextConfig = {
   transpilePackages: ['airpals-ds'],
 };
+```
+
+Then in your `globals.css`:
+
+```css
+@import "@fontsource/inter/400.css";
+@import "@fontsource/lexend/400.css";
 @import "airpals-ds/style.css";
 
 @tailwind base;
@@ -170,27 +177,69 @@ const nextConfig = {
 
 ## Components
 
+38 components across 7 categories.
+
+### Form & Input
 | Component | Description |
 |-----------|-------------|
-| `Button` | 6 types · 3 sizes |
-| `Alert` | 5 use cases (error / warning / success / info / alert) · border prop |
-| `Badge` | 9 colors · 3 variants · 2 shapes |
-| `Input` | 4 states · Error / Success status |
+| `Button` | 6 types · 3 sizes · forwardRef |
+| `ButtonDouble` | Two-action button for confirm/cancel patterns |
+| `IconButton` | Icon-only button · 5 sizes · tooltip support |
+| `Input` | 4 states · Error / Success status · controlled |
 | `Textarea` | 4 states · helper text · character counter |
-| `Dropdown` | Controlled select with ARIA listbox |
+| `Dropdown` | Controlled select · ARIA listbox |
 | `Checkbox` | 4 states · On / Off / Indeterminate |
 | `Radio` / `RadioButton` | 4 states · 2 sizes |
 | `Toggle` | 3 styles (Standard / Navy / Subtle) |
 | `ToggleWithText` | Default and compact sizes |
+| `Stepper` | Numeric input +/− · min/max/step · form-compatible |
+| `Rating` | 1–5 stars · read-only or interactive · 2 sizes |
+
+### Data Display
+| Component | Description |
+|-----------|-------------|
+| `Badge` | 9 colors · 3 variants · 2 shapes |
 | `Tag` | 4 states · closable |
 | `Avatar` | 5 sizes · 4 corner styles · online badge |
 | `AvatarGroup` | Overlapping stack with overflow counter |
-| `SplitButton` | 6 types · 4 sizes · dropdown menu |
-| `Breadcrumbs` | 3 separator styles · home icon |
-| `Pagination` | Smart page range · first/last controls |
-| `ClickableLink` | Blue / Dark Blue · external link |
+| `DataCard` | Metric card · label + value · trend badge + sparkline slot |
+| `InfoCard` | Feature card · image + title + CTA |
+| `Table` | Sortable · checkboxes · badge/avatar/text cell types |
+| `TableHeader` | 2 sizes · 6 column types |
+| `TableCell` | 7 types × 4 states |
+
+### Feedback & Status
+| Component | Description |
+|-----------|-------------|
+| `Alert` | 5 use cases (error / warning / success / info / alert) · border prop |
+| `FeedbackDialog` | 1–5 star feedback modal · optional comment textarea |
+| `Skeleton` | Loading placeholder for text lines |
+| `SkeletonCard` | Loading placeholder for cards |
+| `SkeletonTableRow` | Loading placeholder for table rows |
+
+### Navigation
+| Component | Description |
+|-----------|-------------|
 | `Navbar` | Desktop + mobile (hamburger) |
 | `Footer` | Desktop + mobile |
+| `Sidebar` | Collapsible nav · icon + label items · active state |
+| `Breadcrumbs` | 3 separator styles · home icon |
+| `SplitButton` | 6 types · 4 sizes · dropdown menu |
+| `Pagination` | Smart page range · first/last controls |
+| `ProgressStep` | Labeled step indicator · active/inactive · icon slot |
+
+### Disclosure
+| Component | Description |
+|-----------|-------------|
+| `Accordion` | Small/Large sizes · icon · controlled + uncontrolled · disabled |
+| `AccordionGroup` | Manages open/close across multiple Accordion items |
+| `InfoSection` | Two-column marketing layout · illustration + InfoCard |
+
+### Utilities
+| Component | Description |
+|-----------|-------------|
+| `Divider` | Horizontal rule · optional label |
+| `ClickableLink` | Blue / Dark Blue · external link |
 | `Icon` | Heroicons v1 — outline and solid |
 | `Logo` | Airpals wordmark — light and dark |
 
@@ -217,6 +266,49 @@ Tokens respond automatically to `.dark` class for dark mode. Override any token 
 ```
 
 Full token reference available in the Storybook → **Foundations / Tokens Reference**.
+
+---
+
+## Motion tokens
+
+All DS components use a shared set of motion tokens for consistent animation timing. These are defined in `tokens.css` and available globally when you import `airpals-ds/style.css`.
+
+### Duration tokens
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--motion-fast` | `100ms` | Micro-interactions, tooltip fade, icon swap |
+| `--motion-base` | `200ms` | Default transitions — hover states, toggles, badges |
+| `--motion-slow` | `350ms` | Larger transitions — modals, drawers, accordions |
+
+### Easing tokens (Material Motion)
+
+| Token | Curve | Use |
+|-------|-------|-----|
+| `--ease-out` | `cubic-bezier(0, 0, 0.2, 1)` | Elements entering the screen |
+| `--ease-in` | `cubic-bezier(0.4, 0, 1, 1)` | Elements leaving the screen |
+| `--ease-std` | `cubic-bezier(0.4, 0, 0.2, 1)` | Elements moving within the screen |
+| `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Playful spring — toggles, badge pop |
+
+### Usage in your own components
+
+```css
+.my-component {
+  transition: opacity var(--motion-base) var(--ease-out),
+              transform var(--motion-base) var(--ease-out);
+}
+```
+
+```css
+/* Respects prefers-reduced-motion — already handled globally in tokens.css */
+@media (prefers-reduced-motion: reduce) {
+  .my-component {
+    transition: none;
+  }
+}
+```
+
+The global `prefers-reduced-motion` rule in `tokens.css` sets all `--motion-*` tokens to `0ms` automatically — you don't need to handle it per-component.
 
 ---
 
