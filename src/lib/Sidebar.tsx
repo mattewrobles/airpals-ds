@@ -289,7 +289,7 @@ export function Sidebar({
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9, alignItems: 'center', width: '100%' }}>
             <div style={{ height: 1, backgroundColor: '#e2e8f0', width: '100%' }} />
             <Avatar size="sm" variant="Initials" initials={userInitials} corner="Full" />
-            <a href="#" style={{ fontSize: 10, fontWeight: 500, fontFamily: 'Lexend', color: '#0043ff', textDecoration: 'none', textAlign: 'center' }}>Sign out</a>
+            <a href="#" style={{ fontSize: 10, fontWeight: 500, fontFamily: 'Inter', color: '#0043ff', textDecoration: 'none', textAlign: 'center' }}>Sign out</a>
           </div>
         </>
       )}

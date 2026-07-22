@@ -41,7 +41,7 @@ export function Table({ columns, rows, className = '', style }: TableProps) {
     <div
       className={className}
       style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--color-bg-primary)',
         borderRadius: 8,
         boxShadow: '0px 1px 2px rgba(0,0,0,0.05)',
         display: 'flex',
@@ -50,7 +50,7 @@ export function Table({ columns, rows, className = '', style }: TableProps) {
       }}
     >
       {columns.map((col) => {
-        const isNumber = col.type === 'text' && col.align === 'right';
+        const isNumber = col.type === 'number';
         return (
           <div
             key={col.key}
@@ -79,7 +79,7 @@ export function Table({ columns, rows, className = '', style }: TableProps) {
               return (
                 <React.Fragment key={i}>
                   {/* Divider */}
-                  <div style={{ height: 1, backgroundColor: '#e5e7eb', flexShrink: 0 }} />
+                  <div style={{ height: 1, backgroundColor: 'var(--color-border-primary)', flexShrink: 0 }} />
                   {/* ponytail: wrapper gives equal row height; TableCell fills it */}
                   <div style={{ flex: '1 0 0', minHeight: 48, display: 'flex', alignItems: 'stretch' }}>
                     <TableCell

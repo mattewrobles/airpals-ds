@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 export type CheckboxSize = 'md' | 'sm';
 
@@ -60,6 +60,11 @@ export function Checkbox({
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Set DOM indeterminate property — React doesn't handle this via props
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.indeterminate = indeterminate;
+  }, [indeterminate]);
 
   const isActive = checked || indeterminate;
   const bg = getBg(isActive, hovered, focused, disabled);

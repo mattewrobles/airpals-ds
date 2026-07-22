@@ -49,26 +49,27 @@ const WRAPPER: Record<InputStatus, string> = {
   Default: [
     'border border-line-primary bg-surface-primary',
     'hover:border-line-accent',
-    'focus-within:[border-width:3px] focus-within:border-[#adbcf2]',
+    'focus-within:[border-width:3px] focus-within:border-line-focus',
   ].join(' '),
   Error: [
-    'border border-[#dc2626] bg-surface-primary',
-    'hover:border-[#dc2626]',
+    'border border-line-error bg-surface-primary',
+    'hover:border-line-error',
     'focus-within:[border-width:3px] focus-within:border-[#fecaca]',
   ].join(' '),
   Success: [
-    'border border-[#15803d] bg-surface-primary',
-    'hover:border-[#15803d]',
+    'border border-line-success bg-surface-primary',
+    'hover:border-line-success',
     'focus-within:[border-width:3px] focus-within:border-[#82e6ac]',
   ].join(' '),
 };
 
-const DISABLED_WRAPPER = 'border border-surface-disable bg-surface-disable cursor-not-allowed';
+// border-line-disable (not border-surface-disable — surface is a background token)
+const DISABLED_WRAPPER = 'border border-line-disable bg-surface-disable cursor-not-allowed';
 
 const HELPER_COLOR: Record<InputStatus, string> = {
   Default: 'text-ink-secondary',
-  Error:   'text-[#dc2626]',
-  Success: 'text-[#15803d]',
+  Error:   'text-ink-error',
+  Success: 'text-ink-success',
 };
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -127,8 +128,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             name={name}
             type={type}
             disabled={disabled}
-            value={value}
-            defaultValue={defaultValue}
+            {...(value !== undefined ? { value } : { defaultValue })}
             onChange={e => onChange?.(e.target.value)}
             placeholder={placeholder}
             aria-label={ariaLabel}

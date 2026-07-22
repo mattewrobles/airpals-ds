@@ -90,7 +90,7 @@ export function ToggleWithText({
         <button
           type="button"
           onClick={() => handle(false)}
-          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-ink-primary ${!isOn ? 'bg-surface-secondary' : 'bg-transparent hover:bg-surface-secondary/50'}`}
+          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-ink-primary ${!isOn ? 'bg-surface-secondary' : 'bg-transparent hover:bg-surface-tertiary'}`}
         >
           <span className="shrink-0 text-ink-primary">{iconLeft}</span>
           <span className="text-sm font-medium leading-[22px] whitespace-nowrap">{labelLeft}</span>
@@ -98,7 +98,7 @@ export function ToggleWithText({
         <button
           type="button"
           onClick={() => handle(true)}
-          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-ink-primary ${isOn ? 'bg-surface-secondary' : 'bg-transparent hover:bg-surface-secondary/50'}`}
+          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-ink-primary ${isOn ? 'bg-surface-secondary' : 'bg-transparent hover:bg-surface-tertiary'}`}
         >
           <span className="shrink-0 text-ink-primary">{iconRight}</span>
           <span className="text-sm font-medium leading-[22px] whitespace-nowrap">{labelRight}</span>

@@ -60,9 +60,9 @@ export function Stepper({
 
   return (
     <div
-      className={`group flex items-center justify-between bg-[#f3f3f5] rounded-[6px] w-[127px] h-[27px] ${className}`}
+      className={`flex items-center justify-between bg-[#f3f3f5] rounded-[6px] w-[127px] h-[27px] ${className}`}
     >
-      {/* Minus — default: px-[9px], hover: full-height pill left */}
+      {/* Minus — hover applies to THIS button only (not group) */}
       <button
         type="button"
         onClick={decrement}
@@ -70,8 +70,7 @@ export function Stepper({
         disabled={!canDec}
         className={[
           'flex items-center justify-center h-full text-ink-primary transition-colors duration-150 rounded-l-[6px]',
-          'px-[9px]',
-          'group-hover:bg-[#e2e8f0] group-hover:px-[10px] group-hover:hover:bg-[#cbd5e1]',
+          'px-[9px] hover:bg-[#e2e8f0] hover:px-[10px]',
           !canDec ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer',
         ].join(' ')}
       >
@@ -83,7 +82,7 @@ export function Stepper({
         {value}
       </span>
 
-      {/* Plus — default: px-[9px], hover: full-height pill right */}
+      {/* Plus — hover applies to THIS button only (not group) */}
       <button
         type="button"
         onClick={increment}
@@ -91,8 +90,7 @@ export function Stepper({
         disabled={!canInc}
         className={[
           'flex items-center justify-center h-full text-ink-primary transition-colors duration-150 rounded-r-[6px]',
-          'px-[9px]',
-          'group-hover:bg-[#e2e8f0] group-hover:px-[10px] group-hover:hover:bg-[#cbd5e1]',
+          'px-[9px] hover:bg-[#e2e8f0] hover:px-[10px]',
           !canInc ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer',
         ].join(' ')}
       >

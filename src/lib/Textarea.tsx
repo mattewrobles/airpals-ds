@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export type TextareaProps = {
   label?: string;
@@ -39,6 +39,11 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ) => {
     // Track char count for counter display
     const [charCount, setCharCount] = useState((defaultValue ?? value ?? '').length);
+
+    // Sync charCount when controlled value changes externally
+    useEffect(() => {
+      if (value !== undefined) setCharCount(value.length);
+    }, [value]);
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setCharCount(e.target.value.length);
@@ -80,8 +85,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           placeholder={placeholder}
           rows={rows}
           maxLength={maxLength}
-          value={value}
-          defaultValue={defaultValue}
+          {...(value !== undefined ? { value } : { defaultValue })}
           onChange={handleChange}
           aria-label={ariaLabel}
           aria-describedby={ariaDescribedBy ?? helperId}
