@@ -77,6 +77,24 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.5.1',
+    date: '2026-07-22',
+    summary: '8 bug fixes · token sync · TypeScript fix',
+    changes: [
+      { type: 'fixed',   text: 'Tag: wrong brand blue rgba(55,88,249) → rgba(0,67,255) in Default and Focus states' },
+      { type: 'fixed',   text: 'Textarea: controlled/uncontrolled conflict (value + defaultValue passed simultaneously); charCount goes stale when external value resets' },
+      { type: 'fixed',   text: 'Input: border-surface-disable wrong semantic token (surface is background, not border) → border-line-disable; hardcoded border/helper colors → semantic tokens; controlled/uncontrolled conflict' },
+      { type: 'fixed',   text: 'Table: isNumber detection was col.type === "text" && align === "right" → now correctly col.type === "number"; hardcoded #ffffff and #e5e7eb → CSS vars' },
+      { type: 'fixed',   text: 'Checkbox: .indeterminate DOM property never set — CSS :indeterminate selector never matched → useEffect sets it imperatively' },
+      { type: 'fixed',   text: 'Stepper: group-hover highlighted both buttons simultaneously → individual hover: per button' },
+      { type: 'fixed',   text: 'Sidebar: fontFamily Lexend on "Sign out" link in collapsed state → Inter' },
+      { type: 'fixed',   text: 'ToggleWithText: bg-surface-secondary/50 opacity modifier broken in Tailwind v3 with CSS var hex values → bg-surface-tertiary' },
+      { type: 'updated', text: 'tokens.css: synced with Figma Semantics — new primitives (gray-50/150/400/600/800, brand extended), corrected background/tertiary, background/disabled, text/disabled, border/error, border/success values; new semantic tokens: critical, ship, interactive-hover/pressed, overlay, backdrop, surbase-dashboard, on-* variants' },
+      { type: 'updated', text: 'tailwind.config.js: surface/ink/line/icon color objects and safelist extended with all new semantic tokens' },
+      { type: 'fixed',   text: 'TableCellType: added "number" to union — TypeScript TS2367 error on col.type === "number" comparison' },
+    ],
+  },
+  {
     version: 'v0.5.0',
     date: '2026-06-29',
     summary: '17 new components · full Storybook docs · motion tokens',
