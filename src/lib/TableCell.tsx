@@ -8,7 +8,7 @@ import { ClickableLink } from './ClickableLink';
 // Types: text, text-subtext, link, badge, more, toggle, empty
 // States: default (transparent), hover (#f3f4f6), selected (#e6f1fd), disabled (opacity 0.5)
 
-export type TableCellType = 'text' | 'text-subtext' | 'link' | 'badge' | 'more' | 'toggle' | 'empty';
+export type TableCellType = 'text' | 'text-subtext' | 'link' | 'badge' | 'more' | 'toggle' | 'empty' | 'number';
 export type TableCellState = 'default' | 'hover' | 'selected' | 'disabled';
 
 export type TableCellBadge = {
