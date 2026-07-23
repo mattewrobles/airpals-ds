@@ -195,14 +195,13 @@ function TrustBar({ compact = false, soc2BadgeUrl }: { compact?: boolean; soc2Ba
 
 function LinksColumn({ links, bold }: { links: string[]; bold?: Set<string> }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, flexShrink: 0 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, minWidth: 0, flex: 1 }}>
       {links.map(link => (
         <a
           key={link} href="#"
           style={{
             ...linkStyle,
             fontWeight: bold?.has(link) ? 700 : 500,
-            whiteSpace: 'nowrap',
           }}
           onMouseEnter={e => (e.currentTarget.style.opacity = '0.75')}
           onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
@@ -260,7 +259,7 @@ export function Footer({ mobile: mobileProp = false, blogEntries = DEFAULT_BLOG_
         </div>
 
         {/* Navigation: newsletter+blog | links */}
-        <div style={{ display: 'flex', gap: 120, alignItems: 'flex-start', width: '100%' }}>
+        <div style={{ display: 'flex', gap: 64, alignItems: 'flex-start', width: '100%' }}>
           {/* Left: newsletter + blog */}
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <NewsletterForm />
@@ -270,7 +269,7 @@ export function Footer({ mobile: mobileProp = false, blogEntries = DEFAULT_BLOG_
           </div>
 
           {/* Right: 3 link columns */}
-          <div style={{ width: 640, display: 'flex', gap: 64, alignItems: 'flex-start', flexShrink: 0 }}>
+          <div style={{ flex: '0 1 640px', display: 'flex', gap: 48, alignItems: 'flex-start', minWidth: 0 }}>
             <LinksColumn links={LINKS_COL1} bold={boldLinks} />
             <LinksColumn links={LINKS_COL2} bold={boldLinks} />
             <LinksColumn links={LINKS_COL3} bold={boldLinks} />
