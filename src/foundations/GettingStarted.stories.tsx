@@ -91,7 +91,7 @@ export const Docs: Story = {
       <div>
         <div className="flex items-center gap-3 mb-2">
           <h1 className="font-heading text-3xl font-semibold text-brand-navy dark:text-slate-50">Getting Started</h1>
-          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.2.2</span>
+          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.5.6</span>
         </div>
         <p className="text-sm text-slate-500 leading-6">
           Airpals Design System — React components built with Tailwind CSS.

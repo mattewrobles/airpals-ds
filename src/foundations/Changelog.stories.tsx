@@ -77,6 +77,57 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.5.6',
+    date: '2026-07-23',
+    summary: 'Footer responsive fix',
+    changes: [
+      { type: 'fixed', text: 'Footer: third links column clipping at sub-1280px viewports — removed flexShrink:0, changed to flex:0 1 640px, LinksColumn now uses flex:1 + minWidth:0; gap between newsletter and links reduced from 120 to 64' },
+    ],
+  },
+  {
+    version: 'v0.5.5',
+    date: '2026-07-23',
+    summary: 'SkeletonTableRow mobile',
+    changes: [
+      { type: 'fixed', text: 'SkeletonTableRow: row overflows viewport on mobile — capped at 3 visible columns via useIsMobile, added width:100% to container' },
+    ],
+  },
+  {
+    version: 'v0.5.4',
+    date: '2026-07-23',
+    summary: 'Skeleton + FeedbackDialog fluid width',
+    changes: [
+      { type: 'fixed', text: 'SkeletonCard: hardcoded width:240 → width:100%, maxWidth:240' },
+      { type: 'fixed', text: 'SkeletonTableRow: cells used flex:1 0 0 (flex-shrink:0) causing overflow — changed to flex:1 1 0 + minWidth:0; overflow:hidden on row container' },
+      { type: 'fixed', text: 'FeedbackDialog: hardcoded width:420 → width:100%, maxWidth:420' },
+    ],
+  },
+  {
+    version: 'v0.5.3',
+    date: '2026-07-23',
+    summary: 'DataCard mobile layout + Sidebar overflow',
+    changes: [
+      { type: 'fixed', text: 'DataCard Vertical/Horizontal: text, content and stepper overlapping on mobile — dedicated column layout via useIsMobile (thumbnail + title row on top, data + stepper row below)' },
+      { type: 'fixed', text: 'Sidebar collapsed: skeleton bars overflowing the 66px collapsed container — overflow:hidden + flexShrink:0 added to containerStyle' },
+    ],
+  },
+  {
+    version: 'v0.5.2',
+    date: '2026-07-23',
+    summary: 'Responsive components audit — all components adapt to mobile viewport',
+    changes: [
+      { type: 'new',     text: 'useIsMobile hook — SSR-safe window.matchMedia at 768px breakpoint, exported from package root' },
+      { type: 'updated', text: 'Navbar: auto-collapses to mobile layout on ≤768px; mobile width 375 → width:100%' },
+      { type: 'updated', text: 'Footer: auto-switches to mobile layout on ≤768px; mobile width 390 → width:100%' },
+      { type: 'updated', text: 'Sidebar: auto-collapses on mobile via useIsMobile' },
+      { type: 'updated', text: 'Table: wrapped in overflow-x:auto scroll container with minWidth:max-content on inner div' },
+      { type: 'updated', text: 'InfoCard: fixed width:385 → width:100%, maxWidth:385' },
+      { type: 'updated', text: 'InfoSection: fluid layout, column flip on mobile (card first, illustration second), gap 127→32' },
+      { type: 'updated', text: 'Breadcrumbs: flexWrap:wrap on <ol>, removed whiteSpace:nowrap from links' },
+      { type: 'new',     text: 'Typography story: Medium weight (500) variants documented for body-lg, body-md, body-sm, caption' },
+    ],
+  },
+  {
     version: 'v0.5.1',
     date: '2026-07-22',
     summary: '8 bug fixes · token sync · TypeScript fix',
