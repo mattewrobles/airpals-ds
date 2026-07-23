@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { useIsMobile } from './hooks/useIsMobile';
 
 // Skeleton — loading placeholder with shimmer animation
 // Shapes: rect (default), circle, text, card
@@ -126,13 +127,15 @@ export function SkeletonCard({ className = '' }: { className?: string }) {
 // SkeletonTableRow — one loading row matching Table layout
 export function SkeletonTableRow({ columns = 5, className = '' }: { columns?: number; className?: string }) {
   React.useEffect(() => { injectShimmer(); }, []);
+  const isMobile = useIsMobile();
+  const visibleCols = isMobile ? Math.min(columns, 3) : columns;
   return (
     <div
       className={className}
-      style={{ display: 'flex', alignItems: 'center', gap: 0, borderBottom: '1px solid #e5e7eb', overflow: 'hidden' }}
+      style={{ display: 'flex', alignItems: 'center', gap: 0, borderBottom: '1px solid #e5e7eb', width: '100%', overflow: 'hidden' }}
       aria-hidden="true"
     >
-      {Array.from({ length: columns }).map((_, i) => (
+      {Array.from({ length: visibleCols }).map((_, i) => (
         <div key={i} style={{ flex: '1 1 0', minWidth: 0, padding: '10px 12px' }}>
           <Skeleton shape="rect" height={16} width={i === 0 ? '60%' : '80%'} />
         </div>
