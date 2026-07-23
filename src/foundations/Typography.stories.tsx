@@ -22,12 +22,12 @@ const meta: Meta = {
         component: [
           '## Airpals Type Scale',
           '',
-          'Two fonts: **Lexend SemiBold** (h1–h4) · **Inter Regular / SemiBold** (subheading ×2, body, caption).',
+          'Two fonts: **Lexend SemiBold** (h1–h4) · **Inter Regular / Medium / SemiBold** (subheading ×2, body, caption).',
           '',
           'Figma Variables collection: `Breakpoints` → modes `Desktop` / `Mobile`.',
           'Each `font-size` property is bound to a variable (e.g. `h1 · text-5xl/size`).',
           '',
-          '> **Medium weight removed.** Only Regular + SemiBold. No perceptual diff at small B2B UI sizes.',
+          '> **Three weights:** Regular (400) · Medium (500) · SemiBold (600). Body & Caption only — headings are always SemiBold.',
         ].join('\n'),
       },
     },
@@ -105,6 +105,13 @@ const typeScale: TypeSpec[] = [
     sample: 'Track your shipments with full visibility across all carriers.',
   },
   {
+    style: 'body-lg · Medium', figmaVar: 'body-lg · text-lg/size', group: 'Body Large',
+    twClass: 'text-lg font-medium', twMobileClass: 'text-base font-medium',
+    size: '18px', mobileSize: '16px', lh: '28px', mobileLH: '24px',
+    weight: 'Medium', font: 'body',
+    sample: 'Track your shipments with full visibility across all carriers.',
+  },
+  {
     style: 'body-lg · SemiBold', figmaVar: 'body-lg · text-lg/size', group: 'Body Large',
     twClass: 'text-lg font-semibold', twMobileClass: 'text-base font-semibold',
     size: '18px', mobileSize: '16px', lh: '28px', mobileLH: '24px',
@@ -117,6 +124,13 @@ const typeScale: TypeSpec[] = [
     twClass: 'text-base font-normal', twMobileClass: 'text-sm font-normal',
     size: '16px', mobileSize: '14px', lh: '24px', mobileLH: '20px',
     weight: 'Regular', font: 'body',
+    sample: 'Origin address, suite 400, Brooklyn NY 11201',
+  },
+  {
+    style: 'body-md · Medium', figmaVar: 'body-md · text-base/size', group: 'Body Medium',
+    twClass: 'text-base font-medium', twMobileClass: 'text-sm font-medium',
+    size: '16px', mobileSize: '14px', lh: '24px', mobileLH: '20px',
+    weight: 'Medium', font: 'body',
     sample: 'Origin address, suite 400, Brooklyn NY 11201',
   },
   {
@@ -135,6 +149,13 @@ const typeScale: TypeSpec[] = [
     sample: 'Estimated delivery: Thursday, May 15 by 8pm',
   },
   {
+    style: 'body-sm · Medium', figmaVar: 'body-sm · text-sm/size', group: 'Body Small',
+    twClass: 'text-sm font-medium', twMobileClass: 'text-xs font-medium',
+    size: '14px', mobileSize: '12px', lh: '20px', mobileLH: '18px',
+    weight: 'Medium', font: 'body',
+    sample: 'Estimated delivery: Thursday, May 15 by 8pm',
+  },
+  {
     style: 'body-sm · SemiBold', figmaVar: 'body-sm · text-sm/size', group: 'Body Small',
     twClass: 'text-sm font-semibold', twMobileClass: 'text-xs font-semibold',
     size: '14px', mobileSize: '12px', lh: '20px', mobileLH: '18px',
@@ -147,6 +168,13 @@ const typeScale: TypeSpec[] = [
     twClass: 'text-xs font-normal', twMobileClass: 'text-[11px] font-normal',
     size: '12px', mobileSize: '11px', lh: '16px', mobileLH: '15px',
     weight: 'Regular', font: 'body',
+    sample: 'Created May 14, 2026 at 9:41 AM',
+  },
+  {
+    style: 'caption · Medium', figmaVar: 'caption · text-xs/size', group: 'Caption',
+    twClass: 'text-xs font-medium', twMobileClass: 'text-[11px] font-medium',
+    size: '12px', mobileSize: '11px', lh: '16px', mobileLH: '15px',
+    weight: 'Medium', font: 'body',
     sample: 'Created May 14, 2026 at 9:41 AM',
   },
   {
@@ -252,10 +280,10 @@ export const TypeScale: Story = {
           {[
             { style: 'h1 – h4',        use: 'Page titles, modal headers, section titles. Lexend SemiBold always.' },
             { style: 'subheading',      use: 'Panel section titles, card headers. Regular = descriptive labels, SemiBold = interactive or emphasized.' },
-            { style: 'body-lg',         use: 'Primary body copy — descriptions, onboarding, empty states.' },
-            { style: 'body-md',         use: 'Default UI — table cells, form labels, list items. Most used.' },
-            { style: 'body-sm',         use: 'Secondary info — helper text, metadata, timestamps, tooltips.' },
-            { style: 'caption',         use: 'Labels, tags, all-caps status pills, fine print.' },
+            { style: 'body-lg',         use: 'Primary body copy — descriptions, onboarding, empty states. Medium for important labels.' },
+            { style: 'body-md',         use: 'Default UI — table cells, form labels, list items. Most used. Medium for data values and secondary labels.' },
+            { style: 'body-sm',         use: 'Secondary info — helper text, metadata, timestamps, tooltips. Medium for small labels that need differentiation.' },
+            { style: 'caption',         use: 'Labels, tags, all-caps status pills, fine print. Medium for badge text and inline tags.' },
           ].map((row) => (
             <div key={row.style} className="grid grid-cols-[180px_1fr] px-4 py-2.5 border-t border-slate-200">
               <span className="text-sm font-semibold text-[#1b306c] font-mono">{row.style}</span>
