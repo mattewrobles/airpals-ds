@@ -92,6 +92,9 @@ const releases: Release[] = [
       { type: 'updated', text: 'tokens.css: synced with Figma Semantics — new primitives (gray-50/150/400/600/800, brand extended), corrected background/tertiary, background/disabled, text/disabled, border/error, border/success values; new semantic tokens: critical, ship, interactive-hover/pressed, overlay, backdrop, surbase-dashboard, on-* variants' },
       { type: 'updated', text: 'tailwind.config.js: surface/ink/line/icon color objects and safelist extended with all new semantic tokens' },
       { type: 'fixed',   text: 'TableCellType: added "number" to union — TypeScript TS2367 error on col.type === "number" comparison' },
+      { type: 'updated', text: 'tokens.css typography: desktop scale line-heights corrected to exact Figma values (h1: 1.083, h3: 1.333, h4: 1.333, body-lg: 1.556, body-md: 1.5, body-sm: 1.429, caption: 1.333)' },
+      { type: 'new',     text: 'tokens.css: medium (500) and semibold (600) weight variants for body-lg, body-md, body-sm — --type-lg-weight-md/sb, --type-md-weight-md/sb, --type-sm-weight-md/sb, --type-xs-weight-md' },
+      { type: 'new',     text: 'tokens.css: full mobile type scale — --type-*-m-size / --type-*-m-lh for h1–h4, subheading, body-lg/md/sm, caption. Auto-applied via @media (max-width: 768px)' },
     ],
   },
   {

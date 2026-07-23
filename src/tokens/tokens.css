@@ -233,17 +233,45 @@
    ========================================================= */
 
 :root {
-  --type-h1-size:   3rem;      --type-h1-lh:   1.2;  --type-h1-weight:  600;
-  --type-h2-size:   1.875rem;  --type-h2-lh:   1.3;  --type-h2-weight:  600;
-  --type-h3-size:   1.5rem;    --type-h3-lh:   1.35; --type-h3-weight:  600;
-  --type-h4-size:   1.125rem;  --type-h4-lh:   1.4;  --type-h4-weight:  600;
-  --type-sub-size:  1.25rem;   --type-sub-lh:  1.5;  --type-sub-weight: 500;
-  --type-lg-size:   1.125rem;  --type-lg-lh:   1.6;  --type-lg-weight: 400; --type-lg-weight-md: 500; --type-lg-weight-sb: 600;
-  --type-md-size:   1rem;      --type-md-lh:   1.6;  --type-md-weight: 400; --type-md-weight-md: 500; --type-md-weight-sb: 600;
-  --type-sm-size:   0.875rem;  --type-sm-lh:   1.5;  --type-sm-weight: 400; --type-sm-weight-md: 500; --type-sm-weight-sb: 600;
-  --type-xs-size:   0.75rem;   --type-xs-lh:   1.4;  --type-xs-weight: 400; --type-xs-weight-md: 500;
+  /* Desktop type scale — synced from Figma text styles 2026-07-22 */
+  --type-h1-size:   3rem;      --type-h1-lh:   1.083; --type-h1-weight:  600;
+  --type-h2-size:   1.875rem;  --type-h2-lh:   1.2;   --type-h2-weight:  600;
+  --type-h3-size:   1.5rem;    --type-h3-lh:   1.333; --type-h3-weight:  600;
+  --type-h4-size:   1.125rem;  --type-h4-lh:   1.333; --type-h4-weight:  600;
+  --type-sub-size:  1.25rem;   --type-sub-lh:  1.4;   --type-sub-weight: 400; --type-sub-weight-sb: 600;
+  --type-lg-size:   1.125rem;  --type-lg-lh:   1.556; --type-lg-weight:  400; --type-lg-weight-md: 500; --type-lg-weight-sb: 600;
+  --type-md-size:   1rem;      --type-md-lh:   1.5;   --type-md-weight:  400; --type-md-weight-md: 500; --type-md-weight-sb: 600;
+  --type-sm-size:   0.875rem;  --type-sm-lh:   1.429; --type-sm-weight:  400; --type-sm-weight-md: 500; --type-sm-weight-sb: 600;
+  --type-xs-size:   0.75rem;   --type-xs-lh:   1.333; --type-xs-weight:  400; --type-xs-weight-md: 500;
+
+  /* Mobile type scale — synced from Figma text styles 2026-07-22 */
+  --type-h1-m-size:  1.875rem; --type-h1-m-lh:  1.2;
+  --type-h2-m-size:  1.5rem;   --type-h2-m-lh:  1.167;
+  --type-h3-m-size:  1.25rem;  --type-h3-m-lh:  1.4;
+  --type-h4-m-size:  1rem;     --type-h4-m-lh:  1.5;
+  --type-sub-m-size: 1.125rem; --type-sub-m-lh: 1.333;
+  --type-lg-m-size:  1rem;     --type-lg-m-lh:  1.5;
+  --type-md-m-size:  1rem;     --type-md-m-lh:  1.5;
+  --type-sm-m-size:  0.875rem; --type-sm-m-lh:  1.429;
+  --type-xs-m-size:  0.75rem;  --type-xs-m-lh:  1.333;
+
   --font-heading:   'Lexend', sans-serif;
   --font-body:      'Inter', sans-serif;
+}
+
+/* Auto-apply mobile type scale at ≤768px */
+@media (max-width: 768px) {
+  :root {
+    --type-h1-size: var(--type-h1-m-size); --type-h1-lh: var(--type-h1-m-lh);
+    --type-h2-size: var(--type-h2-m-size); --type-h2-lh: var(--type-h2-m-lh);
+    --type-h3-size: var(--type-h3-m-size); --type-h3-lh: var(--type-h3-m-lh);
+    --type-h4-size: var(--type-h4-m-size); --type-h4-lh: var(--type-h4-m-lh);
+    --type-sub-size: var(--type-sub-m-size); --type-sub-lh: var(--type-sub-m-lh);
+    --type-lg-size: var(--type-lg-m-size); --type-lg-lh: var(--type-lg-m-lh);
+    --type-md-size: var(--type-md-m-size); --type-md-lh: var(--type-md-m-lh);
+    --type-sm-size: var(--type-sm-m-size); --type-sm-lh: var(--type-sm-m-lh);
+    --type-xs-size: var(--type-xs-m-size); --type-xs-lh: var(--type-xs-m-lh);
+  }
 }
 
 /* =========================================================
