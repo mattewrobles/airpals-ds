@@ -39,7 +39,7 @@ export function InfoCard({
 }: InfoCardProps) {
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'flex-start', width: 385, boxSizing: 'border-box' }}
+      style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'flex-start', width: '100%', maxWidth: 385, boxSizing: 'border-box' }}
       className={className}
     >
       {/* Optional top image */}

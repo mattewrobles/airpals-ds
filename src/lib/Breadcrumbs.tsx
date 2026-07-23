@@ -50,7 +50,7 @@ function Separator({ type }: { type: BreadcrumbSeparator }) {
 export function Breadcrumbs({ items, separator = 'chevron', className = '' }: BreadcrumbsProps) {
   return (
     <nav aria-label="Breadcrumb" className={className}>
-      <ol style={{ display: 'flex', alignItems: 'center', gap: 10, listStyle: 'none', margin: 0, padding: 0 }}>
+      <ol style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10, listStyle: 'none', margin: 0, padding: 0 }}>
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
           return (
@@ -71,7 +71,7 @@ export function Breadcrumbs({ items, separator = 'chevron', className = '' }: Br
                 ) : (
                   <a
                     href={item.href ?? '#'}
-                    style={{ fontSize: 16, fontWeight: 400, lineHeight: '24px', color: '#475569', whiteSpace: 'nowrap', textDecoration: 'none', fontFamily: 'Inter' }}
+                    style={{ fontSize: 16, fontWeight: 400, lineHeight: '24px', color: '#475569', textDecoration: 'none', fontFamily: 'Inter' }}
                     onMouseEnter={e => (e.currentTarget.style.color = '#1b306c')}
                     onMouseLeave={e => (e.currentTarget.style.color = '#475569')}
                   >

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ArrowRightIcon } from '@heroicons/react/solid';
 import { Logo } from './Logo';
+import { useIsMobile } from './hooks/useIsMobile';
 
 // Figma 747-9228 (desktop) / 747-9226 (mobile)
 // bg: #1b306c (background/accent-contrast)
@@ -215,13 +216,15 @@ function LinksColumn({ links, bold }: { links: string[]; bold?: Set<string> }) {
 
 // ─── Footer ──────────────────────────────────────────────────────────────────
 
-export function Footer({ mobile = false, blogEntries = DEFAULT_BLOG_ENTRIES, soc2BadgeUrl, className = '' }: FooterProps) {
+export function Footer({ mobile: mobileProp = false, blogEntries = DEFAULT_BLOG_ENTRIES, soc2BadgeUrl, className = '' }: FooterProps) {
+  const isMobileScreen = useIsMobile();
+  const mobile = mobileProp || isMobileScreen;
   const bg: React.CSSProperties = { backgroundColor: '#1b306c', fontFamily: 'Inter' };
   const boldLinks = new Set(['Terms & Conditions']);
 
   if (mobile) {
     return (
-      <footer style={{ ...bg, width: 390, padding: '40px 24px', display: 'flex', flexDirection: 'column', gap: 32, boxSizing: 'border-box' }} className={className}>
+      <footer style={{ ...bg, width: '100%', padding: '40px 24px', display: 'flex', flexDirection: 'column', gap: 32, boxSizing: 'border-box' }} className={className}>
         <Logo color="white" height={30} />
         <NewsletterForm fullWidthFields />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

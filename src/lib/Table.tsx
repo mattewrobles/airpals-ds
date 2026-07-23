@@ -38,18 +38,20 @@ export type TableProps = {
 
 export function Table({ columns, rows, className = '', style }: TableProps) {
   return (
+    <div className={className} style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
     <div
-      className={className}
       style={{
         backgroundColor: 'var(--color-bg-primary)',
         borderRadius: 8,
         boxShadow: '0px 1px 2px rgba(0,0,0,0.05)',
         display: 'flex',
         overflow: 'hidden',
+        minWidth: 'max-content',
         ...style,
       }}
     >
       {columns.map((col) => {
+
         const isNumber = col.type === 'number';
         return (
           <div
@@ -98,6 +100,7 @@ export function Table({ columns, rows, className = '', style }: TableProps) {
           </div>
         );
       })}
+    </div>
     </div>
   );
 }

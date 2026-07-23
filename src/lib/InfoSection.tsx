@@ -3,6 +3,7 @@
 import React from 'react';
 import { InfoCard } from './InfoCard';
 import type { InfoCardProps } from './InfoCard';
+import { useIsMobile } from './hooks/useIsMobile';
 
 // Figma 747-9493 — InfoSection
 // Aling "One": InfoCard left + illustration right
@@ -54,21 +55,27 @@ export function InfoSection({
   infoCard = {},
   className = '',
 }: InfoSectionProps) {
+  const isMobile = useIsMobile();
   const card = <InfoCard {...infoCard} />;
   const illus = <IllustrationBox showBase={showBase} illustration={illustration} />;
 
   return (
     <div
       style={{
-        display: 'flex', gap: 127, alignItems: 'center',
-        width: 888, boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? 32 : 127,
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: 888,
+        boxSizing: 'border-box',
       }}
       className={className}
     >
       {align === 'One' ? (
         <>{card}{illus}</>
       ) : (
-        <>{illus}{card}</>
+        isMobile ? <>{card}{illus}</> : <>{illus}{card}</>
       )}
     </div>
   );

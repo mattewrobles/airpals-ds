@@ -23,6 +23,7 @@ import {
 import { Logo } from './Logo';
 import { Badge } from './Badge';
 import { Avatar } from './Avatar';
+import { useIsMobile } from './hooks/useIsMobile';
 
 // Figma 742-64588 (atom SidebarItem) + 742-64604 (full Sidebar)
 // Expanded: 256px wide, bg white, border-r #e2e8f0, py-24 px-16
@@ -152,7 +153,7 @@ export function SidebarItem({
 // ─── Sidebar full ─────────────────────────────────────────────────────────────
 
 export function Sidebar({
-  collapsed = false,
+  collapsed: collapsedProp = false,
   activeItem = 'org-settings',
   onItemClick,
   onCollapseToggle,
@@ -163,6 +164,8 @@ export function Sidebar({
   items = DEFAULT_ITEMS,
   className = '',
 }: SidebarProps) {
+  const isMobile = useIsMobile();
+  const collapsed = collapsedProp || isMobile;
   const containerStyle: React.CSSProperties = {
     backgroundColor: '#ffffff',
     borderRight: '1px solid #e2e8f0',

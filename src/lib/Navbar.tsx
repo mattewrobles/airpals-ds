@@ -11,6 +11,7 @@ import {
 import { Logo } from './Logo';
 import { Button } from './Button';
 import { Input } from './Input';
+import { useIsMobile } from './hooks/useIsMobile';
 
 // Figma 536-240 (full) + 536-190 (dropdown atom)
 // Desktop: h-108px, px-32px, bg white
@@ -80,7 +81,9 @@ function SolutionsDropdown({ open, mobile = false }: { open: boolean; mobile?: b
   );
 }
 
-export function Navbar({ mobile = false, className = '' }: NavbarProps) {
+export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarProps) {
+  const isMobileScreen = useIsMobile();
+  const mobile = mobileProp || isMobileScreen;
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -119,7 +122,7 @@ export function Navbar({ mobile = false, className = '' }: NavbarProps) {
 
   if (mobile) {
     return (
-      <nav className={className} style={{ backgroundColor: '#ffffff', width: 375 }}>
+      <nav className={className} style={{ backgroundColor: '#ffffff', width: '100%' }}>
         {/* Mobile header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 32px' }}>
           <Logo color="original" height={30} />

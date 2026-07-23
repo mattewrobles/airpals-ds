@@ -78,10 +78,10 @@ export function DataCard({
     textAlign: 'center', whiteSpace: 'nowrap',
   };
 
-  // Normal — vertical card 202px wide
+  // Normal — vertical card, fluid width
   if (layout === 'Normal') {
     return (
-      <div style={{ ...cardBase, width: 202, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '12px 36px' }} className={className}>
+      <div style={{ ...cardBase, width: '100%', maxWidth: 202, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '12px 36px' }} className={className}>
         <span style={{ ...titleStyle, textAlign: 'center' }}>{title}</span>
         {showImage && <Thumbnail imageUrl={imageUrl} size={76} />}
         {showContent && <span style={{ ...contentStyle, textAlign: 'center' }}>{content}</span>}
@@ -91,10 +91,10 @@ export function DataCard({
     );
   }
 
-  // Vertical — 483px, image left + content center + data + stepper right
+  // Vertical — fluid width, image left + content center + data + stepper right
   if (layout === 'Vertical') {
     return (
-      <div style={{ ...cardBase, width: 483, display: 'flex', alignItems: 'center', gap: 32, padding: 20 }} className={className}>
+      <div style={{ ...cardBase, width: '100%', maxWidth: 483, display: 'flex', alignItems: 'center', gap: 32, padding: 20 }} className={className}>
         {showImage && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <Thumbnail imageUrl={imageUrl} size={56} />
@@ -110,9 +110,9 @@ export function DataCard({
     );
   }
 
-  // Horizontal — 631px, image + title/content in row + data + stepper
+  // Horizontal — fluid width, image + title/content in row + data + stepper
   return (
-    <div style={{ ...cardBase, width: 631, display: 'flex', alignItems: 'center', gap: 32, padding: 20 }} className={className}>
+    <div style={{ ...cardBase, width: '100%', maxWidth: 631, display: 'flex', alignItems: 'center', gap: 32, padding: 20 }} className={className}>
       {showImage && (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <Thumbnail imageUrl={imageUrl} size={56} />

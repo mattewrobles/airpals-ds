@@ -110,4 +110,6 @@ export type { IconVariant, IconSize, IconProps } from './lib/Icon';
 export { ButtonDemo } from './lib/ButtonDemo';
 export type { ButtonDemoProps } from './lib/ButtonDemo';
 
+export { useIsMobile } from './lib/hooks/useIsMobile';
+
 import './index.css';
