@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Stepper } from './Stepper';
+import { useIsMobile } from './hooks/useIsMobile';
 
 // Figma 745-9014 — DataCard (Normal 202px / Vertical 483px / Horizontal 631px)
 // bg white, shadow xs (0 1px 1px rgba(0,0,0,0.05)), rounded-10
@@ -54,6 +55,7 @@ export function DataCard({
   className = '',
 }: DataCardProps) {
   const [count, setCount] = useState(defaultCount);
+  const isMobile = useIsMobile();
 
   const cardBase: React.CSSProperties = {
     backgroundColor: '#ffffff',
@@ -91,8 +93,25 @@ export function DataCard({
     );
   }
 
-  // Vertical — fluid width, image left + content center + data + stepper right
+  // Vertical — fluid width; stacks to column on mobile
   if (layout === 'Vertical') {
+    if (isMobile) {
+      return (
+        <div style={{ ...cardBase, width: '100%', display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }} className={className}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {showImage && <Thumbnail imageUrl={imageUrl} size={44} />}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <span style={{ ...titleStyle, fontSize: 16 }}>{title}</span>
+              {showContent && <p style={{ ...contentStyle, margin: '4px 0 0' }}>{content}</p>}
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            {showData && <span style={dataStyle}>{data}</span>}
+            <Stepper value={count} min={0} onChange={setCount} />
+          </div>
+        </div>
+      );
+    }
     return (
       <div style={{ ...cardBase, width: '100%', maxWidth: 483, display: 'flex', alignItems: 'center', gap: 32, padding: 20 }} className={className}>
         {showImage && (
@@ -110,7 +129,24 @@ export function DataCard({
     );
   }
 
-  // Horizontal — fluid width, image + title/content in row + data + stepper
+  // Horizontal — fluid width; stacks to column on mobile
+  if (isMobile) {
+    return (
+      <div style={{ ...cardBase, width: '100%', display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }} className={className}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {showImage && <Thumbnail imageUrl={imageUrl} size={44} />}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <span style={{ ...titleStyle, fontSize: 16 }}>{title}</span>
+            {showContent && <p style={{ ...contentStyle, margin: '4px 0 0' }}>{content}</p>}
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {showData && <span style={dataStyle}>{data}</span>}
+          <Stepper value={count} min={0} onChange={setCount} />
+        </div>
+      </div>
+    );
+  }
   return (
     <div style={{ ...cardBase, width: '100%', maxWidth: 631, display: 'flex', alignItems: 'center', gap: 32, padding: 20 }} className={className}>
       {showImage && (

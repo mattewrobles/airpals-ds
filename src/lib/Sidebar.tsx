@@ -175,6 +175,8 @@ export function Sidebar({
     paddingTop: 24,
     paddingBottom: 24,
     fontFamily: 'Inter',
+    overflow: 'hidden',
+    flexShrink: 0,
     ...(collapsed
       ? { width: 66, paddingLeft: 12, paddingRight: 12, justifyContent: 'space-between', minHeight: '100vh' }
       : { width: 256, paddingLeft: 16, paddingRight: 16, gap: 24 }),
