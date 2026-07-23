@@ -107,7 +107,8 @@ export function SkeletonCard({ className = '' }: { className?: string }) {
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
-        width: 240,
+        width: '100%',
+        maxWidth: 240,
         boxSizing: 'border-box',
       }}
       aria-hidden="true"
@@ -128,11 +129,11 @@ export function SkeletonTableRow({ columns = 5, className = '' }: { columns?: nu
   return (
     <div
       className={className}
-      style={{ display: 'flex', alignItems: 'center', gap: 0, borderBottom: '1px solid #e5e7eb' }}
+      style={{ display: 'flex', alignItems: 'center', gap: 0, borderBottom: '1px solid #e5e7eb', overflow: 'hidden' }}
       aria-hidden="true"
     >
       {Array.from({ length: columns }).map((_, i) => (
-        <div key={i} style={{ flex: '1 0 0', padding: '10px 12px' }}>
+        <div key={i} style={{ flex: '1 1 0', minWidth: 0, padding: '10px 12px' }}>
           <Skeleton shape="rect" height={16} width={i === 0 ? '60%' : '80%'} />
         </div>
       ))}
