@@ -17,7 +17,7 @@ export { Breadcrumbs } from './lib/Breadcrumbs';
 export type { BreadcrumbSeparator, BreadcrumbItem, BreadcrumbsProps } from './lib/Breadcrumbs';
 
 export { Button } from './lib/Button';
-export type { ButtonType, ButtonState, ButtonProps } from './lib/Button';
+export type { ButtonProps } from './lib/Button';
 
 export { Checkbox } from './lib/Checkbox';
 export type { CheckboxSize, CheckboxProps } from './lib/Checkbox';
@@ -105,7 +105,7 @@ export type { SidebarItemState, SidebarItemProps, SidebarNavItem, SidebarProps }
 export type { LogoOrientation, LogoColor, LogoProps } from './lib/Logo';
 
 export { Icon } from './lib/Icon';
-export type { IconVariant, IconSize, IconProps } from './lib/Icon';
+export type { IconSize, IconProps } from './lib/Icon';
 
 export { ButtonDemo } from './lib/ButtonDemo';
 export type { ButtonDemoProps } from './lib/ButtonDemo';
