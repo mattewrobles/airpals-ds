@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { ChevronRightIcon, ArrowRightIcon } from '@heroicons/react/solid';
+import { ChevronRight as LucideChevronRight, ArrowRight as LucideArrowRight } from 'lucide-react';
 
 // Figma 779-1625 (atom) + 625-2136 (full)
 // Active/last item: Inter SemiBold 16px, #1b306c (text/primary)
@@ -25,11 +25,11 @@ export type BreadcrumbsProps = {
 };
 
 const ChevronRight = () => (
-  <ChevronRightIcon style={{ width: 18, height: 18, color: 'var(--color-text-disable)', flexShrink: 0 }} aria-hidden="true" />
+  <LucideChevronRight style={{ width: 18, height: 18, color: 'var(--color-text-disable)', flexShrink: 0 }} aria-hidden="true" />
 );
 
 const ArrowRight = () => (
-  <ArrowRightIcon style={{ width: 18, height: 18, color: 'var(--color-text-disable)', flexShrink: 0 }} aria-hidden="true" />
+  <LucideArrowRight style={{ width: 18, height: 18, color: 'var(--color-text-disable)', flexShrink: 0 }} aria-hidden="true" />
 );
 
 function Separator({ type }: { type: BreadcrumbSeparator }) {

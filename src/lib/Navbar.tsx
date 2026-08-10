@@ -2,12 +2,12 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  SearchIcon,
-  MenuIcon,
-  XIcon,
-} from '@heroicons/react/solid';
+  ChevronDown as LucideChevronDown,
+  ChevronUp as LucideChevronUp,
+  Search,
+  Menu,
+  X,
+} from 'lucide-react';
 import { Logo } from './Logo';
 import { Button } from './Button';
 import { Input } from './Input';
@@ -25,15 +25,15 @@ export type NavbarProps = {
 };
 
 const ChevronDown = ({ className = '' }: { className?: string }) => (
-  <ChevronDownIcon className={`w-4 h-4 ${className}`} aria-hidden="true" />
+  <LucideChevronDown className={`w-4 h-4 ${className}`} aria-hidden="true" />
 );
 
 const ChevronUp = () => (
-  <ChevronUpIcon className="w-4 h-4" aria-hidden="true" />
+  <LucideChevronUp className="w-4 h-4" aria-hidden="true" />
 );
 
-const HamburgerIcon = () => <MenuIcon className="w-6 h-6" style={{ color: 'var(--color-text-primary)' }} aria-hidden="true" />;
-const CloseIcon = () => <XIcon className="w-6 h-6" style={{ color: 'var(--color-text-primary)' }} aria-hidden="true" />;
+const HamburgerIcon = () => <Menu className="w-6 h-6" style={{ color: 'var(--color-text-primary)' }} aria-hidden="true" />;
+const CloseIcon = () => <X className="w-6 h-6" style={{ color: 'var(--color-text-primary)' }} aria-hidden="true" />;
 
 const SOLUTIONS_ITEMS = [
   'Multi-carrier Shipping Software',
@@ -241,7 +241,7 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
         {/* Search input */}
         <Input
           placeholder="Search..."
-          rightIcon={<SearchIcon style={{ width: 16, height: 16, color: 'var(--color-text-disable)' }} aria-hidden="true" />}
+          rightIcon={<Search style={{ width: 16, height: 16, color: 'var(--color-text-disable)' }} aria-hidden="true" />}
           aria-label="Search"
           className="w-[187px]"
         />

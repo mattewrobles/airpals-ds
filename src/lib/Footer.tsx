@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { ArrowRightIcon } from '@heroicons/react/solid';
+import { ArrowRight } from 'lucide-react';
 import { Logo } from './Logo';
 import { useIsMobile } from './hooks/useIsMobile';
 
@@ -129,7 +129,7 @@ function NewsletterForm({ fullWidthFields = false }: { fullWidthFields?: boolean
             }}
           >
             Submit
-            <ArrowRightIcon style={{ width: 18, height: 18, flexShrink: 0 }} aria-hidden="true" />
+            <ArrowRight style={{ width: 18, height: 18, flexShrink: 0 }} aria-hidden="true" />
           </button>
         </div>
       </div>

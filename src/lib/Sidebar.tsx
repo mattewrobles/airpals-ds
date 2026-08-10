@@ -2,24 +2,22 @@
 
 import React, { useState } from 'react';
 import {
-  HomeIcon,
-  LightningBoltIcon,
-  PaperAirplaneIcon,
-  ClipboardListIcon,
-  TruckIcon,
-  CurrencyDollarIcon,
-  DocumentTextIcon,
-  BellIcon,
-  CogIcon,
-  UserIcon,
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from '@heroicons/react/solid';
-import {
-  OfficeBuildingIcon,
-  UserGroupIcon,
-} from '@heroicons/react/outline';
+  Home,
+  Zap,
+  Send,
+  ClipboardList,
+  Truck,
+  DollarSign,
+  FileText,
+  Bell,
+  Settings,
+  User,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Building2,
+  Users,
+} from 'lucide-react';
 import { Logo } from './Logo';
 import { Badge } from './Badge';
 import { Avatar } from './Avatar';
@@ -69,16 +67,16 @@ export type SidebarProps = {
 // ─── Default nav items ────────────────────────────────────────────────────────
 
 const DEFAULT_ITEMS: SidebarNavItem[] = [
-  { id: 'home',          label: 'Home',                   icon: <HomeIcon className="w-[18px] h-[18px]" /> },
-  { id: 'ai',            label: 'AI Shipping Assistant',  icon: <LightningBoltIcon className="w-[18px] h-[18px]" />, badge: 'BETA' },
-  { id: 'shipping',      label: 'Multi-carrier Shipping', icon: <PaperAirplaneIcon className="w-[18px] h-[18px]" /> },
-  { id: 'sameday',       label: 'Ship Same-day',          icon: <ClipboardListIcon className="w-[18px] h-[18px]" /> },
-  { id: 'track',         label: 'Track Orders',           icon: <TruckIcon className="w-[18px] h-[18px]" /> },
-  { id: 'billing',       label: 'Billing',                icon: <CurrencyDollarIcon className="w-[18px] h-[18px]" /> },
-  { id: 'transactions',  label: 'Transaction History',    icon: <DocumentTextIcon className="w-[18px] h-[18px]" /> },
-  { id: 'notifications', label: 'Notifications',          icon: <BellIcon className="w-[18px] h-[18px]" /> },
-  { id: 'org-settings',  label: 'Organization Settings',  icon: <CogIcon className="w-[18px] h-[18px]" /> },
-  { id: 'user-settings', label: 'User Settings',          icon: <UserIcon className="w-[18px] h-[18px]" /> },
+  { id: 'home',          label: 'Home',                   icon: <Home className="w-[18px] h-[18px]" /> },
+  { id: 'ai',            label: 'AI Shipping Assistant',  icon: <Zap className="w-[18px] h-[18px]" />, badge: 'BETA' },
+  { id: 'shipping',      label: 'Multi-carrier Shipping', icon: <Send className="w-[18px] h-[18px]" /> },
+  { id: 'sameday',       label: 'Ship Same-day',          icon: <ClipboardList className="w-[18px] h-[18px]" /> },
+  { id: 'track',         label: 'Track Orders',           icon: <Truck className="w-[18px] h-[18px]" /> },
+  { id: 'billing',       label: 'Billing',                icon: <DollarSign className="w-[18px] h-[18px]" /> },
+  { id: 'transactions',  label: 'Transaction History',    icon: <FileText className="w-[18px] h-[18px]" /> },
+  { id: 'notifications', label: 'Notifications',          icon: <Bell className="w-[18px] h-[18px]" /> },
+  { id: 'org-settings',  label: 'Organization Settings',  icon: <Settings className="w-[18px] h-[18px]" /> },
+  { id: 'user-settings', label: 'User Settings',          icon: <User className="w-[18px] h-[18px]" /> },
 ];
 
 // ─── SidebarItem atom ─────────────────────────────────────────────────────────
@@ -141,7 +139,7 @@ export function SidebarItem({
           )}
           {showChevron && (
             <span style={{ color: iconColor, display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-              <ChevronDownIcon className="w-[18px] h-[18px]" />
+              <ChevronDown className="w-[18px] h-[18px]" />
             </span>
           )}
         </>
@@ -195,7 +193,7 @@ export function Sidebar({
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-secondary)', display: 'flex', padding: 0 }}
                 aria-label="Collapse sidebar"
               >
-                <ChevronLeftIcon className="w-5 h-5" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
             </div>
 
@@ -220,11 +218,11 @@ export function Sidebar({
               <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-secondary)', lineHeight: '16px' }}>Organizations</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 8px', borderRadius: 5, backgroundColor: 'var(--color-bg-canvas)', cursor: 'pointer' }}>
                 <span style={{ color: 'var(--color-text-primary)', display: 'flex', flexShrink: 0 }}>
-                  <OfficeBuildingIcon className="w-[18px] h-[18px]" />
+                  <Building2 className="w-[18px] h-[18px]" />
                 </span>
                 <span style={{ flex: 1, fontSize: 14, fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: '20px' }}>{orgName}</span>
                 <span style={{ color: 'var(--color-text-secondary)', display: 'flex', flexShrink: 0 }}>
-                  <ChevronDownIcon className="w-[18px] h-[18px]" />
+                  <ChevronDown className="w-[18px] h-[18px]" />
                 </span>
               </div>
             </div>
@@ -233,11 +231,11 @@ export function Sidebar({
               <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-secondary)', lineHeight: '16px' }}>Placing orders as team</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 8px', borderRadius: 5, backgroundColor: 'var(--color-bg-canvas)', cursor: 'pointer' }}>
                 <span style={{ color: 'var(--color-text-primary)', display: 'flex', flexShrink: 0 }}>
-                  <UserGroupIcon className="w-[18px] h-[18px]" />
+                  <Users className="w-[18px] h-[18px]" />
                 </span>
                 <span style={{ flex: 1, fontSize: 14, fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: '20px' }}>{teamName}</span>
                 <span style={{ color: 'var(--color-text-secondary)', display: 'flex', flexShrink: 0 }}>
-                  <ChevronDownIcon className="w-[18px] h-[18px]" />
+                  <ChevronDown className="w-[18px] h-[18px]" />
                 </span>
               </div>
             </div>
@@ -286,8 +284,8 @@ export function Sidebar({
 
           {/* Org + team icons */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center' }}>
-            <SidebarItem icon={<OfficeBuildingIcon className="w-[18px] h-[18px]" />} collapsed state="Default" />
-            <SidebarItem icon={<UserGroupIcon className="w-[18px] h-[18px]" />} collapsed state="Default" />
+            <SidebarItem icon={<Building2 className="w-[18px] h-[18px]" />} collapsed state="Default" />
+            <SidebarItem icon={<Users className="w-[18px] h-[18px]" />} collapsed state="Default" />
           </div>
 
           {/* Profile collapsed */}
