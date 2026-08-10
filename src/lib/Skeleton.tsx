@@ -101,7 +101,7 @@ export function SkeletonCard({ className = '' }: { className?: string }) {
     <div
       className={className}
       style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--color-bg-primary)',
         borderRadius: 10,
         boxShadow: '0px 1px 2px rgba(0,0,0,0.05)',
         padding: 16,
@@ -132,7 +132,7 @@ export function SkeletonTableRow({ columns = 5, className = '' }: { columns?: nu
   return (
     <div
       className={className}
-      style={{ display: 'flex', alignItems: 'center', gap: 0, borderBottom: '1px solid #e5e7eb', width: '100%', overflow: 'hidden' }}
+      style={{ display: 'flex', alignItems: 'center', gap: 0, borderBottom: '1px solid var(--color-border-primary)', width: '100%', overflow: 'hidden' }}
       aria-hidden="true"
     >
       {Array.from({ length: visibleCols }).map((_, i) => (

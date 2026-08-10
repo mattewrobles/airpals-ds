@@ -79,14 +79,14 @@ export function Accordion({
   const bodyText   = isLarge ? 'text-base leading-6' : 'text-sm leading-5';
 
   // Colors
-  const bgColor     = disabled ? 'bg-[#f1f5f9]' : 'bg-[#e6f1fd]';
-  const titleColor  = disabled ? 'text-[#cbd5e1]' : 'text-[#1b306c]';
-  const chevronColor = disabled ? '#cbd5e1' : '#1b306c';
-  const bodyColor   = disabled ? 'text-[#cbd5e1]' : 'text-[#1b306c]';
+  const bgColor     = disabled ? 'bg-background-disable' : 'bg-background-secondary';
+  const titleColor  = disabled ? 'text-text-disable' : 'text-text-primary';
+  const chevronColor = disabled ? 'var(--color-text-disable)' : 'var(--color-text-primary)';
+  const bodyColor   = disabled ? 'text-text-disable' : 'text-text-primary';
 
   return (
     <div
-      className={`${bgColor} border-b border-[#e5e7eb] rounded-3xl w-full overflow-hidden ${className}`}
+      className={`${bgColor} border-b border-border-primary rounded-3xl w-full overflow-hidden ${className}`}
     >
       <button
         id={triggerId}
@@ -96,7 +96,7 @@ export function Accordion({
         onClick={toggle}
         className={[
           `flex items-center w-full text-left ${headerPx} ${headerGap}`,
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#4f46e5]',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-border-focus',
           disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         ].join(' ')}
       >

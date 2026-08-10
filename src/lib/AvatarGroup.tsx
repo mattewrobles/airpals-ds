@@ -40,9 +40,9 @@ const OVERLAP = 10;
 
 const PLACEHOLDER_SVG = (
   <svg viewBox="0 0 40 40" fill="none" style={{ width: '100%', height: '100%' }}>
-    <rect width="40" height="40" fill="#e2e8f0"/>
-    <circle cx="20" cy="15" r="7" fill="#94a3b8"/>
-    <ellipse cx="20" cy="35" rx="13" ry="10" fill="#94a3b8"/>
+    <rect width="40" height="40" fill="var(--color-bg-disable)"/>
+    <circle cx="20" cy="15" r="7" fill="var(--color-text-disable)"/>
+    <ellipse cx="20" cy="35" rx="13" ry="10" fill="var(--color-text-disable)"/>
   </svg>
 );
 
@@ -78,7 +78,7 @@ export function AvatarGroup({
           width: cfg.px,
           height: cfg.px,
           borderRadius: '50%',
-          border: '2px solid #ffffff',
+          border: '2px solid var(--color-bg-primary)',
           overflow: 'hidden',
           display: 'flex',
           alignItems: 'center',
@@ -91,7 +91,7 @@ export function AvatarGroup({
           return (
             <div
               key="counter"
-              style={{ ...baseStyle, backgroundColor: '#e6f1fd', color: '#0043ff' }}
+              style={{ ...baseStyle, backgroundColor: 'var(--color-bg-secondary)', color: 'var(--color-text-accent)' }}
             >
               <span style={{ fontSize: cfg.fontSize, fontWeight: 600, lineHeight: 1 }}>
                 +{remaining}
@@ -113,8 +113,8 @@ export function AvatarGroup({
 
         if (item!.initials) {
           return (
-            <div key={i} style={{ ...baseStyle, backgroundColor: '#0043ff' }}>
-              <span style={{ fontSize: cfg.fontSize, fontWeight: 600, color: '#ffffff', lineHeight: 1, userSelect: 'none' }}>
+            <div key={i} style={{ ...baseStyle, backgroundColor: 'var(--color-bg-accent)' }}>
+              <span style={{ fontSize: cfg.fontSize, fontWeight: 600, color: 'var(--color-text-on-accent)', lineHeight: 1, userSelect: 'none' }}>
                 {item!.initials}
               </span>
             </div>
@@ -123,7 +123,7 @@ export function AvatarGroup({
 
         // Image placeholder
         return (
-          <div key={i} style={{ ...baseStyle, backgroundColor: '#e2e8f0' }}>
+          <div key={i} style={{ ...baseStyle, backgroundColor: 'var(--color-bg-disable)' }}>
             {PLACEHOLDER_SVG}
           </div>
         );

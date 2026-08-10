@@ -93,7 +93,7 @@ function DropdownRow({ label, subtitle, avatar, rowState = 'default', divider = 
         <div className="flex flex-col flex-1 min-w-0">
           <span className={`text-sm font-normal leading-5 ${titleCls} truncate`}>{label}</span>
           {subtitle && (
-            <span className="text-xs font-medium leading-4 text-[#6b7280] truncate">{subtitle}</span>
+            <span className="text-xs font-medium leading-4 text-text-tertiary truncate">{subtitle}</span>
           )}
         </div>
       </div>
@@ -159,7 +159,7 @@ export function Dropdown({
   const triggerId = id ?? (label ? `dropdown-${label.toLowerCase().replace(/\s+/g, '-')}` : undefined);
 
   const triggerBorder = open
-    ? '[border-width:3px] border-[#adbcf2]'
+    ? '[border-width:3px] border-border-focus'
     : 'border border-border-primary hover:border-border-accent';
 
   return (

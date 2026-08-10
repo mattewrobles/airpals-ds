@@ -60,7 +60,7 @@ const LINKS_COL3 = ['Sitemap', 'Privacy Policy', 'Terms & Conditions', 'T&C Mult
 
 const linkStyle: React.CSSProperties = {
   fontSize: 14, fontWeight: 500, fontFamily: 'Inter',
-  color: '#ffffff', lineHeight: '20px', textDecoration: 'none', cursor: 'pointer',
+  color: 'var(--color-text-on-accent)', lineHeight: '20px', textDecoration: 'none', cursor: 'pointer',
 };
 
 const SocialIcons = () => (
@@ -78,17 +78,17 @@ function NewsletterForm({ fullWidthFields = false }: { fullWidthFields?: boolean
 
   const fieldBase: React.CSSProperties = {
     height: 45, display: 'flex', alignItems: 'center',
-    borderBottom: '2px solid #ffffff', padding: '9px 13px', overflow: 'hidden',
+    borderBottom: '2px solid var(--color-text-on-accent)', padding: '9px 13px', overflow: 'hidden',
   };
   const inputBase: React.CSSProperties = {
     flex: 1, border: 'none', outline: 'none', background: 'transparent',
     fontSize: 16, fontWeight: 400, fontFamily: 'Inter',
-    color: '#ffffff', lineHeight: '20px', padding: 0, minWidth: 0,
+    color: 'var(--color-text-on-accent)', lineHeight: '20px', padding: 0, minWidth: 0,
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
-      <span style={{ fontSize: 18, fontWeight: 600, fontFamily: 'Lexend', color: '#ffffff', lineHeight: 'normal' }}>
+      <span style={{ fontSize: 18, fontWeight: 600, fontFamily: 'Lexend', color: 'var(--color-text-on-accent)', lineHeight: 'normal' }}>
         Subscribe to our newsletter
       </span>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 9, width: '100%' }}>
@@ -125,7 +125,7 @@ function NewsletterForm({ fullWidthFields = false }: { fullWidthFields?: boolean
               display: 'flex', alignItems: 'center', gap: 8,
               background: 'none', border: 'none', cursor: 'pointer',
               padding: 12, borderRadius: 6,
-              fontSize: 14, fontWeight: 600, fontFamily: 'Inter', color: '#ffffff',
+              fontSize: 14, fontWeight: 600, fontFamily: 'Inter', color: 'var(--color-text-on-accent)',
             }}
           >
             Submit
@@ -155,7 +155,7 @@ function BlogCard({ title, imageUrl, stack = false }: { title: string; imageUrl?
       ) : (
         <div style={{ width: 44, height: 44, borderRadius: 8, backgroundColor: 'rgba(255,255,255,0.15)', flexShrink: 0 }} />
       )}
-      <span style={{ flex: 1, fontSize: 14, fontWeight: 500, fontFamily: 'Inter', color: '#ffffff', lineHeight: '20px', minWidth: 0 }}>
+      <span style={{ flex: 1, fontSize: 14, fontWeight: 500, fontFamily: 'Inter', color: 'var(--color-text-on-accent)', lineHeight: '20px', minWidth: 0 }}>
         {title}
       </span>
     </div>
@@ -180,13 +180,13 @@ function TrustBar({ compact = false, soc2BadgeUrl }: { compact?: boolean; soc2Ba
           </div>
         )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontSize: 14, fontWeight: 600, fontFamily: 'Inter', color: '#ffffff', lineHeight: 'normal' }}>SOC 2 Type II</span>
+          <span style={{ fontSize: 14, fontWeight: 600, fontFamily: 'Inter', color: 'var(--color-text-on-accent)', lineHeight: 'normal' }}>SOC 2 Type II</span>
           <span style={{ fontSize: 12, fontWeight: 400, fontFamily: 'Inter', color: 'rgba(255,255,255,0.45)', lineHeight: 'normal' }}>AICPA Certified</span>
         </div>
       </div>
       <div style={{ width: 1, height: 36, backgroundColor: 'rgba(255,255,255,0.18)', flexShrink: 0 }} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <span style={{ fontSize: 14, fontWeight: 600, fontFamily: 'Inter', color: '#ffffff', lineHeight: 'normal' }}>256-bit SSL</span>
+        <span style={{ fontSize: 14, fontWeight: 600, fontFamily: 'Inter', color: 'var(--color-text-on-accent)', lineHeight: 'normal' }}>256-bit SSL</span>
         <span style={{ fontSize: 12, fontWeight: 400, fontFamily: 'Inter', color: 'rgba(255,255,255,0.45)', lineHeight: 'normal' }}>End-to-end encrypted</span>
       </div>
     </div>
@@ -218,7 +218,7 @@ function LinksColumn({ links, bold }: { links: string[]; bold?: Set<string> }) {
 export function Footer({ mobile: mobileProp = false, blogEntries = DEFAULT_BLOG_ENTRIES, soc2BadgeUrl, className = '' }: FooterProps) {
   const isMobileScreen = useIsMobile();
   const mobile = mobileProp || isMobileScreen;
-  const bg: React.CSSProperties = { backgroundColor: '#1b306c', fontFamily: 'Inter' };
+  const bg: React.CSSProperties = { backgroundColor: 'var(--color-bg-accent-dark)', fontFamily: 'Inter' };
   const boldLinks = new Set(['Terms & Conditions']);
 
   if (mobile) {

@@ -43,16 +43,16 @@ export function ButtonDouble({
         {hasTwoButtons && (
           <Button
             label={secondaryLabel!}
-            type="Secondary"
-            state={secondaryDisabled ? 'Disabled' : 'Default'}
+            variant="secondary"
+            disabled={secondaryDisabled}
             onClick={onSecondary}
             className={btnFlex}
           />
         )}
         <Button
           label={primaryLabel}
-          type="Primary"
-          state={primaryDisabled ? 'Disabled' : 'Default'}
+          variant="primary"
+          disabled={primaryDisabled}
           onClick={onPrimary}
           className={btnFlex}
         />

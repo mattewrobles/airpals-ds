@@ -25,8 +25,8 @@ export type RatingProps = {
 const STAR_PATH = 'M9,1 L11.06,6.17 L16.61,6.53 L12.33,10.08 L13.70,15.47 L9,12.50 L4.30,15.47 L5.67,10.08 L1.39,6.53 L6.94,6.17 Z';
 
 function Star({ filled, size, hovered }: { filled: boolean; size: number; hovered?: boolean }) {
-  const color = filled || hovered ? '#1b306c' : 'none';
-  const stroke = filled || hovered ? 'none' : '#d1d5db';
+  const color = filled || hovered ? 'var(--color-text-primary)' : 'none';
+  const stroke = filled || hovered ? 'none' : 'var(--color-border-primary)';
   return (
     <svg
       width={size}
@@ -85,7 +85,7 @@ export function Rating({
   ));
 
   const labelEl = autoLabel ? (
-    <span style={{ fontSize: 14, lineHeight: '20px', color: '#1b306c', whiteSpace: 'nowrap' }}>
+    <span style={{ fontSize: 14, lineHeight: '20px', color: 'var(--color-text-primary)', whiteSpace: 'nowrap' }}>
       {autoLabel}
     </span>
   ) : null;

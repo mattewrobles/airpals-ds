@@ -24,8 +24,8 @@ export function ToggleShort({ checked = false, disabled = false, onChange, class
   };
 
   const trackBg = disabled
-    ? (isOn ? 'bg-[#a9c0ff]' : 'bg-[#f3f4f6]')
-    : (isOn ? 'bg-background-accent' : 'bg-[#e5e7eb]');
+    ? (isOn ? 'bg-[#a9c0ff]' : 'bg-background-canvas')
+    : (isOn ? 'bg-background-accent' : 'bg-background-disable');
 
   return (
     <button
@@ -69,7 +69,7 @@ export function ToggleSimple({ checked = false, onChange, className = '' }: Togg
       role="switch"
       aria-checked={isOn}
       onClick={handle}
-      className={`flex items-center p-[2px] w-[44px] h-[24px] rounded-[12px] outline-none focus-visible:shadow-[0px_0px_0px_2px_white,0px_0px_0px_4px_#6366f1] transition-colors duration-200 cursor-pointer overflow-hidden shrink-0 ${isOn ? 'bg-[#cde5ff] justify-end' : 'bg-[#e5e7eb]'} ${className}`}
+      className={`flex items-center p-[2px] w-[44px] h-[24px] rounded-[12px] outline-none focus-visible:shadow-[0px_0px_0px_2px_white,0px_0px_0px_4px_#6366f1] transition-colors duration-200 cursor-pointer overflow-hidden shrink-0 ${isOn ? 'bg-background-secondary-hover justify-end' : 'bg-background-disable'} ${className}`}
     >
       <div className="shrink-0 size-[20px] rounded-full bg-white shadow-[0px_1px_2px_rgba(0,0,0,0.06),0px_1px_3px_rgba(0,0,0,0.10)]" />
     </button>

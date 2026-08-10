@@ -25,11 +25,11 @@ export type BreadcrumbsProps = {
 };
 
 const ChevronRight = () => (
-  <ChevronRightIcon style={{ width: 18, height: 18, color: '#94a3b8', flexShrink: 0 }} aria-hidden="true" />
+  <ChevronRightIcon style={{ width: 18, height: 18, color: 'var(--color-text-disable)', flexShrink: 0 }} aria-hidden="true" />
 );
 
 const ArrowRight = () => (
-  <ArrowRightIcon style={{ width: 18, height: 18, color: '#94a3b8', flexShrink: 0 }} aria-hidden="true" />
+  <ArrowRightIcon style={{ width: 18, height: 18, color: 'var(--color-text-disable)', flexShrink: 0 }} aria-hidden="true" />
 );
 
 function Separator({ type }: { type: BreadcrumbSeparator }) {
@@ -37,7 +37,7 @@ function Separator({ type }: { type: BreadcrumbSeparator }) {
     return (
       <span
         aria-hidden="true"
-        style={{ color: '#1b306c', fontSize: 16, fontWeight: 600, lineHeight: '24px', width: 18, textAlign: 'center', flexShrink: 0 }}
+        style={{ color: 'var(--color-text-primary)', fontSize: 16, fontWeight: 600, lineHeight: '24px', width: 18, textAlign: 'center', flexShrink: 0 }}
       >
         /
       </span>
@@ -57,23 +57,23 @@ export function Breadcrumbs({ items, separator = 'chevron', className = '' }: Br
             <React.Fragment key={i}>
               <li style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 {item.icon && (
-                  <span aria-hidden="true" style={{ display: 'flex', alignItems: 'center', width: 18, height: 18, color: isLast ? '#1b306c' : '#475569', flexShrink: 0 }}>
+                  <span aria-hidden="true" style={{ display: 'flex', alignItems: 'center', width: 18, height: 18, color: isLast ? 'var(--color-text-primary)' : 'var(--color-text-secondary)', flexShrink: 0 }}>
                     {item.icon}
                   </span>
                 )}
                 {isLast ? (
                   <span
                     aria-current="page"
-                    style={{ fontSize: 16, fontWeight: 600, lineHeight: '24px', color: '#1b306c', whiteSpace: 'nowrap', fontFamily: 'Inter' }}
+                    style={{ fontSize: 16, fontWeight: 600, lineHeight: '24px', color: 'var(--color-text-primary)', whiteSpace: 'nowrap', fontFamily: 'Inter' }}
                   >
                     {item.label}
                   </span>
                 ) : (
                   <a
                     href={item.href ?? '#'}
-                    style={{ fontSize: 16, fontWeight: 400, lineHeight: '24px', color: '#475569', textDecoration: 'none', fontFamily: 'Inter' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#1b306c')}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#475569')}
+                    style={{ fontSize: 16, fontWeight: 400, lineHeight: '24px', color: 'var(--color-text-secondary)', textDecoration: 'none', fontFamily: 'Inter' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text-primary)')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
                   >
                     {item.label}
                   </a>

@@ -23,7 +23,7 @@ export type TableHeaderProps = {
 function SortIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
-      <path d="M8 3v10M4 7l4-4 4 4" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 3v10M4 7l4-4 4 4" stroke="var(--color-text-secondary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -31,7 +31,7 @@ function SortIcon() {
 function FilterIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
-      <path d="M2 4h12M5 8h6M7 12h2" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M2 4h12M5 8h6M7 12h2" stroke="var(--color-text-secondary)" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -52,8 +52,8 @@ export function TableHeader({
   const gap = isSmall ? 8 : 12;
 
   const base: React.CSSProperties = {
-    backgroundColor: '#ffffff',
-    borderBottom: active ? '2px solid #1b306c' : '1px solid #e2e8f0',
+    backgroundColor: 'var(--color-bg-primary)',
+    borderBottom: active ? '2px solid var(--color-text-primary)' : '1px solid var(--color-border-primary)',
     height: h,
     minHeight: h,
     maxHeight: h,
@@ -70,7 +70,7 @@ export function TableHeader({
     fontWeight: 600,
     fontSize: isSmall ? 14 : 18,
     lineHeight: isSmall ? '20px' : '28px',
-    color: '#475569',
+    color: 'var(--color-text-secondary)',
     flex: 1,
     minWidth: 0,
     overflow: 'hidden',

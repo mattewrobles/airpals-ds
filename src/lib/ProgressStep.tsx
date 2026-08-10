@@ -29,13 +29,13 @@ export function ProgressStep({ label, icon, active = false, className = '' }: Pr
           borderRadius: 999,
           ...(active
             ? {
-                backgroundColor: '#fc4575',
+                backgroundColor: 'var(--color-bg-accent-pink)',
                 boxShadow: '1px 1.5px 2px rgba(252,69,117,0.55)',
                 border: 'none',
               }
             : {
-                backgroundColor: '#ffffff',
-                border: '1px solid #e2e8f0',
+                backgroundColor: 'var(--color-bg-primary)',
+                border: '1px solid var(--color-border-primary)',
                 boxShadow: '1px 1.5px 2px rgba(102,128,201,0.29)',
               }),
         }}
@@ -48,7 +48,7 @@ export function ProgressStep({ label, icon, active = false, className = '' }: Pr
             justifyContent: 'center',
             width: 15,
             height: 15,
-            color: active ? '#ffffff' : '#cbd5e1',
+            color: active ? 'var(--color-text-on-accent)' : 'var(--color-text-disable)',
             flexShrink: 0,
           }}
         >
@@ -64,7 +64,7 @@ export function ProgressStep({ label, icon, active = false, className = '' }: Pr
           fontFamily: 'Inter',
           letterSpacing: '1.3375px',
           textTransform: 'uppercase',
-          color: active ? '#fc4575' : '#cbd5e1',
+          color: active ? 'var(--color-bg-accent-pink)' : 'var(--color-text-disable)',
           whiteSpace: 'nowrap',
           lineHeight: 'normal',
         }}

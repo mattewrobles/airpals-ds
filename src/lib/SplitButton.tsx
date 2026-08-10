@@ -30,8 +30,8 @@ const SIZE = {
 // Success = mint light · Warning = brand-pink solid · Danger = red-600 solid
 const TYPE = {
   Primary:   { bg: 'bg-background-accent',    border: 'border-background-accent',    text: 'text-text-on-accent', divider: 'rgba(255,255,255,0.25)' },
-  Secondary: { bg: 'bg-background-primary',   border: 'border-border-primary',      text: 'text-text-primary',   divider: '#e2e8f0' },
-  Info:      { bg: 'bg-background-secondary', border: 'border-border-secondary',    text: 'text-text-primary',   divider: '#cbd5e1' },
+  Secondary: { bg: 'bg-background-primary',   border: 'border-border-primary',      text: 'text-text-primary',   divider: 'var(--color-border-primary)' },
+  Info:      { bg: 'bg-background-secondary', border: 'border-border-secondary',    text: 'text-text-primary',   divider: 'var(--color-border-ghost)' },
   Success:   { bg: 'bg-[#e9fcf4]',         border: 'border-[#e9fcf4]',         text: 'text-text-primary',   divider: '#a7f3d0' },
   Warning:   { bg: 'bg-brand-pink',         border: 'border-brand-pink',         text: 'text-white',         divider: 'rgba(255,255,255,0.25)' },
   Danger:    { bg: 'bg-[#dc2626]',          border: 'border-[#dc2626]',          text: 'text-white',         divider: 'rgba(255,255,255,0.25)' },

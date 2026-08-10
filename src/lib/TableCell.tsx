@@ -34,17 +34,17 @@ export type TableCellProps = {
 
 const STATE_BG: Record<TableCellState, string> = {
   default: 'transparent',
-  hover: '#f3f4f6',
-  selected: '#e6f1fd',
+  hover: 'var(--color-bg-canvas)',
+  selected: 'var(--color-bg-secondary)',
   disabled: 'transparent',
 };
 
 function MoreIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <circle cx="10" cy="5" r="1.5" fill="#475569" />
-      <circle cx="10" cy="10" r="1.5" fill="#475569" />
-      <circle cx="10" cy="15" r="1.5" fill="#475569" />
+      <circle cx="10" cy="5" r="1.5" fill="var(--color-text-secondary)" />
+      <circle cx="10" cy="10" r="1.5" fill="var(--color-text-secondary)" />
+      <circle cx="10" cy="15" r="1.5" fill="var(--color-text-secondary)" />
     </svg>
   );
 }
@@ -104,12 +104,12 @@ export function TableCell({
   }
 
   if (type === 'badge') {
-    const b = badge ?? { label: text, bg: '#0043ff', color: '#ffffff' };
+    const b = badge ?? { label: text, bg: 'var(--color-bg-accent)', color: 'var(--color-text-on-accent)' };
     return (
       <div style={base} className={className}>
         <span style={{
-          backgroundColor: b.bg ?? '#0043ff',
-          color: b.color ?? '#ffffff',
+          backgroundColor: b.bg ?? 'var(--color-bg-accent)',
+          color: b.color ?? 'var(--color-text-on-accent)',
           borderRadius: 20,
           padding: '4px 8px',
           fontFamily: 'Inter, sans-serif',
@@ -142,7 +142,7 @@ export function TableCell({
       <span style={{
         fontFamily: 'Inter, sans-serif', fontWeight: 600,
         fontSize: 14, lineHeight: '20px',
-        color: isDisabled ? '#9ca3af' : '#1b306c',
+        color: isDisabled ? 'var(--color-text-disable)' : 'var(--color-text-primary)',
         width: '100%',
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       }}>
@@ -152,7 +152,7 @@ export function TableCell({
         <span style={{
           fontFamily: 'Inter, sans-serif', fontWeight: 400,
           fontSize: 12, lineHeight: '16px',
-          color: isDisabled ? '#9ca3af' : '#475569',
+          color: isDisabled ? 'var(--color-text-disable)' : 'var(--color-text-secondary)',
           width: '100%',
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}>

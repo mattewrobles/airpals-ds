@@ -100,8 +100,8 @@ export function SidebarItem({
   const isHover = effectiveState === 'Hover';
   const isActive = isSelected || isHover;
 
-  const iconColor = isSelected ? '#0043ff' : isHover ? '#7e859a' : '#64748b';
-  const textColor = isSelected ? '#1b306c' : isHover ? '#7e859a' : '#64748b';
+  const iconColor = isSelected ? 'var(--color-text-accent)' : isHover ? '#7e859a' : 'var(--color-text-secondary)';
+  const textColor = isSelected ? 'var(--color-text-primary)' : isHover ? '#7e859a' : 'var(--color-text-secondary)';
 
   const style: React.CSSProperties = {
     display: 'flex',
@@ -113,7 +113,7 @@ export function SidebarItem({
     ...(collapsed
       ? { justifyContent: 'center', padding: 8, width: 34 }
       : { padding: isSelected ? '12px 8px' : 8, width: '100%' }),
-    backgroundColor: isActive ? '#f3f3f5' : 'transparent',
+    backgroundColor: isActive ? 'var(--color-bg-canvas)' : 'transparent',
   };
 
   return (
@@ -167,8 +167,8 @@ export function Sidebar({
   const isMobile = useIsMobile();
   const collapsed = collapsedProp || isMobile;
   const containerStyle: React.CSSProperties = {
-    backgroundColor: '#ffffff',
-    borderRight: '1px solid #e2e8f0',
+    backgroundColor: 'var(--color-bg-primary)',
+    borderRight: '1px solid var(--color-border-primary)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -192,7 +192,7 @@ export function Sidebar({
               <Logo color="original" height={28} />
               <button
                 onClick={onCollapseToggle}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', display: 'flex', padding: 0 }}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-secondary)', display: 'flex', padding: 0 }}
                 aria-label="Collapse sidebar"
               >
                 <ChevronLeftIcon className="w-5 h-5" />
@@ -210,33 +210,33 @@ export function Sidebar({
                   onClick={() => onItemClick?.(item.id)}
                 />
               ))}
-              <div style={{ height: 1, backgroundColor: '#e2e8f0', width: '100%' }} />
+              <div style={{ height: 1, backgroundColor: 'var(--color-border-primary)', width: '100%' }} />
             </div>
           </div>
 
           {/* Organizations + Team */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, width: '100%' }}>
-              <span style={{ fontSize: 12, fontWeight: 500, color: '#475569', lineHeight: '16px' }}>Organizations</span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 8px', borderRadius: 5, backgroundColor: '#f3f3f5', cursor: 'pointer' }}>
-                <span style={{ color: '#1b306c', display: 'flex', flexShrink: 0 }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-secondary)', lineHeight: '16px' }}>Organizations</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 8px', borderRadius: 5, backgroundColor: 'var(--color-bg-canvas)', cursor: 'pointer' }}>
+                <span style={{ color: 'var(--color-text-primary)', display: 'flex', flexShrink: 0 }}>
                   <OfficeBuildingIcon className="w-[18px] h-[18px]" />
                 </span>
-                <span style={{ flex: 1, fontSize: 14, fontWeight: 400, color: '#1b306c', lineHeight: '20px' }}>{orgName}</span>
-                <span style={{ color: '#64748b', display: 'flex', flexShrink: 0 }}>
+                <span style={{ flex: 1, fontSize: 14, fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: '20px' }}>{orgName}</span>
+                <span style={{ color: 'var(--color-text-secondary)', display: 'flex', flexShrink: 0 }}>
                   <ChevronDownIcon className="w-[18px] h-[18px]" />
                 </span>
               </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 9, width: '100%' }}>
-              <span style={{ fontSize: 12, fontWeight: 500, color: '#475569', lineHeight: '16px' }}>Placing orders as team</span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 8px', borderRadius: 5, backgroundColor: '#f3f3f5', cursor: 'pointer' }}>
-                <span style={{ color: '#1b306c', display: 'flex', flexShrink: 0 }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-secondary)', lineHeight: '16px' }}>Placing orders as team</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 8px', borderRadius: 5, backgroundColor: 'var(--color-bg-canvas)', cursor: 'pointer' }}>
+                <span style={{ color: 'var(--color-text-primary)', display: 'flex', flexShrink: 0 }}>
                   <UserGroupIcon className="w-[18px] h-[18px]" />
                 </span>
-                <span style={{ flex: 1, fontSize: 14, fontWeight: 400, color: '#1b306c', lineHeight: '20px' }}>{teamName}</span>
-                <span style={{ color: '#64748b', display: 'flex', flexShrink: 0 }}>
+                <span style={{ flex: 1, fontSize: 14, fontWeight: 400, color: 'var(--color-text-primary)', lineHeight: '20px' }}>{teamName}</span>
+                <span style={{ color: 'var(--color-text-secondary)', display: 'flex', flexShrink: 0 }}>
                   <ChevronDownIcon className="w-[18px] h-[18px]" />
                 </span>
               </div>
@@ -245,12 +245,12 @@ export function Sidebar({
 
           {/* Profile */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%', marginTop: 'auto' }}>
-            <div style={{ height: 1, backgroundColor: '#e2e8f0', width: '100%' }} />
+            <div style={{ height: 1, backgroundColor: 'var(--color-border-primary)', width: '100%' }} />
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
               <Avatar size="sm" variant="Initials" initials={userInitials} corner="Full" />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1, flex: 1, minWidth: 0 }}>
-                <span style={{ fontSize: 14, fontWeight: 600, color: '#1b306c', lineHeight: '20px' }}>{userName}</span>
-                <a href="#" style={{ fontSize: 12, fontWeight: 500, color: '#0043ff', lineHeight: '16px', textDecoration: 'none' }}>Sign out</a>
+                <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary)', lineHeight: '20px' }}>{userName}</span>
+                <a href="#" style={{ fontSize: 12, fontWeight: 500, color: 'var(--color-text-accent)', lineHeight: '16px', textDecoration: 'none' }}>Sign out</a>
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ export function Sidebar({
                   onClick={() => onItemClick?.(item.id)}
                 />
               ))}
-              <div style={{ height: 1, backgroundColor: '#e2e8f0', width: '100%' }} />
+              <div style={{ height: 1, backgroundColor: 'var(--color-border-primary)', width: '100%' }} />
             </div>
           </div>
 
@@ -292,9 +292,9 @@ export function Sidebar({
 
           {/* Profile collapsed */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 9, alignItems: 'center', width: '100%' }}>
-            <div style={{ height: 1, backgroundColor: '#e2e8f0', width: '100%' }} />
+            <div style={{ height: 1, backgroundColor: 'var(--color-border-primary)', width: '100%' }} />
             <Avatar size="sm" variant="Initials" initials={userInitials} corner="Full" />
-            <a href="#" style={{ fontSize: 10, fontWeight: 500, fontFamily: 'Inter', color: '#0043ff', textDecoration: 'none', textAlign: 'center' }}>Sign out</a>
+            <a href="#" style={{ fontSize: 10, fontWeight: 500, fontFamily: 'Inter', color: 'var(--color-text-accent)', textDecoration: 'none', textAlign: 'center' }}>Sign out</a>
           </div>
         </>
       )}

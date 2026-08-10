@@ -48,9 +48,9 @@ function badgeOffset(badgePx: number, isFullRadius: boolean): number {
 
 const PLACEHOLDER_SVG = (
   <svg viewBox="0 0 40 40" fill="none" style={{ width: '100%', height: '100%' }}>
-    <rect width="40" height="40" fill="#e2e8f0"/>
-    <circle cx="20" cy="15" r="7" fill="#94a3b8"/>
-    <ellipse cx="20" cy="35" rx="13" ry="10" fill="#94a3b8"/>
+    <rect width="40" height="40" fill="var(--color-bg-disable)"/>
+    <circle cx="20" cy="15" r="7" fill="var(--color-text-disable)"/>
+    <ellipse cx="20" cy="35" rx="13" ry="10" fill="var(--color-text-disable)"/>
   </svg>
 );
 
@@ -83,7 +83,7 @@ export function Avatar({
           height: cfg.px,
           borderRadius: radius,
           overflow: 'hidden',
-          backgroundColor: '#0043ff',
+          backgroundColor: 'var(--color-bg-accent)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -99,7 +99,7 @@ export function Avatar({
             fontSize: cfg.fontSize,
             lineHeight: `${cfg.lineHeight}px`,
             fontWeight: 600,
-            color: '#ffffff',
+            color: 'var(--color-text-on-accent)',
             userSelect: 'none',
           }}>
             {initials}
@@ -117,7 +117,7 @@ export function Avatar({
             height: cfg.badgePx,
             borderRadius: '50%',
             backgroundColor: '#22ad5c',
-            border: '2px solid #ffffff',
+            border: '2px solid var(--color-bg-primary)',
             top: offset,
             right: offset,
           }}

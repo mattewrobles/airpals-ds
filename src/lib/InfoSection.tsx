@@ -28,7 +28,7 @@ function IllustrationBox({ showBase, illustration }: { showBase: boolean; illust
       {showBase && (
         <div style={{
           width: 378, height: 378, borderRadius: 24,
-          backgroundColor: '#e6f1fd', flexShrink: 0,
+          backgroundColor: 'var(--color-bg-secondary)', flexShrink: 0,
         }} />
       )}
       {/* Illustration — overlaid centered */}

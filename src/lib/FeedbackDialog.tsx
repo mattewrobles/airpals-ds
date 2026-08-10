@@ -26,7 +26,7 @@ export type FeedbackDialogProps = {
 function CloseIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M5 5l10 10M15 5L5 15" stroke="#1b306c" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -50,7 +50,7 @@ export function FeedbackDialog({
     <div
       className={className}
       style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--color-bg-primary)',
         borderRadius: 8,
         boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1), 0px 4px 6px -4px rgba(0,0,0,0.1)',
         width: '100%',
@@ -69,7 +69,7 @@ export function FeedbackDialog({
         <span style={{
           flex: 1, minWidth: 0,
           fontFamily: 'Inter, sans-serif', fontWeight: 600,
-          fontSize: 16, lineHeight: '24px', color: '#1b306c',
+          fontSize: 16, lineHeight: '24px', color: 'var(--color-text-primary)',
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}>
           {title}
@@ -92,7 +92,7 @@ export function FeedbackDialog({
             <div style={{
               width: 162, height: 162,
               borderRadius: 12,
-              backgroundColor: '#e6f1fd',
+              backgroundColor: 'var(--color-bg-secondary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <span style={{ fontSize: 48 }}>📦</span>
@@ -113,7 +113,7 @@ export function FeedbackDialog({
         <div style={{ paddingTop: 0, paddingBottom: 12, width: '100%' }}>
           <p style={{
             fontFamily: 'Inter, sans-serif', fontWeight: 400,
-            fontSize: 14, lineHeight: '20px', color: '#475569',
+            fontSize: 14, lineHeight: '20px', color: 'var(--color-text-secondary)',
             margin: 0,
           }}>
             {description}
@@ -125,13 +125,13 @@ export function FeedbackDialog({
       {showFooter && (
         <div style={{ display: 'flex', gap: 12, width: '100%' }}>
           <Button
-            type="Secondary"
+            variant="secondary"
             label={secondaryLabel}
             onClick={onSecondary}
             className="flex-1"
           />
           <Button
-            type="Primary"
+            variant="primary"
             label={primaryLabel}
             onClick={onPrimary}
             className="flex-1"

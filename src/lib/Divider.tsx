@@ -20,14 +20,14 @@ export function Divider({ direction = 'Horizontal', className = '' }: DividerPro
       <div
         aria-hidden="true"
         role="separator"
-        className={`w-px self-stretch bg-[#e5e7eb] shrink-0 ${className}`}
+        className={`w-px self-stretch bg-border-primary shrink-0 ${className}`}
       />
     );
   }
   return (
     <hr
       aria-hidden="true"
-      className={`border-0 border-t border-[#e5e7eb] w-full m-0 ${className}`}
+      className={`border-0 border-t border-border-primary w-full m-0 ${className}`}
     />
   );
 }

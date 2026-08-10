@@ -54,11 +54,11 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const helperId = helperText && textareaId ? `${textareaId}-helper` : undefined;
 
     const fieldCls = disabled
-      ? 'bg-background-disable border border-[#cbd5e1] cursor-not-allowed'
+      ? 'bg-background-disable border border-border-ghost cursor-not-allowed'
       : [
-          'bg-background-primary border border-[#dfe4ea]',
+          'bg-background-primary border border-border-subtle',
           'hover:[border-width:1.5px] hover:border-border-accent',
-          'focus:[border-width:3px] focus:border-[#a5b4fc]',
+          'focus:[border-width:3px] focus:border-border-focus',
         ].join(' ');
 
     const showFooter = helperText || maxLength;

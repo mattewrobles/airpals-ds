@@ -59,7 +59,7 @@ export function InfoCard({
             <span style={{
               flex: 1, minWidth: 0,
               fontFamily: 'Lexend, sans-serif', fontWeight: 600,
-              fontSize: 24, lineHeight: '32px', color: '#1b306c',
+              fontSize: 24, lineHeight: '32px', color: 'var(--color-text-primary)',
             }}>
               {title}
             </span>
@@ -71,7 +71,7 @@ export function InfoCard({
       {showContent && (
         <p style={{
           fontFamily: 'Inter', fontWeight: 400,
-          fontSize: 16, lineHeight: '24px', color: '#1b306c',
+          fontSize: 16, lineHeight: '24px', color: 'var(--color-text-primary)',
           margin: 0, width: '100%', flexShrink: 0,
         }}>
           {paragraph}
@@ -81,7 +81,7 @@ export function InfoCard({
       {/* CTA Button */}
       {showButton && (
         <Button
-          type="Primary"
+          variant="primary"
           label={buttonLabel}
           onClick={onButtonClick}
         />

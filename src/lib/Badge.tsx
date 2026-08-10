@@ -26,17 +26,17 @@ type Spec = { bg?: string; border?: string; text: string; dot: string };
 
 const COLORS: Record<BadgeColor, { fill: Spec; outline: Spec; duo: Spec }> = {
   Primary: {
-    fill:    { bg: '#0043ff',               text: '#ffffff', dot: '#ffffff' },
-    outline: { border: '#0043ff',           text: '#0043ff', dot: '#0043ff' },
-    duo:     { bg: 'rgba(67,97,255,0.1)',   text: '#0043ff', dot: '#0043ff' },
+    fill:    { bg: 'var(--color-bg-accent)',      text: 'var(--color-text-on-accent)', dot: 'var(--color-text-on-accent)' },
+    outline: { border: 'var(--color-border-accent)', text: 'var(--color-text-accent)', dot: 'var(--color-text-accent)' },
+    duo:     { bg: 'var(--color-bg-secondary)',   text: 'var(--color-text-accent)',    dot: 'var(--color-text-accent)' },
   },
   Secondary: {
-    fill:    { bg: '#fc4575',               text: '#ffffff', dot: '#ffffff' },
-    outline: { border: '#fc4575',           text: '#fc4575', dot: '#fc4575' },
-    duo:     { bg: 'rgba(252,69,117,0.1)', text: '#1b306c', dot: '#fc4575' },
+    fill:    { bg: 'var(--color-bg-accent-pink)', text: 'var(--color-text-on-accent)', dot: 'var(--color-text-on-accent)' },
+    outline: { border: '#fc4575',                 text: '#fc4575',                     dot: '#fc4575' },
+    duo:     { bg: 'rgba(252,69,117,0.1)',         text: 'var(--color-text-primary)',   dot: '#fc4575' },
   },
   Dark: {
-    fill:    { bg: '#0a0a0a',              text: '#ffffff', dot: '#ffffff' },
+    fill:    { bg: '#0a0a0a',              text: 'var(--color-text-on-accent)', dot: 'var(--color-text-on-accent)' },
     outline: { border: '#0a0a0a',          text: '#0a0a0a', dot: '#0a0a0a' },
     duo:     { bg: 'rgba(33,43,54,0.1)',   text: '#0a0a0a', dot: '#0a0a0a' },
   },
@@ -46,9 +46,9 @@ const COLORS: Record<BadgeColor, { fill: Spec; outline: Spec; duo: Spec }> = {
     duo:     { bg: 'rgba(99,115,129,0.1)', text: '#637381', dot: '#637381' },
   },
   Light: {
-    fill:    { bg: '#f3f4f6',              text: '#0a0a0a', dot: '#0a0a0a' },
-    outline: { border: '#e5e7eb',          text: '#0a0a0a', dot: '#0a0a0a' },
-    duo:     { bg: '#f3f4f6',              text: '#374151', dot: '#374151' },
+    fill:    { bg: 'var(--color-bg-canvas)',      text: 'var(--color-text-primary)', dot: 'var(--color-text-primary)' },
+    outline: { border: 'var(--color-border-primary)', text: '#0a0a0a',              dot: '#0a0a0a' },
+    duo:     { bg: 'var(--color-bg-canvas)',      text: '#374151',                  dot: '#374151' },
   },
   Warning: {
     fill:    { bg: '#f59e0b',              text: '#ffffff', dot: '#ffffff' },
@@ -58,17 +58,17 @@ const COLORS: Record<BadgeColor, { fill: Spec; outline: Spec; duo: Spec }> = {
   Danger: {
     fill:    { bg: '#ef4444',              text: '#ffffff', dot: '#ffffff' },
     outline: { border: '#ef4444',          text: '#ef4444', dot: '#ef4444' },
-    duo:     { bg: '#fdeeec',              text: '#1b306c', dot: '#ef4444' },
+    duo:     { bg: '#fdeeec',              text: 'var(--color-text-primary)', dot: '#ef4444' },
   },
   Success: {
     fill:    { bg: '#22ad5c',              text: '#ffffff', dot: '#ffffff' },
     outline: { border: '#22ad5c',          text: '#22ad5c', dot: '#22ad5c' },
-    duo:     { bg: '#e9fcf4',              text: '#1b306c', dot: '#22ad5c' },
+    duo:     { bg: '#e9fcf4',              text: 'var(--color-text-primary)', dot: '#22ad5c' },
   },
   Info: {
-    fill:    { bg: '#00a0ff',              text: '#ffffff', dot: '#ffffff' },
+    fill:    { bg: '#00a0ff',              text: 'var(--color-text-on-accent)', dot: 'var(--color-text-on-accent)' },
     outline: { border: '#00a0ff',          text: '#00a0ff', dot: '#00a0ff' },
-    duo:     { bg: '#e6f1fd',              text: '#1b306c', dot: '#00a0ff' },
+    duo:     { bg: 'var(--color-bg-secondary)', text: 'var(--color-text-primary)', dot: '#00a0ff' },
   },
 };
 

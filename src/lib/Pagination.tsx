@@ -58,10 +58,10 @@ const navBtn = (disabled: boolean): React.CSSProperties => ({
   alignItems: 'center',
   justifyContent: 'center',
   padding: '8px',
-  border: '1px solid #dfe4ea',
+  border: '1px solid var(--color-border-primary)',
   borderRadius: 6,
-  backgroundColor: '#ffffff',
-  color: disabled ? '#cbd5e1' : '#1b306c',
+  backgroundColor: 'var(--color-bg-primary)',
+  color: disabled ? 'var(--color-text-disable)' : 'var(--color-text-primary)',
   cursor: disabled ? 'not-allowed' : 'pointer',
   flexShrink: 0,
   transition: 'background-color var(--motion-fast) var(--ease-std)',
@@ -73,10 +73,10 @@ const pageBtn = (active: boolean): React.CSSProperties => ({
   alignItems: 'center',
   justifyContent: 'center',
   padding: '8px 13px',
-  border: active ? 'none' : '1px solid #dfe4ea',
+  border: active ? 'none' : '1px solid var(--color-border-primary)',
   borderRadius: 6,
-  backgroundColor: active ? '#0043ff' : '#ffffff',
-  color: active ? '#ffffff' : '#1b306c',
+  backgroundColor: active ? 'var(--color-bg-accent)' : 'var(--color-bg-primary)',
+  color: active ? 'var(--color-text-on-accent)' : 'var(--color-text-primary)',
   cursor: 'pointer',
   fontSize: 16,
   fontWeight: 400,
@@ -117,7 +117,7 @@ export function Pagination({
             display: 'inline-flex', alignItems: 'center', gap: 4,
             padding: '5px 8px', borderRadius: 4,
             border: 'none', background: 'none',
-            fontSize: 10, fontWeight: 400, color: isFirst ? '#cbd5e1' : '#1b306c',
+            fontSize: 10, fontWeight: 400, color: isFirst ? 'var(--color-text-disable)' : 'var(--color-text-primary)',
             cursor: isFirst ? 'not-allowed' : 'pointer',
             flexShrink: 0,
           }}
@@ -131,7 +131,7 @@ export function Pagination({
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
           {pages.map((p, i) =>
             p === '...' ? (
-              <span key={`e-${i}`} style={{ fontSize: 16, color: '#1b306c', padding: '0 4px' }}>…</span>
+              <span key={`e-${i}`} style={{ fontSize: 16, color: 'var(--color-text-primary)', padding: '0 4px' }}>…</span>
             ) : (
               <button
                 key={p}
@@ -152,9 +152,9 @@ export function Pagination({
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 4,
             padding: '5px 8px', borderRadius: 4,
-            backgroundColor: isLast ? 'transparent' : '#f3f4f6',
+            backgroundColor: isLast ? 'transparent' : 'var(--color-bg-canvas)',
             border: 'none',
-            fontSize: 10, fontWeight: 400, color: isLast ? '#cbd5e1' : '#1b306c',
+            fontSize: 10, fontWeight: 400, color: isLast ? 'var(--color-text-disable)' : 'var(--color-text-primary)',
             cursor: isLast ? 'not-allowed' : 'pointer',
             flexShrink: 0,
           }}
@@ -175,8 +175,8 @@ export function Pagination({
         disabled={isFirst}
         style={navBtn(isFirst)}
         aria-label="Previous page"
-        onMouseEnter={e => { if (!isFirst) (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#e6f1fd'; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#ffffff'; }}
+        onMouseEnter={e => { if (!isFirst) (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--color-bg-secondary)'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--color-bg-primary)'; }}
       >
         <ChevronLeft />
       </button>
@@ -185,7 +185,7 @@ export function Pagination({
         p === '...' ? (
           <span
             key={`e-${i}`}
-            style={{ height: 34, minWidth: 34, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, color: '#1b306c' }}
+            style={{ height: 34, minWidth: 34, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, color: 'var(--color-text-primary)' }}
           >
             …
           </span>
@@ -195,8 +195,8 @@ export function Pagination({
             onClick={() => go(p as number)}
             style={pageBtn(p === current)}
             aria-current={p === current ? 'page' : undefined}
-            onMouseEnter={e => { if (p !== current) (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#e6f1fd'; }}
-            onMouseLeave={e => { if (p !== current) (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#ffffff'; }}
+            onMouseEnter={e => { if (p !== current) (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--color-bg-secondary)'; }}
+            onMouseLeave={e => { if (p !== current) (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--color-bg-primary)'; }}
           >
             {p}
           </button>
@@ -208,8 +208,8 @@ export function Pagination({
         disabled={isLast}
         style={navBtn(isLast)}
         aria-label="Next page"
-        onMouseEnter={e => { if (!isLast) (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#e6f1fd'; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#ffffff'; }}
+        onMouseEnter={e => { if (!isLast) (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--color-bg-secondary)'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'var(--color-bg-primary)'; }}
       >
         <ChevronRight />
       </button>

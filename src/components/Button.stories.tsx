@@ -3,7 +3,7 @@ import React from 'react';
 import { CodeBlock } from '../shared/CodeBlock';
 import { UsageBlock } from '../shared/UsageBlock';
 import { Button } from '../lib/Button';
-import type { ButtonType, ButtonState, ButtonProps } from '../lib/Button';
+import type { ButtonVariant, ButtonProps } from '../lib/Button';
 
 /* ── Meta ────────────────────────────────────────────────── */
 
@@ -14,15 +14,14 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    type:  {
+    variant: {
       control: 'select',
-      options: ['Primary', 'Secondary', 'Ghost', 'Ghost II', 'Negative', 'Accent'],
+      options: ['primary', 'secondary', 'ghost', 'outline', 'destructive', 'accent-pink'],
       description: 'Visual hierarchy of the button',
     },
-    state: {
-      control: 'select',
-      options: ['Default', 'Disabled'],
-      description: 'Interaction state',
+    disabled: {
+      control: 'boolean',
+      description: 'Disabled state',
     },
     label: { control: 'text', description: 'Button label text' },
   },
@@ -33,16 +32,16 @@ const meta: Meta<typeof Button> = {
         component: [
           '**Figma key:** `1976dd5fb0525a76fb43bf3785fa678114f2c72c`',
           '',
-          '56 variants — 14 types × 4 states. Always use `rounded-lg` or `rounded-xl`. Never fixed width.',
+          '6 variants × 2 states. Always use `rounded-lg` or `rounded-xl`. Never fixed width.',
           '',
-          '| Type | When to use |',
-          '|------|-------------|',
-          '| Primary | Main CTA — one per view |',
-          '| Secondary | Secondary action |',
-          '| Ghost | Tertiary / cancel |',
-          '| Ghost II | Subtle action on colored bg |',
-          '| Negative | Destructive actions |',
-          '| Accent | Brand highlight (navy bg) |',
+          '| Variant | When to use |',
+          '|---------|-------------|',
+          '| primary | Main CTA — one per view |',
+          '| secondary | Secondary action |',
+          '| ghost | Tertiary / cancel |',
+          '| outline | Subtle action on colored bg |',
+          '| destructive | Destructive actions |',
+          '| accent-pink | Brand highlight (pink accent) |',
         ].join('\n'),
       },
     },
@@ -57,7 +56,7 @@ export const Usage: Story = {
   render: () => (
     <UsageBlock
       component={'Button'}
-      types={['ButtonType', 'ButtonState', 'ButtonProps']}
+      types={['ButtonVariant', 'ButtonProps']}
       jsx={`<Button label="New Shipment" />`}
       figmaKey="1976dd5fb0525a76fb43bf3785fa678114f2c72c"
     />
@@ -67,32 +66,32 @@ export const Usage: Story = {
 /* ── Stories ─────────────────────────────────────────────── */
 
 export const Primary: Story = {
-  args: { label: 'New Shipment', type: 'Primary' },
+  args: { label: 'New Shipment', variant: 'primary' },
 };
 
 export const Secondary: Story = {
-  args: { label: 'View Details', type: 'Secondary' },
+  args: { label: 'View Details', variant: 'secondary' },
 };
 
 export const Ghost: Story = {
-  args: { label: 'Cancel', type: 'Ghost' },
+  args: { label: 'Cancel', variant: 'ghost' },
 };
 
 export const Negative: Story = {
-  args: { label: 'Delete Shipment', type: 'Negative' },
+  args: { label: 'Delete Shipment', variant: 'destructive' },
 };
 
 export const Disabled: Story = {
-  args: { label: 'New Shipment', type: 'Primary', state: 'Disabled' },
+  args: { label: 'New Shipment', variant: 'primary', disabled: true },
 };
 
 export const Sizes: Story = {
   name: 'Sizes',
   render: () => (
     <div className="flex flex-wrap items-center gap-3 p-4 bg-white dark:bg-slate-900 font-body">
-      <Button label="Default" type="Primary" />
-      <Button label="With icon left" type="Primary" iconLeft={<span>📦</span>} />
-      <Button label="Disabled" type="Primary" state="Disabled" />
+      <Button label="Default" variant="primary" />
+      <Button label="With icon left" variant="primary" iconLeft={<span>📦</span>} />
+      <Button label="Disabled" variant="primary" disabled />
     </div>
   ),
 };
@@ -104,16 +103,16 @@ export const AllTypes: Story = {
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Default</p>
         <div className="flex flex-wrap gap-3">
-          {(['Primary', 'Secondary', 'Ghost', 'Ghost II', 'Negative', 'Accent'] as const).map((t) => (
-            <Button key={t} label={t} type={t} />
+          {(['primary', 'secondary', 'ghost', 'outline', 'destructive', 'accent-pink'] as const).map((v) => (
+            <Button key={v} label={v} variant={v} />
           ))}
         </div>
       </div>
       <div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-3">Disabled</p>
         <div className="flex flex-wrap gap-3">
-          {(['Primary', 'Secondary', 'Ghost'] as const).map((t) => (
-            <Button key={t} label={t} type={t} state="Disabled" />
+          {(['primary', 'secondary', 'ghost'] as const).map((v) => (
+            <Button key={v} label={v} variant={v} disabled />
           ))}
         </div>
       </div>
@@ -148,7 +147,7 @@ export const AllTypes: Story = {
   px-4 py-2 text-sm">
   New Shipment
 </button>`,
-              jsx: `<Button label="New Shipment" type="Primary" />`,
+              jsx: `<Button label="New Shipment" variant="primary" />`,
             },
             {
               label: 'Secondary',
@@ -157,7 +156,7 @@ export const AllTypes: Story = {
   px-4 py-2 text-sm">
   View Details
 </button>`,
-              jsx: `<Button label="View Details" type="Secondary" />`,
+              jsx: `<Button label="View Details" variant="secondary" />`,
             },
             {
               label: 'Ghost',
@@ -167,7 +166,7 @@ export const AllTypes: Story = {
   px-4 py-2 text-sm">
   Cancel
 </button>`,
-              jsx: `<Button label="Cancel" type="Ghost" />`,
+              jsx: `<Button label="Cancel" variant="ghost" />`,
             },
             {
               label: 'Negative',
@@ -176,7 +175,7 @@ export const AllTypes: Story = {
   px-4 py-2 text-sm">
   Delete Shipment
 </button>`,
-              jsx: `<Button label="Delete Shipment" type="Negative" />`,
+              jsx: `<Button label="Delete Shipment" variant="destructive" />`,
             },
             {
               label: 'Disabled (any type)',
@@ -185,7 +184,7 @@ export const AllTypes: Story = {
   opacity-50 cursor-not-allowed">
   New Shipment
 </button>`,
-              jsx: `<Button label="New Shipment" type="Primary" state="Disabled" />`,
+              jsx: `<Button label="New Shipment" variant="primary" disabled />`,
             },
           ].map(s => (
             <div key={s.label}>

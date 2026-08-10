@@ -32,8 +32,8 @@ const ChevronUp = () => (
   <ChevronUpIcon className="w-4 h-4" aria-hidden="true" />
 );
 
-const HamburgerIcon = () => <MenuIcon className="w-6 h-6" style={{ color: '#1b306c' }} aria-hidden="true" />;
-const CloseIcon = () => <XIcon className="w-6 h-6" style={{ color: '#1b306c' }} aria-hidden="true" />;
+const HamburgerIcon = () => <MenuIcon className="w-6 h-6" style={{ color: 'var(--color-text-primary)' }} aria-hidden="true" />;
+const CloseIcon = () => <XIcon className="w-6 h-6" style={{ color: 'var(--color-text-primary)' }} aria-hidden="true" />;
 
 const SOLUTIONS_ITEMS = [
   'Multi-carrier Shipping Software',
@@ -45,8 +45,8 @@ function SolutionsDropdown({ open, mobile = false }: { open: boolean; mobile?: b
   return (
     <div
       style={{
-        backgroundColor: '#ffffff',
-        border: '1px solid #e2e8f0',
+        backgroundColor: 'var(--color-bg-primary)',
+        border: '1px solid var(--color-border-primary)',
         borderRadius: 6,
         boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1), 0px 4px 6px -4px rgba(0,0,0,0.1)',
         ...(mobile ? { width: '100%' } : { position: 'absolute', top: 'calc(100% + 4px)', left: 0, minWidth: 260, zIndex: 50 }),
@@ -63,16 +63,16 @@ function SolutionsDropdown({ open, mobile = false }: { open: boolean; mobile?: b
             fontSize: 14,
             fontWeight: 500,
             fontFamily: 'Inter',
-            color: '#1b306c',
-            borderTop: i === 0 ? '1px solid #e2e8f0' : undefined,
-            borderBottom: '1px solid #e2e8f0',
+            color: 'var(--color-text-primary)',
+            borderTop: i === 0 ? '1px solid var(--color-border-primary)' : undefined,
+            borderBottom: '1px solid var(--color-border-primary)',
             textDecoration: 'none',
             whiteSpace: 'nowrap',
-            backgroundColor: '#ffffff',
+            backgroundColor: 'var(--color-bg-primary)',
             transition: 'background-color var(--motion-fast) var(--ease-std)',
           }}
-          onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#f8fafc')}
-          onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#ffffff')}
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--color-bg-canvas)')}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'var(--color-bg-primary)')}
         >
           {item}
         </a>
@@ -108,7 +108,7 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
     fontSize: 14,
     fontWeight: 400,
     fontFamily: 'Inter',
-    color: '#1b306c',
+    color: 'var(--color-text-primary)',
     textDecoration: 'none',
     whiteSpace: 'nowrap',
     cursor: 'pointer',
@@ -122,7 +122,7 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
 
   if (mobile) {
     return (
-      <nav className={className} style={{ backgroundColor: '#ffffff', width: '100%' }}>
+      <nav className={className} style={{ backgroundColor: 'var(--color-bg-primary)', width: '100%' }}>
         {/* Mobile header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 32px' }}>
           <Logo color="original" height={30} />
@@ -175,8 +175,8 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
 
             {/* CTAs */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <Button type="Secondary" label="Log in / Dashboard" className="w-full" />
-              <Button type="Accent" label="Talk to sales" className="w-full" />
+              <Button variant="secondary" label="Log in / Dashboard" className="w-full" />
+              <Button variant="accent-pink" label="Talk to sales" className="w-full" />
             </div>
           </div>
         )}
@@ -189,7 +189,7 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
     <nav
       className={className}
       style={{
-        backgroundColor: '#ffffff',
+        backgroundColor: 'var(--color-bg-primary)',
         width: '100%',
         height: 108,
         display: 'flex',
@@ -214,7 +214,7 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
             onClick={() => { setSolutionsOpen(v => !v); setIndustriesOpen(false); }}
           >
             Solutions
-            <span style={{ marginLeft: 2, display: 'flex', alignItems: 'center', color: '#1b306c' }}>
+            <span style={{ marginLeft: 2, display: 'flex', alignItems: 'center', color: 'var(--color-text-primary)' }}>
               {solutionsOpen ? <ChevronUp /> : <ChevronDown />}
             </span>
           </button>
@@ -228,7 +228,7 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
             onClick={() => { setIndustriesOpen(v => !v); setSolutionsOpen(false); }}
           >
             Industries
-            <span style={{ marginLeft: 2, display: 'flex', alignItems: 'center', color: '#1b306c' }}>
+            <span style={{ marginLeft: 2, display: 'flex', alignItems: 'center', color: 'var(--color-text-primary)' }}>
               {industriesOpen ? <ChevronUp /> : <ChevronDown />}
             </span>
           </button>
@@ -241,16 +241,16 @@ export function Navbar({ mobile: mobileProp = false, className = '' }: NavbarPro
         {/* Search input */}
         <Input
           placeholder="Search..."
-          rightIcon={<SearchIcon style={{ width: 16, height: 16, color: '#94a3b8' }} aria-hidden="true" />}
+          rightIcon={<SearchIcon style={{ width: 16, height: 16, color: 'var(--color-text-disable)' }} aria-hidden="true" />}
           aria-label="Search"
           className="w-[187px]"
         />
 
         {/* Log in / Dashboard */}
-        <Button type="Secondary" label="Log in / Dashboard" className="whitespace-nowrap" />
+        <Button variant="secondary" label="Log in / Dashboard" className="whitespace-nowrap" />
 
         {/* Talk to sales */}
-        <Button type="Accent" label="Talk to sales" />
+        <Button variant="accent-pink" label="Talk to sales" />
       </div>
     </nav>
   );

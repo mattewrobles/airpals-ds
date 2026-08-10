@@ -58,7 +58,7 @@ export function DataCard({
   const isMobile = useIsMobile();
 
   const cardBase: React.CSSProperties = {
-    backgroundColor: '#ffffff',
+    backgroundColor: 'var(--color-bg-primary)',
     boxShadow: '0px 1px 2px rgba(0,0,0,0.05)',
     borderRadius: 10,
     boxSizing: 'border-box',
@@ -66,17 +66,17 @@ export function DataCard({
 
   const titleStyle: React.CSSProperties = {
     fontFamily: 'Lexend, sans-serif', fontWeight: 600,
-    fontSize: 18, lineHeight: '24px', color: '#1b306c',
+    fontSize: 18, lineHeight: '24px', color: 'var(--color-text-primary)',
   };
 
   const contentStyle: React.CSSProperties = {
     fontFamily: 'Inter', fontWeight: 400,
-    fontSize: 14, lineHeight: '20px', color: '#1b306c',
+    fontSize: 14, lineHeight: '20px', color: 'var(--color-text-primary)',
   };
 
   const dataStyle: React.CSSProperties = {
     fontFamily: 'Inter', fontWeight: 500,
-    fontSize: 12, lineHeight: '16px', color: '#1b306c',
+    fontSize: 12, lineHeight: '16px', color: 'var(--color-text-primary)',
     textAlign: 'center', whiteSpace: 'nowrap',
   };
 

@@ -60,7 +60,7 @@ export function Stepper({
 
   return (
     <div
-      className={`flex items-center justify-between bg-[#f3f3f5] rounded-[6px] w-[127px] h-[27px] ${className}`}
+      className={`flex items-center justify-between bg-background-canvas rounded-[6px] w-[127px] h-[27px] ${className}`}
     >
       {/* Minus — hover applies to THIS button only (not group) */}
       <button

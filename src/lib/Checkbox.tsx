@@ -28,9 +28,9 @@ export type CheckboxProps = {
 //   disabled (any) → #cbd5e1
 
 function getBg(isActive: boolean, hovered: boolean, focused: boolean, disabled: boolean): string {
-  if (disabled) return '#cbd5e1';
-  if (isActive) return focused ? '#115fd8' : hovered ? '#1773ff' : '#0043ff';
-  return focused ? '#115fd8' : hovered ? '#94a3b8' : '#cbd5e1';
+  if (disabled) return 'var(--color-border-ghost)';
+  if (isActive) return focused ? 'var(--color-bg-interactive-pressed)' : hovered ? 'var(--color-bg-interactive-hover)' : 'var(--color-bg-accent)';
+  return focused ? 'var(--color-bg-interactive-pressed)' : hovered ? 'var(--color-text-disable)' : 'var(--color-border-ghost)';
 }
 
 const CheckIcon = () => (

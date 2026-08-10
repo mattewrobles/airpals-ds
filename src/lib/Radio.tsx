@@ -31,10 +31,10 @@ export type RadioButtonProps = {
 //   Selected → border-2 border-brand-blue, white bg + blue inner dot
 //   Disabled → border-2 border-slate-200, white bg
 const RING: Record<RadioState, string> = {
-  Default:  'border-2 border-[#cbd5e1]',
-  Hover:    'border-2 border-[#94a3b8]',
+  Default:  'border-2 border-border-ghost',
+  Hover:    'border-2 border-slate-400',
   Selected: 'border-2 border-border-accent',
-  Disabled: 'border-2 border-[#e2e8f0]',
+  Disabled: 'border-2 border-slate-200',
 };
 
 export function RadioIndicator({ state = 'Default', size = '16px', className = '' }: RadioIndicatorProps) {
