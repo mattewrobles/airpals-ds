@@ -25,7 +25,7 @@ export function ButtonDemo({
       className={[
         'inline-flex items-center justify-center gap-2.5',
         'px-5 py-3 rounded-xl',
-        'bg-brand-pink text-ink-on-accent',
+        'bg-brand-pink text-text-on-accent',
         'text-base font-normal font-body',
         'transition-opacity',
         disabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90 active:opacity-80',

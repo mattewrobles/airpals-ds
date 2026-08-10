@@ -24,7 +24,7 @@ export type TextareaProps = {
 //   Default  → 1px #dfe4ea (hairline)
 //   Hover    → 1.5px #0043ff (accent)
 //   Focused  → 3px #a5b4fc (indigo-300)
-//   Disabled → 1px #cbd5e1 + bg-surface-disable
+//   Disabled → 1px #cbd5e1 + bg-background-disable
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
@@ -54,10 +54,10 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const helperId = helperText && textareaId ? `${textareaId}-helper` : undefined;
 
     const fieldCls = disabled
-      ? 'bg-surface-disable border border-[#cbd5e1] cursor-not-allowed'
+      ? 'bg-background-disable border border-[#cbd5e1] cursor-not-allowed'
       : [
-          'bg-surface-primary border border-[#dfe4ea]',
-          'hover:[border-width:1.5px] hover:border-line-accent',
+          'bg-background-primary border border-[#dfe4ea]',
+          'hover:[border-width:1.5px] hover:border-border-accent',
           'focus:[border-width:3px] focus:border-[#a5b4fc]',
         ].join(' ');
 
@@ -70,7 +70,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={textareaId}
-            className={`text-base font-medium leading-6 ${disabled ? 'text-ink-disable' : 'text-ink-primary'}`}
+            className={`text-base font-medium leading-6 ${disabled ? 'text-text-disable' : 'text-text-primary'}`}
           >
             {label}
           </label>
@@ -91,8 +91,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-describedby={ariaDescribedBy ?? helperId}
           className={[
             'w-full rounded-md p-5',
-            'text-base font-normal leading-6 text-ink-primary',
-            'placeholder:text-ink-disable',
+            'text-base font-normal leading-6 text-text-primary',
+            'placeholder:text-text-disable',
             'outline-none transition-colors resize-none',
             fieldCls,
           ].join(' ')}
@@ -100,7 +100,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
         {/* Footer: helper text (left) + counter (right) */}
         {showFooter && (
-          <div className="flex items-center justify-between text-sm font-normal leading-5 text-ink-primary">
+          <div className="flex items-center justify-between text-sm font-normal leading-5 text-text-primary">
             {helperText
               ? <p id={helperId} className="flex-1 min-w-0">{helperText}</p>
               : <span />

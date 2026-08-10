@@ -38,8 +38,8 @@ export function ClickableLink({
   className = '',
 }: ClickableLinkProps) {
   const colorCls = color === 'Blue'
-    ? 'text-ink-accent hover:opacity-75'
-    : 'text-ink-primary hover:opacity-75';
+    ? 'text-text-accent hover:opacity-75'
+    : 'text-text-primary hover:opacity-75';
 
   const sizeCls = size === 'lg' ? 'text-lg leading-5' : 'text-sm leading-5';
 

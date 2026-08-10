@@ -27,10 +27,10 @@ const X_ICON = (
 // Figma exact: Focus=border-2 border-rgba(55,88,249,0.3), Disable=opacity-40
 // Brand blue #0043ff = rgb(0,67,255) — previous code used wrong indigo rgb(55,88,249)
 const stateClasses: Record<TagState, string> = {
-  Default: 'bg-[rgba(0,67,255,0.08)] text-ink-primary',
-  Hover:   'bg-surface-accent text-ink-on-accent',
-  Focus:   'bg-[rgba(0,67,255,0.08)] text-ink-primary border-2 border-[rgba(0,67,255,0.3)]',
-  Disable: 'bg-surface-disable text-ink-primary opacity-40 cursor-not-allowed',
+  Default: 'bg-[rgba(0,67,255,0.08)] text-text-primary',
+  Hover:   'bg-background-accent text-text-on-accent',
+  Focus:   'bg-[rgba(0,67,255,0.08)] text-text-primary border-2 border-[rgba(0,67,255,0.3)]',
+  Disable: 'bg-background-disable text-text-primary opacity-40 cursor-not-allowed',
 };
 
 export function Tag({

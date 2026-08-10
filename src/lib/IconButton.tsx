@@ -14,10 +14,10 @@ export type IconButtonProps = {
 
 // Figma node 747-8438 — 32×32px icon-only button, 4 states
 const STATE_STYLES: Record<IconButtonState, string> = {
-  Normal:  'bg-surface-accent  text-icon-on-accent',
-  Outline: 'border border-line-accent text-icon-accent',
+  Normal:  'bg-background-accent  text-icon-on-accent',
+  Outline: 'border border-border-accent text-icon-accent',
   Glow:    'text-icon-accent   [filter:drop-shadow(0_0_6px_#0043ff88)]',
-  Disable: 'bg-surface-disable text-icon-disable cursor-not-allowed',
+  Disable: 'bg-background-disable text-icon-disable cursor-not-allowed',
 };
 
 export function IconButton({

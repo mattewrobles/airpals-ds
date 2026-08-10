@@ -2,13 +2,15 @@
 
 import React from 'react';
 
-export type ButtonType = 'Primary' | 'Secondary' | 'Ghost' | 'Ghost II' | 'Negative' | 'Accent';
-export type ButtonState = 'Default' | 'Disabled';
+// DS v2.5 — aligned with ↘︎ Buttons Figma component (node 1448:25153)
+// 6 variants × 4 states = 24 combinations
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline' | 'destructive' | 'accent-pink';
+export type ButtonStatus = 'default' | 'disabled';
 
 export type ButtonProps = {
   label: string;
-  type?: ButtonType;
-  state?: ButtonState;
+  variant?: ButtonVariant;
+  disabled?: boolean;
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
   onClick?: () => void;
@@ -17,49 +19,39 @@ export type ButtonProps = {
   'aria-label'?: string;
 };
 
-// Figma node 596-24 — DS token mapping + exact hover/active from Figma
-const ENABLED: Record<ButtonType, string> = {
-  Primary:
-    'bg-surface-accent text-ink-on-accent hover:bg-[#1773ff] active:bg-[#115fd8]',
-  Secondary:
-    'bg-surface-secondary text-ink-primary hover:bg-[#cde5ff] active:bg-[#afd0f2]',
-  Ghost:
-    'bg-transparent border border-line-primary text-ink-primary ' +
-    'hover:border-line-accent hover:text-ink-accent active:border-[#115fd8] active:text-[#115fd8]',
-  'Ghost II':
-    'bg-transparent border border-brand-navy text-ink-primary ' +
-    'hover:border-line-accent hover:text-ink-accent active:border-[#115fd8] active:text-[#115fd8]',
-  Negative:
-    'bg-[#f87171] text-white hover:bg-[#ff4e4e] active:bg-[#de3838]',
-  Accent:
-    'bg-brand-pink text-white hover:bg-[#f23063] active:bg-[#d80e43]',
+const ENABLED: Record<ButtonVariant, string> = {
+  primary:
+    'bg-background-accent text-text-on-accent ' +
+    'hover:bg-background-interactive-hover active:bg-background-interactive-pressed',
+  secondary:
+    'bg-background-secondary text-text-primary border border-border-subtle ' +
+    'hover:bg-background-secondary-hover active:bg-background-secondary-pressed',
+  ghost:
+    'bg-transparent text-text-primary ' +
+    'hover:bg-background-secondary-hover active:bg-background-secondary-pressed',
+  outline:
+    'bg-transparent border border-border-ghost text-text-primary ' +
+    'hover:border-border-accent hover:text-text-accent hover:bg-background-secondary-hover ' +
+    'active:border-border-interactive-pressed active:text-text-interactive-pressed active:bg-background-secondary-pressed',
+  destructive:
+    'bg-background-danger text-text-on-accent ' +
+    'hover:bg-background-danger-hover active:bg-background-danger-pressed',
+  'accent-pink':
+    'bg-background-accent-pink text-text-on-accent ' +
+    'hover:bg-background-accent-pink-hover active:bg-background-accent-pink-pressed',
 };
 
-const DISABLED: Record<ButtonType, string> = {
-  Primary:    'bg-surface-disable text-ink-disable',
-  Secondary:  'bg-surface-disable text-ink-disable',
-  Ghost:      'bg-transparent border border-line-primary text-ink-disable',
-  'Ghost II': 'bg-transparent border border-line-primary text-ink-disable',
-  Negative:   'bg-[#f9c9c6] text-white',
-  Accent:     'bg-[#fec3d2] text-white',
+const DISABLED: Record<ButtonVariant, string> = {
+  primary:       'bg-background-disable text-text-disable',
+  secondary:     'bg-background-disable text-text-disable',
+  ghost:         'bg-transparent text-text-disable',
+  outline:       'bg-transparent border border-border-disable text-text-disable',
+  destructive:   'bg-background-disable text-text-disable',
+  'accent-pink': 'bg-background-disable text-text-disable',
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      label,
-      type = 'Primary',
-      state = 'Default',
-      iconLeft,
-      iconRight,
-      onClick,
-      className = '',
-      id,
-      'aria-label': ariaLabel,
-    },
-    ref
-  ) => {
-    const disabled = state === 'Disabled';
+  ({ label, variant = 'primary', disabled = false, iconLeft, iconRight, onClick, className = '', id, 'aria-label': ariaLabel }, ref) => {
     const hasIcon = Boolean(iconLeft || iconRight);
 
     return (
@@ -72,13 +64,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-label={ariaLabel}
         className={[
           'inline-flex items-center justify-center min-w-[140px] overflow-hidden',
-          'p-3 rounded-md',
+          'px-4 py-2.5 rounded-lg',
           'text-sm leading-5 font-semibold',
           'transition-colors',
           hasIcon ? 'gap-2' : '',
           disabled
-            ? `${DISABLED[type]} cursor-not-allowed`
-            : ENABLED[type],
+            ? `${DISABLED[variant]} cursor-not-allowed`
+            : ENABLED[variant],
           className,
         ].filter(Boolean).join(' ')}
       >

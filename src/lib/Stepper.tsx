@@ -69,7 +69,7 @@ export function Stepper({
         aria-label="Decrease"
         disabled={!canDec}
         className={[
-          'flex items-center justify-center h-full text-ink-primary transition-colors duration-150 rounded-l-[6px]',
+          'flex items-center justify-center h-full text-text-primary transition-colors duration-150 rounded-l-[6px]',
           'px-[9px] hover:bg-[#e2e8f0] hover:px-[10px]',
           !canDec ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer',
         ].join(' ')}
@@ -78,7 +78,7 @@ export function Stepper({
       </button>
 
       {/* Value */}
-      <span className="text-[16px] font-normal leading-[29px] text-ink-primary text-center w-[28px] shrink-0 select-none tabular-nums">
+      <span className="text-[16px] font-normal leading-[29px] text-text-primary text-center w-[28px] shrink-0 select-none tabular-nums">
         {value}
       </span>
 
@@ -89,7 +89,7 @@ export function Stepper({
         aria-label="Increase"
         disabled={!canInc}
         className={[
-          'flex items-center justify-center h-full text-ink-primary transition-colors duration-150 rounded-r-[6px]',
+          'flex items-center justify-center h-full text-text-primary transition-colors duration-150 rounded-r-[6px]',
           'px-[9px] hover:bg-[#e2e8f0] hover:px-[10px]',
           !canInc ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer',
         ].join(' ')}

@@ -63,16 +63,16 @@ function DropdownRow({ label, subtitle, avatar, rowState = 'default', divider = 
   const [hovered, setHovered] = useState(false);
 
   const bgCls =
-    rowState === 'active'   ? 'bg-surface-accent' :
-    rowState === 'disabled' ? 'bg-surface-disable cursor-not-allowed' :
-    hovered                 ? 'bg-surface-secondary cursor-pointer' :
-                              'bg-surface-primary cursor-pointer';
+    rowState === 'active'   ? 'bg-background-accent' :
+    rowState === 'disabled' ? 'bg-background-disable cursor-not-allowed' :
+    hovered                 ? 'bg-background-secondary cursor-pointer' :
+                              'bg-background-primary cursor-pointer';
 
   const titleCls =
-    rowState === 'active'   ? 'text-ink-on-accent' :       // white
-    rowState === 'disabled' ? 'text-ink-disable' :
-    hovered                 ? 'text-ink-secondary' :
-                              'text-ink-primary';
+    rowState === 'active'   ? 'text-text-on-accent' :       // white
+    rowState === 'disabled' ? 'text-text-disable' :
+    hovered                 ? 'text-text-secondary' :
+                              'text-text-primary';
 
   return (
     <div
@@ -97,13 +97,13 @@ function DropdownRow({ label, subtitle, avatar, rowState = 'default', divider = 
           )}
         </div>
       </div>
-      {divider && <div className="w-full border-b border-line-primary" />}
+      {divider && <div className="w-full border-b border-border-primary" />}
     </div>
   );
 }
 
 // ─── Dropdown — Figma 738-3496 ────────────────────────────────────────────────
-// Trigger: label (xs/medium/navy) + field (border-line-primary rounded-md py-3 px-3)
+// Trigger: label (xs/medium/navy) + field (border-border-primary rounded-md py-3 px-3)
 // Menu: rounded-lg shadow-xs overflow-hidden, floats below with mt-2, z-50
 
 function normalizeOption(o: DropdownOption | string): DropdownOption {
@@ -160,7 +160,7 @@ export function Dropdown({
 
   const triggerBorder = open
     ? '[border-width:3px] border-[#adbcf2]'
-    : 'border border-line-primary hover:border-line-accent';
+    : 'border border-border-primary hover:border-border-accent';
 
   return (
     <div ref={wrapRef} className={`relative w-full ${className}`}>
@@ -171,7 +171,7 @@ export function Dropdown({
       {label && (
         <label
           htmlFor={triggerId}
-          className={`block text-xs font-medium leading-4 mb-1 ${disabled ? 'text-ink-disable' : 'text-ink-primary'}`}
+          className={`block text-xs font-medium leading-4 mb-1 ${disabled ? 'text-text-disable' : 'text-text-primary'}`}
         >
           {label}
         </label>
@@ -186,14 +186,14 @@ export function Dropdown({
         aria-expanded={open}
         onClick={() => setOpen(v => !v)}
         className={[
-          'w-full flex items-center justify-between gap-[10px] px-3 py-[10px] rounded-md bg-surface-primary transition-colors duration-[var(--motion-fast)] outline-none',
-          disabled ? 'border border-line-primary bg-surface-disable cursor-not-allowed' : triggerBorder,
+          'w-full flex items-center justify-between gap-[10px] px-3 py-[10px] rounded-md bg-background-primary transition-colors duration-[var(--motion-fast)] outline-none',
+          disabled ? 'border border-border-primary bg-background-disable cursor-not-allowed' : triggerBorder,
         ].join(' ')}
       >
-        <span className={`text-sm font-normal leading-5 truncate ${selected ? 'text-ink-primary' : 'text-ink-secondary'}`}>
+        <span className={`text-sm font-normal leading-5 truncate ${selected ? 'text-text-primary' : 'text-text-secondary'}`}>
           {selected?.label ?? placeholder}
         </span>
-        <span className="shrink-0 text-ink-secondary">
+        <span className="shrink-0 text-text-secondary">
           {open ? <ChevronUp /> : <ChevronDown />}
         </span>
       </button>

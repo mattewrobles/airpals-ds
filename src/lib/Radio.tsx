@@ -33,7 +33,7 @@ export type RadioButtonProps = {
 const RING: Record<RadioState, string> = {
   Default:  'border-2 border-[#cbd5e1]',
   Hover:    'border-2 border-[#94a3b8]',
-  Selected: 'border-2 border-line-accent',
+  Selected: 'border-2 border-border-accent',
   Disabled: 'border-2 border-[#e2e8f0]',
 };
 
@@ -48,7 +48,7 @@ export function RadioIndicator({ state = 'Default', size = '16px', className = '
     <div className={`${outerSize} flex items-center justify-center shrink-0 ${className}`} aria-hidden="true">
       <div className={`${ringSize} rounded-full flex items-center justify-center bg-white transition-colors ${RING[state]}`}>
         {state === 'Selected' && (
-          <div className="size-2 rounded-full bg-surface-accent" />
+          <div className="size-2 rounded-full bg-background-accent" />
         )}
       </div>
     </div>
@@ -85,7 +85,7 @@ export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
       : undefined);
 
     const labelEl = label && (
-      <span className={`font-normal ${textCls} ${disabled ? 'text-ink-disable' : 'text-ink-primary'}`}>
+      <span className={`font-normal ${textCls} ${disabled ? 'text-text-disable' : 'text-text-primary'}`}>
         {label}
       </span>
     );

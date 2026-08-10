@@ -72,7 +72,7 @@ export function ToggleWithText({
     return (
       <div className="inline-flex items-center gap-[7px]">
         <ToggleSimple checked={isOn} onChange={handle} />
-        <span className="text-sm font-medium leading-[22px] text-ink-primary whitespace-nowrap">
+        <span className="text-sm font-medium leading-[22px] text-text-primary whitespace-nowrap">
           {isOn ? labelOn : labelOff}
         </span>
       </div>
@@ -85,22 +85,22 @@ export function ToggleWithText({
     return (
       <div
         role="group"
-        className="flex w-[275px] h-[48px] rounded-[6px] bg-surface-primary shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] p-1 gap-1"
+        className="flex w-[275px] h-[48px] rounded-[6px] bg-background-primary shadow-[0px_1px_4px_0px_rgba(0,0,0,0.12)] p-1 gap-1"
       >
         <button
           type="button"
           onClick={() => handle(false)}
-          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-ink-primary ${!isOn ? 'bg-surface-secondary' : 'bg-transparent hover:bg-surface-tertiary'}`}
+          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-text-primary ${!isOn ? 'bg-background-secondary' : 'bg-transparent hover:bg-background-tertiary'}`}
         >
-          <span className="shrink-0 text-ink-primary">{iconLeft}</span>
+          <span className="shrink-0 text-text-primary">{iconLeft}</span>
           <span className="text-sm font-medium leading-[22px] whitespace-nowrap">{labelLeft}</span>
         </button>
         <button
           type="button"
           onClick={() => handle(true)}
-          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-ink-primary ${isOn ? 'bg-surface-secondary' : 'bg-transparent hover:bg-surface-tertiary'}`}
+          className={`flex flex-1 items-center justify-center gap-[6px] rounded-[4px] transition-colors duration-150 text-text-primary ${isOn ? 'bg-background-secondary' : 'bg-transparent hover:bg-background-tertiary'}`}
         >
-          <span className="shrink-0 text-ink-primary">{iconRight}</span>
+          <span className="shrink-0 text-text-primary">{iconRight}</span>
           <span className="text-sm font-medium leading-[22px] whitespace-nowrap">{labelRight}</span>
         </button>
       </div>
@@ -111,9 +111,9 @@ export function ToggleWithText({
   // Light [toggle] Dark
   return (
     <div className="inline-flex items-center gap-[15px]">
-      <span className="text-sm font-medium leading-[22px] text-ink-primary whitespace-nowrap">{labelA}</span>
+      <span className="text-sm font-medium leading-[22px] text-text-primary whitespace-nowrap">{labelA}</span>
       <ToggleShort checked={isOn} onChange={handle} />
-      <span className="text-sm font-medium leading-[22px] text-ink-primary whitespace-nowrap">{labelB}</span>
+      <span className="text-sm font-medium leading-[22px] text-text-primary whitespace-nowrap">{labelB}</span>
     </div>
   );
 }

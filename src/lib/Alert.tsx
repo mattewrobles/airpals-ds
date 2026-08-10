@@ -36,11 +36,11 @@ export type AlertProps = {
 
 // DS Semantic Tailwind classes — all resolved through CSS vars
 const THEME = {
-  error:   { bg: 'bg-surface-error',   text: 'text-ink-error',   icon: 'text-icon-error',   bar: 'bg-icon-error'   },
-  warning: { bg: 'bg-surface-warning', text: 'text-ink-warning', icon: 'text-icon-warning', bar: 'bg-icon-warning' },
-  success: { bg: 'bg-surface-success', text: 'text-ink-success', icon: 'text-icon-success', bar: 'bg-icon-success' },
-  info:    { bg: 'bg-surface-info',    text: 'text-ink-info',    icon: 'text-icon-info',    bar: 'bg-icon-info'    },
-  alert:   { bg: 'bg-surface-error',   text: 'text-ink-error',   icon: 'text-icon-error',   bar: 'bg-icon-error'   },
+  error:   { bg: 'bg-background-error',   text: 'text-text-error',   icon: 'text-icon-error',   bar: 'bg-icon-error'   },
+  warning: { bg: 'bg-background-warning', text: 'text-text-warning', icon: 'text-icon-warning', bar: 'bg-icon-warning' },
+  success: { bg: 'bg-background-success', text: 'text-text-success', icon: 'text-icon-success', bar: 'bg-icon-success' },
+  info:    { bg: 'bg-background-info',    text: 'text-text-info',    icon: 'text-icon-info',    bar: 'bg-icon-info'    },
+  alert:   { bg: 'bg-background-error',   text: 'text-text-error',   icon: 'text-icon-error',   bar: 'bg-icon-error'   },
 } as const satisfies Record<AlertUseCase, { bg: string; text: string; icon: string; bar: string }>;
 
 // Per Figma: error/success always show bar — warning/info/alert follow `border` prop

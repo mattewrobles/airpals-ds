@@ -47,29 +47,29 @@ const SuccessIcon = () => (
 
 const WRAPPER: Record<InputStatus, string> = {
   Default: [
-    'border border-line-primary bg-surface-primary',
-    'hover:border-line-accent',
-    'focus-within:[border-width:3px] focus-within:border-line-focus',
+    'border border-border-primary bg-background-primary',
+    'hover:border-border-accent',
+    'focus-within:[border-width:3px] focus-within:border-border-focus',
   ].join(' '),
   Error: [
-    'border border-line-error bg-surface-primary',
-    'hover:border-line-error',
+    'border border-border-error bg-background-primary',
+    'hover:border-border-error',
     'focus-within:[border-width:3px] focus-within:border-[#fecaca]',
   ].join(' '),
   Success: [
-    'border border-line-success bg-surface-primary',
-    'hover:border-line-success',
+    'border border-border-success bg-background-primary',
+    'hover:border-border-success',
     'focus-within:[border-width:3px] focus-within:border-[#82e6ac]',
   ].join(' '),
 };
 
-// border-line-disable (not border-surface-disable — surface is a background token)
-const DISABLED_WRAPPER = 'border border-line-disable bg-surface-disable cursor-not-allowed';
+// border-border-disable (not border-background-disable — surface is a background token)
+const DISABLED_WRAPPER = 'border border-border-disable bg-background-disable cursor-not-allowed';
 
 const HELPER_COLOR: Record<InputStatus, string> = {
-  Default: 'text-ink-secondary',
-  Error:   'text-ink-error',
-  Success: 'text-ink-success',
+  Default: 'text-text-secondary',
+  Error:   'text-text-error',
+  Success: 'text-text-success',
 };
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -105,7 +105,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className={`text-xs font-medium leading-4 ${disabled ? 'text-ink-disable' : 'text-ink-primary'}`}
+            className={`text-xs font-medium leading-4 ${disabled ? 'text-text-disable' : 'text-text-primary'}`}
           >
             {label}
           </label>
@@ -138,8 +138,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               'flex-1 min-w-0 bg-transparent outline-none',
               'text-sm font-normal leading-5',
               disabled
-                ? 'text-ink-disable cursor-not-allowed placeholder:text-ink-disable'
-                : 'text-ink-primary placeholder:text-ink-tertiary',
+                ? 'text-text-disable cursor-not-allowed placeholder:text-text-disable'
+                : 'text-text-primary placeholder:text-text-tertiary',
             ].join(' ')}
           />
 
@@ -153,7 +153,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
         {/* Helper text — text-xs/medium */}
         {helperText && (
-          <p id={helperId} className={`text-xs font-medium leading-4 ${disabled ? 'text-ink-secondary' : HELPER_COLOR[status]}`}>
+          <p id={helperId} className={`text-xs font-medium leading-4 ${disabled ? 'text-text-secondary' : HELPER_COLOR[status]}`}>
             {helperText}
           </p>
         )}

@@ -135,7 +135,7 @@ export function Checkbox({
       </div>
 
       {label && (
-        <span className={`text-sm font-normal leading-5 ${disabled ? 'text-ink-disable' : 'text-ink-primary'}`}>
+        <span className={`text-sm font-normal leading-5 ${disabled ? 'text-text-disable' : 'text-text-primary'}`}>
           {label}
         </span>
       )}

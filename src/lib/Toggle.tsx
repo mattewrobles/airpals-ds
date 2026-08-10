@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 // ─── Toggle Short — Figma 742-64561 ──────────────────────────────────────────
 // 36×20px. Track 16px tall (offset 2px top). Knob 20×20px.
-// On: bg-surface-accent (#0043ff). Off: #e5e7eb. Disabled on: #a9c0ff. Disabled off: #f3f4f6.
+// On: bg-background-accent (#0043ff). Off: #e5e7eb. Disabled on: #a9c0ff. Disabled off: #f3f4f6.
 export type ToggleShortProps = {
   checked?: boolean;
   disabled?: boolean;
@@ -25,7 +25,7 @@ export function ToggleShort({ checked = false, disabled = false, onChange, class
 
   const trackBg = disabled
     ? (isOn ? 'bg-[#a9c0ff]' : 'bg-[#f3f4f6]')
-    : (isOn ? 'bg-surface-accent' : 'bg-[#e5e7eb]');
+    : (isOn ? 'bg-background-accent' : 'bg-[#e5e7eb]');
 
   return (
     <button
@@ -95,7 +95,7 @@ export function Toggle({ active, checked, disabled, label, onChange, onToggle, c
   return (
     <label className="inline-flex items-center gap-2.5 cursor-pointer select-none">
       <ToggleShort checked={active ?? checked} disabled={disabled} onChange={handleChange} className={className} />
-      {label && <span className="text-sm font-medium text-ink-primary">{label}</span>}
+      {label && <span className="text-sm font-medium text-text-primary">{label}</span>}
     </label>
   );
 }

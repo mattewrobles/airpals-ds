@@ -29,10 +29,10 @@ const SIZE = {
 // Primary = brand blue solid · Secondary = white outlined · Info = blue-light outlined
 // Success = mint light · Warning = brand-pink solid · Danger = red-600 solid
 const TYPE = {
-  Primary:   { bg: 'bg-surface-accent',    border: 'border-surface-accent',    text: 'text-ink-on-accent', divider: 'rgba(255,255,255,0.25)' },
-  Secondary: { bg: 'bg-surface-primary',   border: 'border-line-primary',      text: 'text-ink-primary',   divider: '#e2e8f0' },
-  Info:      { bg: 'bg-surface-secondary', border: 'border-line-secondary',    text: 'text-ink-primary',   divider: '#cbd5e1' },
-  Success:   { bg: 'bg-[#e9fcf4]',         border: 'border-[#e9fcf4]',         text: 'text-ink-primary',   divider: '#a7f3d0' },
+  Primary:   { bg: 'bg-background-accent',    border: 'border-background-accent',    text: 'text-text-on-accent', divider: 'rgba(255,255,255,0.25)' },
+  Secondary: { bg: 'bg-background-primary',   border: 'border-border-primary',      text: 'text-text-primary',   divider: '#e2e8f0' },
+  Info:      { bg: 'bg-background-secondary', border: 'border-border-secondary',    text: 'text-text-primary',   divider: '#cbd5e1' },
+  Success:   { bg: 'bg-[#e9fcf4]',         border: 'border-[#e9fcf4]',         text: 'text-text-primary',   divider: '#a7f3d0' },
   Warning:   { bg: 'bg-brand-pink',         border: 'border-brand-pink',         text: 'text-white',         divider: 'rgba(255,255,255,0.25)' },
   Danger:    { bg: 'bg-[#dc2626]',          border: 'border-[#dc2626]',          text: 'text-white',         divider: 'rgba(255,255,255,0.25)' },
 } as const;
@@ -106,13 +106,13 @@ export function SplitButton({
 
       {/* Dropdown */}
       {open && !disabled && (
-        <div className="absolute top-full left-0 mt-1 min-w-[160px] bg-surface-primary border border-line-primary rounded-md shadow-md z-10 overflow-hidden py-1">
+        <div className="absolute top-full left-0 mt-1 min-w-[160px] bg-background-primary border border-border-primary rounded-md shadow-md z-10 overflow-hidden py-1">
           {options.map(opt => (
             <button
               key={opt}
               type="button"
               onClick={() => { onOptionSelect?.(opt); setOpen(false); }}
-              className="w-full text-left px-3 py-2 text-sm text-ink-primary hover:bg-surface-secondary transition-colors"
+              className="w-full text-left px-3 py-2 text-sm text-text-primary hover:bg-background-secondary transition-colors"
             >
               {opt}
             </button>
