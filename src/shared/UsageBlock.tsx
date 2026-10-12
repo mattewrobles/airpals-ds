@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const PKG = 'airpals-ds';
-const VERSION = '0.5.1';
+const VERSION = '0.7.0';
 const NPM_URL = 'https://www.npmjs.com/package/airpals-ds';
 
 type UsageBlockProps = {

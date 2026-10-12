@@ -191,6 +191,9 @@ Then in your `globals.css`:
 | `Checkbox` | 4 states · On / Off / Indeterminate |
 | `Radio` / `RadioButton` | 4 states · 2 sizes |
 | `Toggle` | 3 styles (Standard / Navy / Subtle) |
+| `Switch` | Controlled 44×24 switch · required aria label |
+| `Tooltip` | Radix tooltip |
+| `SlideOverPanel` | Right-side edit panel · discard confirm |
 | `ToggleWithText` | Default and compact sizes |
 | `Stepper` | Numeric input +/− · min/max/step · form-compatible |
 | `Rating` | 1–5 stars · read-only or interactive · 2 sizes |

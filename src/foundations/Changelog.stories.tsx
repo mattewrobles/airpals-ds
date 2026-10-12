@@ -77,6 +77,16 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.7.0',
+    date: '2026-10-12',
+    summary: 'Components extracted from the app: SlideOverPanel, Tooltip, Switch',
+    changes: [
+      { type: 'new', text: 'SlideOverPanel: right-side edit panel with discard confirmation on every close path (X, Esc, backdrop, Cancel).' },
+      { type: 'new', text: 'Tooltip, TooltipTrigger, TooltipContent, TooltipProvider: Radix tooltip with the Airpals navy surface.' },
+      { type: 'new', text: 'Switch: controlled 44×24px switch with a required accessible label' },
+    ],
+  },
+  {
     version: 'v0.6.0',
     date: '2026-08-10',
     summary: 'DS v2.5: Lucide icons, semantic tokens, Button v2.5',

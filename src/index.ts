@@ -92,6 +92,14 @@ export type { TextareaProps } from './lib/Textarea';
 export { Toggle, ToggleShort, ToggleSimple } from './lib/Toggle';
 export type { ToggleStyle, ToggleProps, ToggleShortProps, ToggleSimpleProps } from './lib/Toggle';
 
+export { Switch } from './lib/Switch';
+export type { SwitchProps } from './lib/Switch';
+
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './lib/Tooltip';
+
+export { SlideOverPanel } from './lib/SlideOverPanel';
+export type { SlideOverPanelProps } from './lib/SlideOverPanel';
+
 export { ToggleWithText } from './lib/ToggleWithText';
 export type { ToggleWithTextStyle, ToggleWithTextSize, ToggleWithTextProps } from './lib/ToggleWithText';
 
