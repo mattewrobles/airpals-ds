@@ -108,10 +108,10 @@ Si los componentes se ven sin colores o con estilos incorrectos, verifica lo sig
 
 ### Peer dependencies
 
-`@heroicons/react` and `tailwindcss` are required in your project. If you don't have them yet:
+`lucide-react` and `tailwindcss` are required in your project. If you don't have them yet:
 
 ```bash
-yarn add @heroicons/react tailwindcss
+yarn add lucide-react tailwindcss
 ```
 
 ### Tailwind v3 — required config
@@ -240,7 +240,7 @@ Then in your `globals.css`:
 |-----------|-------------|
 | `Divider` | Horizontal rule · optional label |
 | `ClickableLink` | Blue / Dark Blue · external link |
-| `Icon` | Heroicons v1 — outline and solid |
+| `Icon` | Lucide — stroke icons, name-based |
 | `Logo` | Airpals wordmark — light and dark |
 
 ---
@@ -410,5 +410,5 @@ Live Storybook published via Chromatic on every push to `main`.
 - **Tailwind CSS** v3
 - **Storybook** 8
 - **Vite** (lib build)
-- **Heroicons** v1
+- **Lucide** (lucide-react)
 - **Fontsource** — Inter + Lexend

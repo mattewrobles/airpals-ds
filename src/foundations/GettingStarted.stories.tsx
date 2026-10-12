@@ -91,7 +91,7 @@ export const Docs: Story = {
       <div>
         <div className="flex items-center gap-3 mb-2">
           <h1 className="font-heading text-3xl font-semibold text-brand-navy dark:text-slate-50">Getting Started</h1>
-          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.5.6</span>
+          <span className="text-xs font-mono bg-[#e6f1fd] text-[#0043ff] px-2 py-0.5 rounded-full">v0.6.0</span>
         </div>
         <p className="text-sm text-slate-500 leading-6">
           Airpals Design System — React components built with Tailwind CSS.
@@ -102,9 +102,9 @@ export const Docs: Story = {
       {/* Installation */}
       <Section title="Installation">
         <Step n={1} title="Install the package + peer dependencies">
-          <CodeBlock label="yarn" code="yarn add airpals-ds @heroicons/react @fontsource/inter @fontsource/lexend" />
+          <CodeBlock label="yarn" code="yarn add airpals-ds lucide-react @fontsource/inter @fontsource/lexend" />
           <p className="text-xs text-slate-400 mt-1">
-            <Pill>@heroicons/react</Pill> is required — icons are not bundled. <Pill>@fontsource/inter</Pill> and <Pill>@fontsource/lexend</Pill> are required for correct typography.
+            <Pill>lucide-react</Pill> is required — icons are not bundled. <Pill>@fontsource/inter</Pill> and <Pill>@fontsource/lexend</Pill> are required for correct typography.
           </p>
         </Step>
         <Step n={2} title="Import and use">

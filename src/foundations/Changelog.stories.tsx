@@ -77,6 +77,18 @@ function ReleaseCard({ release }: { release: Release }) {
 
 const releases: Release[] = [
   {
+    version: 'v0.6.0',
+    date: '2026-08-10',
+    summary: 'DS v2.5: Lucide icons, semantic tokens, Button v2.5',
+    changes: [
+      { type: 'updated', text: 'Icons: @heroicons/react replaced by lucide-react (1,509 stroke icons). Icon is name-based with a strokeWidth prop' },
+      { type: 'updated', text: 'Semantic token rename: bg-surface-* → bg-background-*, text-ink-* → text-text-*, border-line-* → border-border-*. Old surface/ink/line kept as deprecated aliases' },
+      { type: 'updated', text: 'Button: variants primary, secondary, ghost, outline, destructive, accent-pink. The type prop is now variant and the state prop is now a disabled boolean' },
+      { type: 'updated', text: 'All components migrated to the new tokens. The Component Tokens collection is gone: Semantics is the only source' },
+      { type: 'removed', text: 'Stale exports ButtonType, ButtonState and IconVariant removed from index.ts' },
+    ],
+  },
+  {
     version: 'v0.5.6',
     date: '2026-07-23',
     summary: 'Footer responsive fix',
