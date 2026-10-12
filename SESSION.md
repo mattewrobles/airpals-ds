@@ -35,4 +35,5 @@ Si Chromatic pasa: continuar con auditoría visual de componentes en el app.
 ## 2026-10-12: sync de docs
 - Changelog y Getting Started al día con v0.6.0 (Lucide, tokens semánticos, Button v2.5). README: heroicons → lucide.
 - Código del DS copiado también a `airpals-app-prototype/design-system/` (sin historial). La fuente de verdad sigue siendo este repo.
-- Pendiente: la app usa componentes que el DS no tiene (SlideOverPanel, Tooltip, Switch, TimeWindowPicker, InlineEditReveal, NextChargeBanner, modales de billing). Candidatos para v0.7.0.
+- **v0.7.0 publicado en npm (2026-10-12):** SlideOverPanel, Tooltip, Switch extraídos de la app. La app ya los importa de `airpals-ds`; `ui/tooltip.tsx` local queda solo para `ui/sidebar.tsx` (shadcn).
+- Pendiente para v0.8.0: la app usa componentes que el DS no tiene (SlideOverPanel, Tooltip, Switch, TimeWindowPicker, InlineEditReveal, NextChargeBanner, modales de billing). Candidatos para v0.7.0.
